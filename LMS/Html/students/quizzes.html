@@ -1,0 +1,1836 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Quizzes — Take quizzes and tests and track your performance.">
+
+    <title>Quizzes & Tests — Learnora LMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../Css/student.css">
+
+    <style>
+        /* =========================================================
+           QUIZZES PAGE
+        ========================================================= */
+
+        .quiz-empty {
+            padding: 50px 25px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .quiz-empty i {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #2878ff;
+        }
+
+        .quiz-empty h3 {
+            margin: 0 0 8px;
+            color: #0f172a;
+        }
+
+        .quiz-empty p {
+            margin: 0;
+        }
+
+        .quiz-card.hidden {
+            display: none;
+        }
+
+        .search-highlight {
+            display: none;
+        }
+
+        .filter-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 220px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            z-index: 50;
+        }
+
+        .filter-wrapper {
+            position: relative;
+        }
+
+        .filter-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: left;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            color: #334155;
+        }
+
+        .filter-menu button:hover {
+            background: #f1f5f9;
+        }
+
+        .filter-menu button.active {
+            background: #eff6ff;
+            color: #2878ff;
+            font-weight: 700;
+        }
+
+        .quiz-course-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .quiz-action {
+            min-width: 140px;
+        }
+
+        .no-courses-message {
+            display: none;
+        }
+
+        .notification-popup {
+            position: fixed;
+            top: 75px;
+            right: 25px;
+            width: 320px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.15);
+            padding: 18px;
+            z-index: 9999;
+            display: none;
+        }
+
+        .notification-popup.show {
+            display: block;
+        }
+
+        .notification-popup h4 {
+            margin: 0 0 6px;
+            color: #0f172a;
+        }
+
+        .notification-popup p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+
+            .filter-wrapper {
+                width: 100%;
+            }
+
+            .filter-wrapper .secondary-btn {
+                width: 100%;
+            }
+
+            .filter-menu {
+                left: 0;
+                right: auto;
+                width: 100%;
+            }
+
+            .notification-popup {
+                left: 15px;
+                right: 15px;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div>
+                    <h2>Learnora</h2>
+                    <span>Student Portal</span>
+                </div>
+
+            </div>
+
+            <div class="student-mini-profile">
+
+                <div class="avatar" id="sidebarAvatar">
+                    SA
+                </div>
+
+                <div>
+                    <strong id="sidebarStudentName">
+                        Student
+                    </strong>
+
+                    <span id="sidebarProgram">
+                        Student
+                    </span>
+                </div>
+
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="nav-section-title">MAIN</div>
+
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-grid-2"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="courses.html" class="nav-link">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>My Courses</span>
+                </a>
+
+                <a href="courses.html#add-drop" class="nav-link">
+                    <i class="fa-solid fa-plus-minus"></i>
+                    <span>Add / Drop Course</span>
+                </a>
+
+                <a href="lectures.html" class="nav-link">
+                    <i class="fa-solid fa-chalkboard"></i>
+                    <span>Lectures</span>
+                </a>
+
+                <a href="recordings.html" class="nav-link">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <span>Recordings</span>
+                </a>
+
+                <div class="nav-section-title">ACADEMICS</div>
+
+                <a href="assignments.html" class="nav-link">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <span>Assignments</span>
+                </a>
+
+                <a href="quizzes.html" class="nav-link active">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>Quizzes & Tests</span>
+                </a>
+
+                <a href="results.html" class="nav-link">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Results & Grades</span>
+                </a>
+
+                <a href="attendance.html" class="nav-link">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Attendance</span>
+                </a>
+
+                <a href="schedule.html" class="nav-link">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Schedule</span>
+                </a>
+
+                <a href="materials.html" class="nav-link">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>Study Materials</span>
+                </a>
+
+                <div class="nav-section-title">COMMUNICATION</div>
+
+                <a href="announcements.html" class="nav-link">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Announcements</span>
+                </a>
+
+                <a href="messages.html" class="nav-link">
+                    <i class="fa-solid fa-message"></i>
+                    <span>Messages</span>
+                </a>
+
+                <div class="nav-section-title">ACCOUNT</div>
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-solid fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+
+                <a href="settings.html" class="nav-link">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="../login.html"
+                    class="nav-link logout-link"
+                    id="logoutBtn">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="topbar-search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="quizSearch"
+                        placeholder="Search quizzes...">
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button
+                        class="icon-btn notification-btn"
+                        id="notificationBtn">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span
+                            class="notification-dot"
+                            id="notificationDot">
+                        </span>
+
+                    </button>
+
+                    <div class="topbar-profile">
+
+                        <div
+                            class="avatar small"
+                            id="topbarAvatar">
+                            SA
+                        </div>
+
+                        <div class="topbar-profile-info">
+
+                            <strong id="topbarStudentName">
+                                Student
+                            </strong>
+
+                            <span>
+                                Student
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- NOTIFICATION -->
+
+            <div class="notification-popup" id="notificationPopup">
+
+                <h4>
+                    <i class="fa-regular fa-bell"></i>
+                    Quiz Notifications
+                </h4>
+
+                <p id="notificationText">
+                    Loading quiz notifications...
+                </p>
+
+            </div>
+
+            <!-- PAGE -->
+
+            <div class="page-content">
+
+                <!-- PAGE HEADER -->
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+
+                            <i class="fa-solid fa-clipboard-question"></i>
+
+                            ASSESSMENTS
+
+                        </span>
+
+                        <h1>
+                            Quizzes & Tests
+                        </h1>
+
+                        <p>
+                            Test your knowledge and track your academic performance.
+                        </p>
+
+                    </div>
+
+                    <div class="filter-wrapper">
+
+                        <button
+                            class="secondary-btn"
+                            id="filterBtn">
+
+                            <i class="fa-solid fa-filter"></i>
+
+                            Filter
+
+                        </button>
+
+                        <div
+                            class="filter-menu"
+                            id="filterMenu"
+                            style="display:none;">
+
+                            <button
+                                class="active"
+                                data-filter="all">
+                                All Tests
+                            </button>
+
+                            <button data-filter="pending">
+                                Pending
+                            </button>
+
+                            <button data-filter="progress">
+                                In Progress
+                            </button>
+
+                            <button data-filter="completed">
+                                Completed
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- =================================================
+                     STATS
+                ================================================== -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+
+                            <i class="fa-solid fa-clipboard-list"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Total Tests
+                            </span>
+
+                            <strong id="totalTests">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Completed
+                            </span>
+
+                            <strong id="completedTests">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Pending
+                            </span>
+
+                            <strong id="pendingTests">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+
+                            <i class="fa-solid fa-chart-simple"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Average Score
+                            </span>
+
+                            <strong id="averageScore">
+                                0%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- =================================================
+                     AVAILABLE TESTS
+                ================================================== -->
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Available Tests
+                            </h2>
+
+                            <p>
+                                Assessments related to your enrolled courses.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="quiz-list"
+                        id="quizList">
+
+                        <!-- Dynamic quizzes will load here -->
+
+                    </div>
+
+                    <div
+                        class="quiz-empty"
+                        id="quizEmpty"
+                        style="display:none;">
+
+                        <i class="fa-solid fa-clipboard-question"></i>
+
+                        <h3>
+                            No quizzes found
+                        </h3>
+
+                        <p>
+                            There are no quizzes matching your enrolled courses or search.
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- =================================================
+                     COMPLETED TESTS
+                ================================================== -->
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Completed Tests
+                            </h2>
+
+                            <p>
+                                Your recent quiz and test results.
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="results.html"
+                            class="text-link">
+
+                            View Results
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table class="data-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Test
+                                    </th>
+
+                                    <th>
+                                        Course
+                                    </th>
+
+                                    <th>
+                                        Date
+                                    </th>
+
+                                    <th>
+                                        Score
+                                    </th>
+
+                                    <th>
+                                        Result
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="completedTable">
+
+                                <!-- Dynamic completed quizzes -->
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div
+                        class="quiz-empty"
+                        id="completedEmpty"
+                        style="display:none;">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                        <h3>
+                            No completed tests
+                        </h3>
+
+                        <p>
+                            Your completed quizzes will appear here.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- FOOTER -->
+
+            <footer class="main-footer">
+
+                <span>
+                    © 2026 Learnora LMS
+                </span>
+
+                <span>
+                    Learn smarter. Grow faster.
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script>
+
+        /* =========================================================
+           LEARNORA DYNAMIC QUIZZES
+        ========================================================= */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* -----------------------------------------------------
+               GET LOGGED-IN USER
+            ----------------------------------------------------- */
+
+            let currentUser = null;
+
+            try {
+
+                const storedUser =
+                    localStorage.getItem("learnora_current_user");
+
+                if (storedUser) {
+                    currentUser = JSON.parse(storedUser);
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to read current user:",
+                    error
+                );
+
+            }
+
+            /*
+             * Fallback:
+             * Some versions of the login system may use sessionStorage.
+             */
+
+            if (!currentUser) {
+
+                try {
+
+                    const sessionUser =
+                        sessionStorage.getItem("learnora_current_user");
+
+                    if (sessionUser) {
+                        currentUser = JSON.parse(sessionUser);
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Unable to read session user:",
+                        error
+                    );
+
+                }
+
+            }
+
+            /* -----------------------------------------------------
+               IF USER IS NOT LOGGED IN
+            ----------------------------------------------------- */
+
+            if (!currentUser) {
+
+                window.location.href = "../login.html";
+
+                return;
+
+            }
+
+            /* -----------------------------------------------------
+               HELPERS
+            ----------------------------------------------------- */
+
+            function getInitials(name) {
+
+                if (!name) {
+                    return "ST";
+                }
+
+                return name
+                    .trim()
+                    .split(/\s+/)
+                    .slice(0, 2)
+                    .map(word => word.charAt(0).toUpperCase())
+                    .join("");
+
+            }
+
+            function escapeHTML(value) {
+
+                if (value === null || value === undefined) {
+                    return "";
+                }
+
+                return String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+
+            }
+
+            /* -----------------------------------------------------
+               STUDENT INFORMATION
+            ----------------------------------------------------- */
+
+            const studentName =
+                currentUser.name ||
+                currentUser.fullName ||
+                currentUser.username ||
+                "Student";
+
+            const studentProgram =
+                currentUser.program ||
+                currentUser.department ||
+                currentUser.degree ||
+                "Student";
+
+            const initials =
+                getInitials(studentName);
+
+            document.getElementById(
+                "sidebarStudentName"
+            ).textContent = studentName;
+
+            document.getElementById(
+                "topbarStudentName"
+            ).textContent = studentName;
+
+            document.getElementById(
+                "sidebarProgram"
+            ).textContent = studentProgram;
+
+            document.getElementById(
+                "sidebarAvatar"
+            ).textContent = initials;
+
+            document.getElementById(
+                "topbarAvatar"
+            ).textContent = initials;
+
+            /* =====================================================
+               QUIZ DATABASE
+            ===================================================== */
+
+            const allQuizzes = [
+
+                {
+                    id: "quiz-se-01",
+                    courseCode: "CS-401",
+                    courseName: "Software Engineering",
+                    title: "Software Testing Quiz",
+                    description:
+                        "Test your understanding of software testing strategies and quality assurance.",
+                    questions: 15,
+                    duration: 20,
+                    points: 20,
+                    due: "Sep 30, 2026",
+                    dueShort: "Sep 30",
+                    icon: "fa-code",
+                    color: "blue",
+                    status: "pending"
+                },
+
+                {
+                    id: "quiz-db-01",
+                    courseCode: "CS-403",
+                    courseName: "Database Systems",
+                    title: "SQL & Normalization Test",
+                    description:
+                        "Evaluate your knowledge of SQL queries, keys and database normalization.",
+                    questions: 20,
+                    duration: 30,
+                    points: 25,
+                    due: "Oct 03, 2026",
+                    dueShort: "Oct 03",
+                    icon: "fa-database",
+                    color: "cyan",
+                    status: "progress"
+                },
+
+                {
+                    id: "quiz-da-01",
+                    courseCode: "DS-301",
+                    courseName: "Data Analytics",
+                    title: "Python Data Analysis Quiz",
+                    description:
+                        "Test your knowledge of Python, Pandas and basic data analysis concepts.",
+                    questions: 15,
+                    duration: 25,
+                    points: 20,
+                    due: "Oct 07, 2026",
+                    dueShort: "Oct 07",
+                    icon: "fa-chart-line",
+                    color: "purple",
+                    status: "pending"
+                },
+
+                {
+                    id: "quiz-se-02",
+                    courseCode: "CS-401",
+                    courseName: "Software Engineering",
+                    title: "Requirements Engineering",
+                    description:
+                        "Review functional requirements, use cases and requirements validation.",
+                    questions: 20,
+                    duration: 25,
+                    points: 20,
+                    due: "Sep 22, 2026",
+                    dueShort: "Sep 22",
+                    icon: "fa-code",
+                    color: "green",
+                    status: "completed",
+                    score: 18,
+                    percentage: 90,
+                    completedDate: "Sep 22, 2026"
+                },
+
+                {
+                    id: "quiz-db-02",
+                    courseCode: "CS-403",
+                    courseName: "Database Systems",
+                    title: "ER Modeling",
+                    description:
+                        "Test your understanding of entities, relationships and ER diagrams.",
+                    questions: 20,
+                    duration: 25,
+                    points: 20,
+                    due: "Sep 19, 2026",
+                    dueShort: "Sep 19",
+                    icon: "fa-database",
+                    color: "green",
+                    status: "completed",
+                    score: 17,
+                    percentage: 85,
+                    completedDate: "Sep 19, 2026"
+                }
+
+            ];
+
+            /* =====================================================
+               GET STUDENT COURSES
+            ===================================================== */
+
+            function getStudentCourses() {
+
+                let courses = [];
+
+                /*
+                 * Possible properties supported by this page.
+                 */
+
+                const possibleCourseFields = [
+                    currentUser.courses,
+                    currentUser.enrolledCourses,
+                    currentUser.myCourses,
+                    currentUser.courseList
+                ];
+
+                for (
+                    const field of possibleCourseFields
+                ) {
+
+                    if (Array.isArray(field)) {
+
+                        courses = field;
+
+                        break;
+
+                    }
+
+                }
+
+                /*
+                 * If courses are stored as comma-separated text.
+                 */
+
+                if (
+                    courses.length === 0 &&
+                    typeof currentUser.courses === "string"
+                ) {
+
+                    courses =
+                        currentUser.courses
+                            .split(",")
+                            .map(course => course.trim())
+                            .filter(Boolean);
+
+                }
+
+                return courses;
+
+            }
+
+            /* =====================================================
+               MATCH COURSE
+            ===================================================== */
+
+            function normalize(value) {
+
+                return String(value || "")
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]/g, "");
+
+            }
+
+            function quizBelongsToStudent(
+                quiz,
+                studentCourses
+            ) {
+
+                /*
+                 * If no course information exists,
+                 * display all quizzes instead of showing blank page.
+                 */
+
+                if (
+                    !studentCourses ||
+                    studentCourses.length === 0
+                ) {
+
+                    return true;
+
+                }
+
+                return studentCourses.some(course => {
+
+                    let code = "";
+                    let name = "";
+
+                    if (typeof course === "string") {
+
+                        code = course;
+                        name = course;
+
+                    } else if (typeof course === "object") {
+
+                        code =
+                            course.code ||
+                            course.courseCode ||
+                            course.id ||
+                            "";
+
+                        name =
+                            course.name ||
+                            course.courseName ||
+                            course.title ||
+                            "";
+
+                    }
+
+                    const quizCode =
+                        normalize(quiz.courseCode);
+
+                    const quizName =
+                        normalize(quiz.courseName);
+
+                    return (
+
+                        normalize(code) === quizCode ||
+
+                        normalize(name) === quizName ||
+
+                        normalize(code).includes(quizCode) ||
+
+                        quizCode.includes(normalize(code)) ||
+
+                        normalize(name).includes(quizName) ||
+
+                        quizName.includes(normalize(name))
+
+                    );
+
+                });
+
+            }
+
+            const studentCourses =
+                getStudentCourses();
+
+            const studentQuizzes =
+                allQuizzes.filter(quiz =>
+                    quizBelongsToStudent(
+                        quiz,
+                        studentCourses
+                    )
+                );
+
+            /* =====================================================
+               DYNAMIC STATS
+            ===================================================== */
+
+            function updateStats() {
+
+                const total =
+                    studentQuizzes.length;
+
+                const completed =
+                    studentQuizzes.filter(
+                        quiz => quiz.status === "completed"
+                    ).length;
+
+                const pending =
+                    studentQuizzes.filter(
+                        quiz =>
+                            quiz.status === "pending" ||
+                            quiz.status === "progress"
+                    ).length;
+
+                const completedScores =
+                    studentQuizzes
+                        .filter(
+                            quiz =>
+                                quiz.status === "completed" &&
+                                typeof quiz.percentage === "number"
+                        )
+                        .map(
+                            quiz => quiz.percentage
+                        );
+
+                let average = 0;
+
+                if (completedScores.length > 0) {
+
+                    average =
+                        Math.round(
+                            completedScores.reduce(
+                                (sum, score) =>
+                                    sum + score,
+                                0
+                            ) /
+                            completedScores.length
+                        );
+
+                }
+
+                document.getElementById(
+                    "totalTests"
+                ).textContent = total;
+
+                document.getElementById(
+                    "completedTests"
+                ).textContent = completed;
+
+                document.getElementById(
+                    "pendingTests"
+                ).textContent = pending;
+
+                document.getElementById(
+                    "averageScore"
+                ).textContent =
+                    average + "%";
+
+            }
+
+            /* =====================================================
+               STATUS
+            ===================================================== */
+
+            function getStatusText(status) {
+
+                if (status === "completed") {
+                    return "Completed";
+                }
+
+                if (status === "progress") {
+                    return "In Progress";
+                }
+
+                return "Not Started";
+
+            }
+
+            function getButtonText(status) {
+
+                if (status === "progress") {
+                    return "Continue";
+                }
+
+                if (status === "completed") {
+                    return "Review";
+                }
+
+                return "Start Quiz";
+
+            }
+
+            /* =====================================================
+               RENDER AVAILABLE QUIZZES
+            ===================================================== */
+
+            function renderQuizzes(
+                filter = "all",
+                searchTerm = ""
+            ) {
+
+                const quizList =
+                    document.getElementById(
+                        "quizList"
+                    );
+
+                const empty =
+                    document.getElementById(
+                        "quizEmpty"
+                    );
+
+                quizList.innerHTML = "";
+
+                const search =
+                    searchTerm
+                        .trim()
+                        .toLowerCase();
+
+                let visibleQuizzes =
+                    studentQuizzes.filter(
+                        quiz => {
+
+                            const filterMatch =
+                                filter === "all" ||
+                                quiz.status === filter;
+
+                            const searchMatch =
+                                !search ||
+                                quiz.title
+                                    .toLowerCase()
+                                    .includes(search) ||
+                                quiz.courseCode
+                                    .toLowerCase()
+                                    .includes(search) ||
+                                quiz.courseName
+                                    .toLowerCase()
+                                    .includes(search);
+
+                            return (
+                                filterMatch &&
+                                searchMatch
+                            );
+
+                        }
+                    );
+
+                /*
+                 * Completed quizzes are displayed
+                 * in the completed table instead.
+                 */
+
+                if (filter === "all") {
+
+                    visibleQuizzes =
+                        visibleQuizzes.filter(
+                            quiz =>
+                                quiz.status !== "completed"
+                        );
+
+                }
+
+                if (visibleQuizzes.length === 0) {
+
+                    empty.style.display = "block";
+
+                    return;
+
+                }
+
+                empty.style.display = "none";
+
+                visibleQuizzes.forEach(
+                    quiz => {
+
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
+
+                        card.className =
+                            "quiz-card";
+
+                        card.dataset.status =
+                            quiz.status;
+
+                        card.dataset.search =
+                            (
+                                quiz.title +
+                                " " +
+                                quiz.courseCode +
+                                " " +
+                                quiz.courseName
+                            ).toLowerCase();
+
+                        let statusClass =
+                            quiz.status;
+
+                        const dueClass =
+                            quiz.status === "pending" &&
+                            quiz.dueShort === "Sep 30"
+                                ? "danger-text"
+                                : "";
+
+                        card.innerHTML = `
+
+                            <div class="quiz-card-icon ${escapeHTML(quiz.color)}">
+                                <i class="fa-solid ${escapeHTML(quiz.icon)}"></i>
+                            </div>
+
+                            <div class="quiz-main">
+
+                                <span class="course-label">
+                                    ${escapeHTML(quiz.courseCode)}
+                                    ·
+                                    ${escapeHTML(quiz.courseName)}
+                                </span>
+
+                                <h3>
+                                    ${escapeHTML(quiz.title)}
+                                </h3>
+
+                                <p>
+                                    ${escapeHTML(quiz.description)}
+                                </p>
+
+                                <div class="quiz-meta">
+
+                                    <span>
+                                        <i class="fa-solid fa-list-ol"></i>
+                                        ${quiz.questions} Questions
+                                    </span>
+
+                                    <span>
+                                        <i class="fa-regular fa-clock"></i>
+                                        ${quiz.duration} Minutes
+                                    </span>
+
+                                    <span>
+                                        <i class="fa-solid fa-star"></i>
+                                        ${quiz.points} Points
+                                    </span>
+
+                                    <span class="${dueClass}">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        Due ${escapeHTML(quiz.dueShort)}
+                                    </span>
+
+                                </div>
+
+                                <span class="quiz-course-badge">
+
+                                    <i class="fa-solid fa-book-open"></i>
+
+                                    Enrolled Course
+
+                                </span>
+
+                            </div>
+
+                            <div class="quiz-action">
+
+                                <span class="status-badge ${escapeHTML(statusClass)}">
+                                    ${getStatusText(quiz.status)}
+                                </span>
+
+                                <a
+                                    href="quiz.html?quiz=${encodeURIComponent(quiz.id)}"
+                                    class="primary-btn">
+
+                                    ${getButtonText(quiz.status)}
+
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+                        `;
+
+                        quizList.appendChild(card);
+
+                    }
+                );
+
+            }
+
+            /* =====================================================
+               RENDER COMPLETED
+            ===================================================== */
+
+            function renderCompleted() {
+
+                const table =
+                    document.getElementById(
+                        "completedTable"
+                    );
+
+                const empty =
+                    document.getElementById(
+                        "completedEmpty"
+                    );
+
+                table.innerHTML = "";
+
+                const completed =
+                    studentQuizzes.filter(
+                        quiz =>
+                            quiz.status === "completed"
+                    );
+
+                if (completed.length === 0) {
+
+                    empty.style.display = "block";
+
+                    return;
+
+                }
+
+                empty.style.display = "none";
+
+                completed.forEach(
+                    quiz => {
+
+                        const row =
+                            document.createElement(
+                                "tr"
+                            );
+
+                        row.innerHTML = `
+
+                            <td>
+
+                                <div class="table-title">
+
+                                    <div class="table-icon green">
+
+                                        <i class="fa-solid ${escapeHTML(quiz.icon)}"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            ${escapeHTML(quiz.title)}
+                                        </strong>
+
+                                        <span>
+                                            Quiz
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                ${escapeHTML(quiz.courseCode)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(quiz.completedDate)}
+                            </td>
+
+                            <td>
+                                <strong>
+                                    ${quiz.score}/${quiz.points}
+                                </strong>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge completed">
+
+                                    ${quiz.percentage}%
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="quiz.html?quiz=${encodeURIComponent(quiz.id)}&mode=review"
+                                    class="secondary-btn small-btn">
+
+                                    Review
+
+                                </a>
+
+                            </td>
+
+                        `;
+
+                        table.appendChild(row);
+
+                    }
+                );
+
+            }
+
+            /* =====================================================
+               SEARCH
+            ===================================================== */
+
+            const searchInput =
+                document.getElementById(
+                    "quizSearch"
+                );
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    const activeFilter =
+                        document.querySelector(
+                            "#filterMenu button.active"
+                        );
+
+                    const filter =
+                        activeFilter
+                            ? activeFilter.dataset.filter
+                            : "all";
+
+                    renderQuizzes(
+                        filter,
+                        this.value
+                    );
+
+                }
+            );
+
+            /* =====================================================
+               FILTER
+            ===================================================== */
+
+            const filterBtn =
+                document.getElementById(
+                    "filterBtn"
+                );
+
+            const filterMenu =
+                document.getElementById(
+                    "filterMenu"
+                );
+
+            filterBtn.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    filterMenu.style.display =
+                        filterMenu.style.display === "none"
+                            ? "block"
+                            : "none";
+
+                }
+            );
+
+            document
+                .querySelectorAll(
+                    "#filterMenu button"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            document
+                                .querySelectorAll(
+                                    "#filterMenu button"
+                                )
+                                .forEach(btn =>
+                                    btn.classList.remove(
+                                        "active"
+                                    )
+                                );
+
+                            this.classList.add(
+                                "active"
+                            );
+
+                            const filter =
+                                this.dataset.filter;
+
+                            filterMenu.style.display =
+                                "none";
+
+                            renderQuizzes(
+                                filter,
+                                searchInput.value
+                            );
+
+                        }
+                    );
+
+                });
+
+            document.addEventListener(
+                "click",
+                function () {
+
+                    filterMenu.style.display =
+                        "none";
+
+                }
+            );
+
+            /* =====================================================
+               NOTIFICATIONS
+            ===================================================== */
+
+            const notificationBtn =
+                document.getElementById(
+                    "notificationBtn"
+                );
+
+            const notificationPopup =
+                document.getElementById(
+                    "notificationPopup"
+                );
+
+            const notificationText =
+                document.getElementById(
+                    "notificationText"
+                );
+
+            const pending =
+                studentQuizzes.filter(
+                    quiz =>
+                        quiz.status === "pending" ||
+                        quiz.status === "progress"
+                );
+
+            if (pending.length > 0) {
+
+                notificationText.textContent =
+                    `You have ${pending.length} active quiz${pending.length > 1 ? "zes" : ""} related to your enrolled courses.`;
+
+            } else {
+
+                notificationText.textContent =
+                    "You currently have no pending quizzes.";
+
+            }
+
+            notificationBtn.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    notificationPopup.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+            document.addEventListener(
+                "click",
+                function () {
+
+                    notificationPopup.classList.remove(
+                        "show"
+                    );
+
+                }
+            );
+
+            /* =====================================================
+               LOGOUT
+            ===================================================== */
+
+            document
+                .getElementById("logoutBtn")
+                .addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        localStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        sessionStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        window.location.href =
+                            "../login.html";
+
+                    }
+                );
+
+            /* =====================================================
+               INITIALIZE
+            ===================================================== */
+
+            updateStats();
+
+            renderQuizzes();
+
+            renderCompleted();
+
+            /* =====================================================
+               MOBILE SIDEBAR
+            ===================================================== */
+
+            const mobileMenuBtn =
+                document.getElementById(
+                    "mobileMenuBtn"
+                );
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+            const sidebarOverlay =
+                document.getElementById(
+                    "sidebarOverlay"
+                );
+
+            if (mobileMenuBtn) {
+
+                mobileMenuBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle(
+                            "open"
+                        );
+
+                        sidebarOverlay.classList.toggle(
+                            "show"
+                        );
+
+                    }
+                );
+
+            }
+
+            if (sidebarOverlay) {
+
+                sidebarOverlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+                        sidebarOverlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+```
+
+### Important
+
+Is code mein **quiz database abhi isi file ke JavaScript mein hai**:
+
+```js
+const allQuizzes = [
+   ...
+];
+```
+
+Student ke login object mein agar:
+
+```js
+courses: ["CS-401", "CS-403"]
+```
+
+hai, to us student ko sirf **CS-401 aur CS-403 ke quizzes** milenge.
+
+Agar:
+
+```js
+courses: [
+    {
+        code: "CS-401",
+        name: "Software Engineering"
+    },
+    {
+        code: "DS-301",
+        name: "Data Analytics"
+    }
+]
+```
+
+hai, tab bhi matching automatically ho jayegi.
+
+Aur agar `courses` property abhi login system mein nahi hai, page **blank nahi hoga** — available quizzes display karega.

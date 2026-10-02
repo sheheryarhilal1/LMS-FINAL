@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Parent Portal — Exam Schedule">
+
+    <title>Exam Schedule — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Parent CSS -->
+    <link rel="stylesheet"
+        href="../../Css/parent.css">
+
+    <style>
+
+        /* =====================================================
+           SCHEDULE PAGE EXTRA STYLING
+        ===================================================== */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .page-header-left h1 {
+            margin: 0 0 8px;
+            font-family: "Manrope", sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .page-header-left p {
+            margin: 0;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .page-header-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(39, 217, 244, 0.10);
+            border: 1px solid rgba(39, 217, 244, 0.18);
+            color: #27d9f4;
+            font-size: 21px;
+        }
+
+        .schedule-top-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .schedule-card {
+            background: #0a1321;
+            border: 1px solid rgba(148, 163, 184, 0.10);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14);
+        }
+
+        .schedule-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .schedule-card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .schedule-card-title-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(40, 120, 255, 0.12);
+            color: #2878ff;
+        }
+
+        .schedule-card-title h2 {
+            margin: 0;
+            color: #f8fafc;
+            font-size: 17px;
+            font-family: "Manrope", sans-serif;
+        }
+
+        .schedule-card-title span {
+            display: block;
+            margin-top: 3px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .exam-count {
+            padding: 7px 11px;
+            border-radius: 10px;
+            background: rgba(39, 217, 244, 0.08);
+            color: #27d9f4;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .filter-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-wrapper label {
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .schedule-filter {
+            min-width: 150px;
+            padding: 10px 13px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: #101c2c;
+            color: #f8fafc;
+            outline: none;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .schedule-filter:focus {
+            border-color: #2878ff;
+        }
+
+        /* =====================================================
+           UPCOMING EXAMS
+        ===================================================== */
+
+        .exam-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .exam-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #0f1b2b;
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            transition: 0.2s ease;
+        }
+
+        .exam-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(39, 217, 244, 0.25);
+        }
+
+        .exam-date {
+            width: 52px;
+            min-width: 52px;
+            height: 58px;
+            border-radius: 13px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(
+                145deg,
+                rgba(40, 120, 255, 0.18),
+                rgba(39, 217, 244, 0.08)
+            );
+            border: 1px solid rgba(40, 120, 255, 0.16);
+        }
+
+        .exam-date strong {
+            color: #f8fafc;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .exam-date span {
+            margin-top: 5px;
+            color: #27d9f4;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .exam-details {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .exam-details strong {
+            display: block;
+            color: #f8fafc;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .exam-details > span {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .exam-details small {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .schedule-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th {
+            text-align: left;
+            padding: 14px 15px;
+            background: #0f1b2b;
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+        }
+
+        .schedule-table td {
+            padding: 15px;
+            color: #cbd5e1;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+        }
+
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table tbody tr {
+            transition: 0.2s ease;
+        }
+
+        .schedule-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.018);
+        }
+
+        .schedule-table td strong {
+            color: #f8fafc;
+        }
+
+        .table-loading {
+            text-align: center !important;
+            padding: 35px !important;
+            color: #64748b !important;
+        }
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+            padding: 35px 20px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .empty-state i {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 27px;
+            color: #475569;
+        }
+
+        .empty-state p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        /* =====================================================
+           CHILD INFO
+        ===================================================== */
+
+        .child-info-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            margin-bottom: 22px;
+            border-radius: 16px;
+            background: linear-gradient(
+                135deg,
+                rgba(40, 120, 255, 0.10),
+                rgba(39, 217, 244, 0.06)
+            );
+            border: 1px solid rgba(40, 120, 255, 0.13);
+        }
+
+        .child-info-avatar {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2878ff;
+            color: white;
+            font-weight: 800;
+        }
+
+        .child-info-text strong {
+            display: block;
+            color: #f8fafc;
+            font-size: 14px;
+        }
+
+        .child-info-text span {
+            display: block;
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .schedule-top-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .page-header {
+                align-items: center;
+            }
+
+            .page-header-left h1 {
+                font-size: 23px;
+            }
+
+            .page-header-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 13px;
+            }
+
+            .schedule-card {
+                padding: 16px;
+                border-radius: 15px;
+            }
+
+            .schedule-card-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .filter-wrapper {
+                width: 100%;
+            }
+
+            .schedule-filter {
+                flex: 1;
+                width: 100%;
+            }
+
+            .child-info-banner {
+                padding: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <strong>Learnora</strong>
+                <span>LMS</span>
+            </div>
+
+        </div>
+
+
+        <!-- Parent Profile -->
+
+        <div class="sidebar-profile">
+
+            <div class="profile-avatar"
+                id="sidebarParentAvatar">
+                P
+            </div>
+
+            <div class="profile-info">
+
+                <strong id="sidebarParentName">
+                    Parent
+                </strong>
+
+                <span>
+                    Parent Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Child -->
+
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="child-info">
+
+                <span>Monitoring</span>
+
+                <strong id="sidebarChildName">
+                    Student
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                OVERVIEW
+            </div>
+
+
+            <a href="dashboard.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+
+            <a href="results.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>
+                    Results
+                </span>
+
+            </a>
+
+
+            <!-- ACTIVE SCHEDULE -->
+
+            <a href="schedule.html"
+                class="nav-link active">
+
+                <i class="fa-regular fa-calendar-days"></i>
+
+                <span>
+                    Exam Schedule
+                </span>
+
+            </a>
+
+
+            <a href="attendance.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-user-check"></i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+
+            <a href="assignments.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>
+                    Assignments
+                </span>
+
+            </a>
+
+
+            <a href="quizzes.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <span>
+                    Quizzes
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a href="profile.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="./announcements.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    Announcements
+                </span>
+
+                <span class="nav-badge"
+                    id="announcementCount">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom -->
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                id="logoutBtn"
+                type="button">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ====================================================== -->
+
+    <div class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <button class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Open menu">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-spacer"></div>
+
+
+            <div class="topbar-profile">
+
+                <div class="topbar-avatar"
+                    id="topbarParentAvatar">
+                    P
+                </div>
+
+                <div class="topbar-profile-info">
+
+                    <strong id="topbarParentName">
+                        Parent
+                    </strong>
+
+                    <span>
+                        Parent Account
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <div class="dashboard-container">
+
+
+            <!-- Page Header -->
+
+            <div class="page-header">
+
+                <div class="page-header-left">
+
+                    <h1>
+                        Exam Schedule
+                    </h1>
+
+                    <p>
+                        View your child's upcoming examination schedule.
+                    </p>
+
+                </div>
+
+
+                <div class="page-header-icon">
+
+                    <i class="fa-regular fa-calendar-days"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- Child Information -->
+
+            <div class="child-info-banner">
+
+                <div class="child-info-avatar"
+                    id="childAvatar">
+                    S
+                </div>
+
+                <div class="child-info-text">
+
+                    <strong id="childNameHeading">
+                        Student
+                    </strong>
+
+                    <span id="childProgram">
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TOP GRID
+            ================================================== -->
+
+            <div class="schedule-top-grid">
+
+
+                <!-- Upcoming Exams -->
+
+                <section class="schedule-card">
+
+                    <div class="schedule-card-header">
+
+                        <div class="schedule-card-title">
+
+                            <div class="schedule-card-title-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    Upcoming Exams
+                                </h2>
+
+                                <span>
+                                    Next scheduled examinations
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="exam-count"
+                            id="examCount">
+                            0 Exams
+                        </span>
+
+                    </div>
+
+
+                    <div class="exam-list"
+                        id="examList">
+
+                        <div class="empty-state">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <p>
+                                Loading exam schedule...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Semester Filter -->
+
+                <section class="schedule-card">
+
+                    <div class="schedule-card-header">
+
+                        <div class="schedule-card-title">
+
+                            <div class="schedule-card-title-icon">
+
+                                <i class="fa-solid fa-filter"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    Filter Schedule
+                                </h2>
+
+                                <span>
+                                    Select academic semester
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="filter-wrapper">
+
+                        <label for="semesterFilter">
+                            Semester
+                        </label>
+
+                        <select
+                            id="semesterFilter"
+                            class="schedule-filter">
+
+                            <option value="all">
+                                All Semesters
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLETE SCHEDULE
+            ================================================== -->
+
+            <section class="schedule-card">
+
+                <div class="schedule-card-header">
+
+                    <div class="schedule-card-title">
+
+                        <div class="schedule-card-title-icon">
+
+                            <i class="fa-solid fa-list-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Complete Exam Schedule
+                            </h2>
+
+                            <span>
+                                Examination dates, times and venues
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="schedule-table-wrapper">
+
+                    <table class="schedule-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Code
+                                </th>
+
+                                <th>
+                                    Time
+                                </th>
+
+                                <th>
+                                    Room
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="scheduleTableBody">
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="table-loading">
+
+                                    Loading schedule...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <!-- IMPORTANT:
+         auth.js does NOT exist in your project.
+         Only parent.js is required here.
+    -->
+
+    <script src="../../js/parent.js"></script>
+
+
+    <script>
+
+        /* =====================================================
+           MOBILE SIDEBAR
+        ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const menuToggle =
+                    document.getElementById(
+                        "menuToggle"
+                    );
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+
+                if (
+                    menuToggle &&
+                    sidebar
+                ) {
+
+                    menuToggle.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.toggle(
+                                "open"
+                            );
+
+                            if (overlay) {
+
+                                overlay.classList.toggle(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+                            overlay.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* =================================================
+                   LOGOUT
+                ================================================= */
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+
+                if (logoutBtn) {
+
+                    logoutBtn.addEventListener(
+                        "click",
+                        function () {
+
+                            localStorage.removeItem(
+                                "learnora_current_user"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_logged_in"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_user_role"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_user_email"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_user_id"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_student_name"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_parent_id"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_child_id"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_parent_name"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_parent_relationship"
+                            );
+
+                            localStorage.removeItem(
+                                "learnora_child_name"
+                            );
+
+
+                            sessionStorage.removeItem(
+                                "learnora_current_user"
+                            );
+
+
+                            window.location.href =
+                                "../login.html";
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

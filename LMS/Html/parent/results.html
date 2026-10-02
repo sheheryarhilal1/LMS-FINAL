@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Parent Results — View your child's academic results, grades and semester performance.">
+
+    <title>Results & Grades — Parent | Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Parent CSS -->
+    <link rel="stylesheet" href="../../Css/parent.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <h2>Learnora</h2>
+                <span>LMS</span>
+            </div>
+
+        </div>
+
+
+        <!-- Parent Profile -->
+        <div class="sidebar-profile">
+
+            <div class="profile-avatar" id="sidebarParentAvatar">
+                P
+            </div>
+
+            <div class="profile-info">
+
+                <h4 id="sidebarParentName">
+                    Parent
+                </h4>
+
+                <span>
+                    <i class="fa-solid fa-user-group"></i>
+                    Parent
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Child -->
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="child-info">
+
+                <small>Child</small>
+
+                <strong id="sidebarChildName">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+
+            <a href="dashboard.html" class="nav-link">
+
+                <i class="fa-solid fa-grid-2"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="results.html" class="nav-link active">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Results & Grades</span>
+
+            </a>
+
+
+            <a href="schedule.html" class="nav-link">
+
+                <i class="fa-regular fa-calendar-days"></i>
+
+                <span>Exam Schedule</span>
+
+            </a>
+
+
+            <a href="attendance.html" class="nav-link">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>Attendance</span>
+
+            </a>
+
+
+            <a href="assignments.html" class="nav-link">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>Assignments</span>
+
+            </a>
+
+
+            <a href="quizzes.html" class="nav-link">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <span>Quizzes</span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a href="profile.html" class="nav-link">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>My Profile</span>
+
+            </a>
+
+
+            <a href="./announcements.html" class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>Announcements</span>
+
+                <span class="nav-badge"
+                    id="announcementCount">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Logout -->
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn" id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="main-content" id="mainContent">
+
+
+        <!-- =====================================================
+             TOPBAR
+        ====================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle" id="menuToggle">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        Parent Portal
+                    </span>
+
+                    <h1>
+                        Results & Grades
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <!-- Notification -->
+                <a href="./announcements.html"
+                    class="topbar-icon">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"
+                        id="notificationDot">
+                    </span>
+
+                </a>
+
+
+                <!-- Parent -->
+                <div class="topbar-profile">
+
+                    <div class="topbar-avatar"
+                        id="topbarParentAvatar">
+                        P
+                    </div>
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarParentName">
+                            Parent
+                        </strong>
+
+                        <span>
+                            Parent
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE
+        ====================================================== -->
+
+        <section class="dashboard-container">
+
+
+            <!-- =================================================
+                 PAGE INTRO
+            ================================================== -->
+
+            <section class="page-intro">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACADEMIC PERFORMANCE
+                    </span>
+
+                    <h2>
+                        <span id="childNameHeading">
+                            Student
+                        </span>'s Results
+                    </h2>
+
+                    <p>
+                        View your child's semester results,
+                        course grades and overall academic performance.
+                    </p>
+
+                </div>
+
+
+                <div class="student-mini-profile">
+
+                    <div class="mini-avatar"
+                        id="childAvatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong id="childNameMini">
+                            Loading...
+                        </strong>
+
+                        <span id="childProgramMini">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <section class="stats-grid">
+
+
+                <!-- CGPA -->
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Current CGPA
+                        </span>
+
+                        <h3 id="currentCGPA">
+                            —
+                        </h3>
+
+                        <small>
+                            Overall Academic Performance
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Semester GPA -->
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Semester GPA
+                        </span>
+
+                        <h3 id="semesterGPA">
+                            —
+                        </h3>
+
+                        <small>
+                            Current Semester
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Courses -->
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Courses Completed
+                        </span>
+
+                        <h3 id="completedCourses">
+                            0
+                        </h3>
+
+                        <small>
+                            Recorded Results
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Credits -->
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Credit Hours
+                        </span>
+
+                        <h3 id="creditHours">
+                            0
+                        </h3>
+
+                        <small>
+                            Completed Credits
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SEMESTER SELECTOR
+            ================================================== -->
+
+            <section class="dashboard-card semester-selector-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            ACADEMIC RECORD
+                        </span>
+
+                        <h3>
+                            Semester Results
+                        </h3>
+
+                    </div>
+
+                    <div class="semester-select-wrapper">
+
+                        <label for="semesterSelect">
+                            Semester
+                        </label>
+
+                        <select id="semesterSelect">
+
+                            <option value="all">
+                                All Semesters
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RESULTS TABLE
+            ================================================== -->
+
+            <section class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            COURSE PERFORMANCE
+                        </span>
+
+                        <h3>
+                            Course Results
+                        </h3>
+
+                    </div>
+
+                    <span class="result-count"
+                        id="resultCount">
+                        0 Results
+                    </span>
+
+                </div>
+
+
+                <div class="results-table-wrapper">
+
+                    <table class="results-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Course Code
+                                </th>
+
+                                <th>
+                                    Credit Hours
+                                </th>
+
+                                <th>
+                                    Marks
+                                </th>
+
+                                <th>
+                                    Grade
+                                </th>
+
+                                <th>
+                                    Grade Point
+                                </th>
+
+                                <th>
+                                    Semester
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="resultsTableBody">
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="table-loading">
+
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                    Loading student results...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 GRADE DISTRIBUTION
+            ================================================== -->
+
+            <section class="dashboard-columns">
+
+
+                <!-- Grade Summary -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                GRADE SUMMARY
+                            </span>
+
+                            <h3>
+                                Grade Distribution
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="grade-distribution"
+                        id="gradeDistribution">
+
+                        <div class="empty-state">
+
+                            <i class="fa-solid fa-chart-pie"></i>
+
+                            <p>
+                                Loading grade distribution...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Performance Summary -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                PERFORMANCE
+                            </span>
+
+                            <h3>
+                                Academic Summary
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-summary">
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <span>
+                                    Highest Grade
+                                </span>
+
+                            </div>
+
+                            <strong id="highestGrade">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <span>
+                                    Average Marks
+                                </span>
+
+                            </div>
+
+                            <strong id="averageMarks">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <span>
+                                    Passed Courses
+                                </span>
+
+                            </div>
+
+                            <strong id="passedCourses">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <span>
+                                    Failed Courses
+                                </span>
+
+                            </div>
+
+                            <strong id="failedCourses">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LAST UPDATED
+            ================================================== -->
+
+            <div class="data-info">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>
+                    Results shown here belong to
+                    <strong id="dataChildName">
+                        the linked student
+                    </strong>
+                    associated with this parent account.
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="dashboard-footer">
+
+                <p>
+                    © 2026 Learnora LMS. All rights reserved.
+                </p>
+
+                <span>
+                    Parent Portal
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         MOBILE OVERLAY
+    ========================================================== -->
+
+    <div class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="../../js/auth.js"></script>
+
+    <script src="../../js/parent.js"></script>
+
+
+    <!-- =========================================================
+         SIDEBAR + PAGE SCRIPT
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* ================================================
+               SIDEBAR
+            ================================================= */
+
+            const menuToggle =
+                document.getElementById("menuToggle");
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+
+            if (menuToggle && sidebar) {
+
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle("open");
+
+                        if (overlay) {
+                            overlay.classList.toggle("active");
+                        }
+
+                    }
+                );
+
+            }
+
+
+            if (overlay) {
+
+                overlay.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.remove("open");
+
+                        overlay.classList.remove("active");
+
+                    }
+                );
+
+            }
+
+
+            /* ================================================
+               LOGOUT
+            ================================================= */
+
+            const logoutBtn =
+                document.getElementById("logoutBtn");
+
+
+            if (logoutBtn) {
+
+                logoutBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        if (typeof logout === "function") {
+
+                            logout();
+
+                        } else {
+
+                            localStorage.removeItem(
+                                "learnora_current_user"
+                            );
+
+                            sessionStorage.removeItem(
+                                "learnora_current_user"
+                            );
+
+                            window.location.href =
+                                "../login.html";
+
+                        }
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

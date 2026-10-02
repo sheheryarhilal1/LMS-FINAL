@@ -1,0 +1,2479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Parent Profile — Manage parent account information and child academic details.">
+
+    <title>My Profile — Learnora LMS</title>
+
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================================
+         PARENT CSS
+    ========================================================== -->
+
+    <link rel="stylesheet"
+        href="../../Css/parent.css">
+
+
+    <!-- =========================================================
+         PROFILE PAGE CSS
+         Parent Dashboard ki theme ko follow karta hai
+    ========================================================== -->
+
+    <style>
+
+        /* =====================================================
+           PROFILE HEADER
+        ===================================================== */
+
+        .profile-page-header {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .profile-page-header .eyebrow {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .profile-page-header h2 {
+
+            margin: 0;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+        }
+
+
+        .profile-page-header p {
+
+            margin-top: 7px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           PROFILE HERO
+        ===================================================== */
+
+        .profile-hero-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.16),
+                    rgba(34, 211, 238, 0.07)
+                );
+
+            border: 1px solid rgba(96, 165, 250, 0.15);
+
+        }
+
+
+        .profile-hero-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 240px;
+
+            height: 240px;
+
+            right: -100px;
+
+            top: -120px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(34, 211, 238, 0.12),
+                    transparent 70%
+                );
+
+        }
+
+
+        .profile-hero-left {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .profile-large-avatar {
+
+            width: 88px;
+
+            height: 88px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #22d3ee
+                );
+
+            color: #ffffff;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 30px rgba(37, 99, 235, 0.22);
+
+        }
+
+
+        .profile-hero-info h2 {
+
+            margin: 0 0 6px;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+        }
+
+
+        .profile-hero-info p {
+
+            margin: 0 0 12px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+        }
+
+
+        .profile-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            color: #86efac;
+
+            background: rgba(34, 197, 94, 0.08);
+
+            border: 1px solid rgba(34, 197, 94, 0.15);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .profile-status i {
+
+            font-size: 7px;
+
+        }
+
+
+        .profile-hero-right {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: right;
+
+        }
+
+
+        .profile-hero-right span {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .profile-hero-right strong {
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           PROFILE GRID
+        ===================================================== */
+
+        .profile-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.4fr)
+                minmax(300px, 0.8fr);
+
+            gap: 20px;
+
+        }
+
+
+        .profile-grid .dashboard-card {
+
+            min-width: 0;
+
+        }
+
+
+        /* =====================================================
+           CARD HEADER
+        ===================================================== */
+
+        .profile-card-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .profile-card-heading-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(59, 130, 246, 0.10);
+
+            color: #60a5fa;
+
+        }
+
+
+        .profile-card-heading h3 {
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           INFORMATION GRID
+        ===================================================== */
+
+        .profile-info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+
+        }
+
+
+        .profile-info-item {
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border: 1px solid rgba(148, 163, 184, 0.08);
+
+        }
+
+
+        .profile-info-item span {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+        .profile-info-item strong {
+
+            display: block;
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =====================================================
+           CHILD INFORMATION
+        ===================================================== */
+
+        .child-profile-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            background: rgba(59, 130, 246, 0.05);
+
+            border: 1px solid rgba(96, 165, 250, 0.10);
+
+        }
+
+
+        .child-profile-avatar {
+
+            width: 55px;
+
+            height: 55px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #22d3ee
+                );
+
+            color: #ffffff;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+        }
+
+
+        .child-profile-info span {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+        }
+
+
+        .child-profile-info strong {
+
+            display: block;
+
+            color: #f8fafc;
+
+            font-size: 16px;
+
+        }
+
+
+        .child-profile-info small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           ACADEMIC LIST
+        ===================================================== */
+
+        .profile-academic-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+        }
+
+
+        .profile-academic-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border: 1px solid rgba(148, 163, 184, 0.08);
+
+        }
+
+
+        .profile-academic-row-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+        }
+
+
+        .profile-academic-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 9px;
+
+            color: #67e8f9;
+
+            background: rgba(34, 211, 238, 0.08);
+
+        }
+
+
+        .profile-academic-row-left span {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+        }
+
+
+        .profile-academic-row-left strong {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #f8fafc;
+
+            font-size: 14px;
+
+        }
+
+
+        .profile-academic-value {
+
+            color: #60a5fa;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           ACCOUNT STATUS
+        ===================================================== */
+
+        .profile-account-status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            border-radius: 12px;
+
+            background: rgba(34, 197, 94, 0.05);
+
+            border: 1px solid rgba(34, 197, 94, 0.12);
+
+        }
+
+
+        .profile-account-status-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            color: #4ade80;
+
+            background: rgba(34, 197, 94, 0.08);
+
+        }
+
+
+        .profile-account-status strong {
+
+            display: block;
+
+            color: #86efac;
+
+            font-size: 13px;
+
+        }
+
+
+        .profile-account-status span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           QUICK LINKS
+        ===================================================== */
+
+        .profile-links {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+        }
+
+
+        .profile-link {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 13px 14px;
+
+            border-radius: 11px;
+
+            color: #cbd5e1;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border: 1px solid rgba(148, 163, 184, 0.07);
+
+            text-decoration: none;
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .profile-link:hover {
+
+            background: rgba(59, 130, 246, 0.07);
+
+            border-color: rgba(96, 165, 250, 0.15);
+
+            transform: translateX(2px);
+
+        }
+
+
+        .profile-link-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .profile-link-left i {
+
+            width: 30px;
+
+            height: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 8px;
+
+            color: #60a5fa;
+
+            background: rgba(59, 130, 246, 0.08);
+
+        }
+
+
+        .profile-link-left span {
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        .profile-link > i {
+
+            color: #475569;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .profile-footer {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 25px;
+
+            padding: 5px 2px 20px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .profile-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .profile-page-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .profile-hero-card {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 22px;
+
+            }
+
+
+            .profile-hero-right {
+
+                text-align: left;
+
+            }
+
+
+            .profile-info-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .profile-hero-left {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .profile-large-avatar {
+
+                width: 72px;
+
+                height: 72px;
+
+                font-size: 25px;
+
+            }
+
+
+            .profile-hero-info h2 {
+
+                font-size: 21px;
+
+            }
+
+
+            .profile-academic-row {
+
+                align-items: flex-start;
+
+            }
+
+
+            .profile-footer {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- Logo -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                <h2>Learnora</h2>
+
+                <span>LMS</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Parent Profile -->
+
+        <div class="sidebar-profile">
+
+            <div class="profile-avatar"
+                id="sidebarParentAvatar">
+
+                P
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <h4 id="sidebarParentName">
+
+                    Parent
+
+                </h4>
+
+                <span>
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    Parent
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Child -->
+
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+            </div>
+
+            <div class="child-info">
+
+                <small>
+                    Child
+                </small>
+
+                <strong id="sidebarChildName">
+
+                    Loading...
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+
+            <a href="dashboard.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-table-cells-large"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="results.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Results & Grades
+                </span>
+
+            </a>
+
+
+            <a href="schedule.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-calendar-days"></i>
+
+                <span>
+                    Exam Schedule
+                </span>
+
+            </a>
+
+
+            <a href="attendance.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+
+            <a href="assignments.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>
+                    Assignments
+                </span>
+
+            </a>
+
+
+            <a href="quizzes.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <span>
+                    Quizzes
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a href="profile.html"
+                class="nav-link active">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a href="./announcements.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    Announcements
+                </span>
+
+                <span class="nav-badge"
+                    id="announcementCount">
+
+                    0
+
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- Sidebar Bottom -->
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="main-content"
+        id="mainContent">
+
+
+        <!-- =====================================================
+             TOPBAR
+        ====================================================== -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+
+                <button class="menu-toggle"
+                    id="menuToggle">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <span class="page-label">
+
+                        Parent Portal
+
+                    </span>
+
+
+                    <h1>
+
+                        My Profile
+
+                    </h1>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <a href="./announcements.html"
+                    class="topbar-icon">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"
+                        id="notificationDot">
+                    </span>
+
+                </a>
+
+
+                <div class="topbar-profile">
+
+
+                    <div class="topbar-avatar"
+                        id="topbarParentAvatar">
+
+                        P
+
+                    </div>
+
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarParentName">
+
+                            Parent
+
+                        </strong>
+
+                        <span>
+
+                            Parent
+
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =====================================================
+             PROFILE CONTENT
+        ====================================================== -->
+
+        <section class="dashboard-container">
+
+
+            <!-- Page Header -->
+
+            <div class="profile-page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        ACCOUNT
+
+                    </span>
+
+                    <h2>
+
+                        My Profile
+
+                    </h2>
+
+                    <p>
+
+                        View your personal information and
+                        your child's academic details.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE HERO
+            ================================================== -->
+
+            <section class="profile-hero-card">
+
+
+                <div class="profile-hero-left">
+
+
+                    <div class="profile-large-avatar"
+                        id="profileAvatar">
+
+                        P
+
+                    </div>
+
+
+                    <div class="profile-hero-info">
+
+                        <h2 id="profileName">
+
+                            Parent
+
+                        </h2>
+
+
+                        <p id="profileEmail">
+
+                            parent@example.com
+
+                        </p>
+
+
+                        <span class="profile-status">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            Active Parent Account
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="profile-hero-right">
+
+                    <span>
+
+                        Account Type
+
+                    </span>
+
+                    <strong>
+
+                        Parent Portal
+
+                    </strong>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE GRID
+            ================================================== -->
+
+            <section class="profile-grid">
+
+
+                <!-- =================================================
+                     PERSONAL INFORMATION
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+
+                        <div class="profile-card-heading">
+
+
+                            <div class="profile-card-heading-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="eyebrow">
+
+                                    ACCOUNT DETAILS
+
+                                </span>
+
+                                <h3>
+
+                                    Personal Information
+
+                                </h3>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-info-grid">
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Full Name
+                            </span>
+
+                            <strong id="infoName">
+                                Parent
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Email Address
+                            </span>
+
+                            <strong id="infoEmail">
+                                parent@example.com
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Role
+                            </span>
+
+                            <strong id="infoRole">
+                                Parent
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Account Status
+                            </span>
+
+                            <strong>
+                                Active
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Portal
+                            </span>
+
+                            <strong>
+                                Parent Portal
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-info-item">
+
+                            <span>
+                                Access
+                            </span>
+
+                            <strong>
+                                Academic Monitoring
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     CHILD INFORMATION
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+
+                        <div class="profile-card-heading">
+
+
+                            <div class="profile-card-heading-icon">
+
+                                <i class="fa-solid fa-user-graduate"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="eyebrow">
+
+                                    STUDENT
+
+                                </span>
+
+                                <h3>
+
+                                    Child Information
+
+                                </h3>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="child-profile-box">
+
+
+                        <div class="child-profile-avatar"
+                            id="childAvatar">
+
+                            S
+
+                        </div>
+
+
+                        <div class="child-profile-info">
+
+
+                            <span>
+                                Currently Monitoring
+                            </span>
+
+
+                            <strong id="childName">
+
+                                Loading...
+
+                            </strong>
+
+
+                            <small id="childEmail">
+
+                                Loading...
+
+                            </small>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     ACADEMIC OVERVIEW
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+
+                        <div class="profile-card-heading">
+
+
+                            <div class="profile-card-heading-icon">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="eyebrow">
+
+                                    ACADEMIC INFORMATION
+
+                                </span>
+
+                                <h3>
+
+                                    Academic Overview
+
+                                </h3>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-academic-list">
+
+
+                        <!-- CGPA -->
+
+                        <div class="profile-academic-row">
+
+
+                            <div class="profile-academic-row-left">
+
+
+                                <div class="profile-academic-icon">
+
+                                    <i class="fa-solid fa-star"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Current CGPA
+                                    </span>
+
+                                    <strong>
+                                        Academic Performance
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="profile-academic-value"
+                                id="profileCGPA">
+
+                                —
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- Credit Hours -->
+
+                        <div class="profile-academic-row">
+
+
+                            <div class="profile-academic-row-left">
+
+
+                                <div class="profile-academic-icon">
+
+                                    <i class="fa-solid fa-book"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Credit Hours
+                                    </span>
+
+                                    <strong>
+                                        Completed / Registered
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="profile-academic-value"
+                                id="profileCredits">
+
+                                —
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- Courses -->
+
+                        <div class="profile-academic-row">
+
+
+                            <div class="profile-academic-row-left">
+
+
+                                <div class="profile-academic-icon">
+
+                                    <i class="fa-solid fa-layer-group"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Enrolled Courses
+                                    </span>
+
+                                    <strong>
+                                        Current Semester
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="profile-academic-value"
+                                id="profileCourses">
+
+                                —
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =================================================
+                     ACCOUNT SECURITY
+                ================================================== -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+
+                        <div class="profile-card-heading">
+
+
+                            <div class="profile-card-heading-icon">
+
+                                <i class="fa-solid fa-shield-halved"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="eyebrow">
+
+                                    SECURITY
+
+                                </span>
+
+                                <h3>
+
+                                    Account Security
+
+                                </h3>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-account-status">
+
+
+                        <div class="profile-account-status-icon">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Account Active
+
+                            </strong>
+
+                            <span>
+
+                                Your Learnora parent account
+                                is currently active.
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-links">
+
+
+                        <a href="dashboard.html"
+                            class="profile-link">
+
+
+                            <div class="profile-link-left">
+
+                                <i class="fa-solid fa-grid-2"></i>
+
+                                <span>
+                                    Parent Dashboard
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+
+                        </a>
+
+
+                        <a href="attendance.html"
+                            class="profile-link">
+
+
+                            <div class="profile-link-left">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                                <span>
+                                    Attendance
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+
+                        </a>
+
+
+                        <a href="results.html"
+                            class="profile-link">
+
+
+                            <div class="profile-link-left">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                                <span>
+                                    Results & Grades
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+
+                        </a>
+
+
+                        <a href="./announcements.html"
+                            class="profile-link">
+
+
+                            <div class="profile-link-left">
+
+                                <i class="fa-regular fa-bell"></i>
+
+                                <span>
+                                    Announcements
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+
+                        </a>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="profile-footer">
+
+                <p>
+
+                    © 2026 Learnora LMS. All rights reserved.
+
+                </p>
+
+                <span>
+
+                    Parent Portal
+
+                </span>
+
+            </footer>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         SIDEBAR OVERLAY
+    ========================================================== -->
+
+    <div class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="../../js/auth.js"></script>
+
+    <script src="../../js/parent.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                /* =================================================
+                   GET CURRENT USER
+                ================================================= */
+
+                let user = null;
+
+
+                try {
+
+                    user =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "learnora_current_user"
+                            )
+                        ) ||
+
+                        JSON.parse(
+                            sessionStorage.getItem(
+                                "learnora_current_user"
+                            )
+                        );
+
+                } catch (error) {
+
+                    console.log(
+                        "User data error:",
+                        error
+                    );
+
+                }
+
+
+                if (user) {
+
+
+                    /* =================================================
+                       PARENT NAME
+                    ================================================= */
+
+                    const parentName =
+                        user.name ||
+                        user.fullName ||
+                        user.username ||
+                        "Parent";
+
+
+                    /* =================================================
+                       EMAIL
+                    ================================================= */
+
+                    const email =
+                        user.email ||
+                        "parent@example.com";
+
+
+                    /* =================================================
+                       CHILD NAME
+                    ================================================= */
+
+                    const childName =
+                        user.childName ||
+                        user.child ||
+                        user.studentName ||
+                        "Student";
+
+
+                    /* =================================================
+                       CHILD EMAIL
+                    ================================================= */
+
+                    const childEmail =
+                        user.childEmail ||
+                        user.studentEmail ||
+                        "Student account";
+
+
+                    /* =================================================
+                       INITIALS
+                    ================================================= */
+
+                    const parentInitials =
+                        parentName
+                            .split(" ")
+                            .filter(Boolean)
+                            .map(
+                                word =>
+                                    word
+                                        .charAt(0)
+                            )
+                            .join("")
+                            .substring(0, 2)
+                            .toUpperCase();
+
+
+                    const childInitials =
+                        childName
+                            .split(" ")
+                            .filter(Boolean)
+                            .map(
+                                word =>
+                                    word
+                                        .charAt(0)
+                            )
+                            .join("")
+                            .substring(0, 2)
+                            .toUpperCase();
+
+
+                    /* =================================================
+                       PARENT DATA
+                    ================================================= */
+
+                    const parentElements = [
+
+                        "sidebarParentName",
+                        "topbarParentName",
+                        "profileName",
+                        "infoName"
+
+                    ];
+
+
+                    parentElements.forEach(
+                        id => {
+
+                            const element =
+                                document.getElementById(id);
+
+                            if (element) {
+
+                                element.textContent =
+                                    parentName;
+
+                            }
+
+                        }
+                    );
+
+
+                    const emailElements = [
+
+                        "profileEmail",
+                        "infoEmail"
+
+                    ];
+
+
+                    emailElements.forEach(
+                        id => {
+
+                            const element =
+                                document.getElementById(id);
+
+                            if (element) {
+
+                                element.textContent =
+                                    email;
+
+                            }
+
+                        }
+                    );
+
+
+                    /* =================================================
+                       PARENT AVATARS
+                    ================================================= */
+
+                    [
+
+                        "profileAvatar",
+                        "sidebarParentAvatar",
+                        "topbarParentAvatar"
+
+                    ].forEach(
+                        id => {
+
+                            const element =
+                                document.getElementById(id);
+
+                            if (element) {
+
+                                element.textContent =
+                                    parentInitials;
+
+                            }
+
+                        }
+                    );
+
+
+                    /* =================================================
+                       CHILD DATA
+                    ================================================= */
+
+                    [
+
+                        "sidebarChildName",
+                        "childName"
+
+                    ].forEach(
+                        id => {
+
+                            const element =
+                                document.getElementById(id);
+
+                            if (element) {
+
+                                element.textContent =
+                                    childName;
+
+                            }
+
+                        }
+                    );
+
+
+                    const childEmailElement =
+                        document.getElementById(
+                            "childEmail"
+                        );
+
+
+                    if (childEmailElement) {
+
+                        childEmailElement.textContent =
+                            childEmail;
+
+                    }
+
+
+                    const childAvatar =
+                        document.getElementById(
+                            "childAvatar"
+                        );
+
+
+                    if (childAvatar) {
+
+                        childAvatar.textContent =
+                            childInitials;
+
+                    }
+
+
+                    /* =================================================
+                       ROLE
+                    ================================================= */
+
+                    const roleElement =
+                        document.getElementById(
+                            "infoRole"
+                        );
+
+
+                    if (roleElement) {
+
+                        const role =
+                            user.role ||
+                            "parent";
+
+
+                        roleElement.textContent =
+                            role
+                                .charAt(0)
+                                .toUpperCase() +
+                            role.slice(1);
+
+                    }
+
+
+                    /* =================================================
+                       ACADEMIC DATA
+                    ================================================= */
+
+                    const cgpa =
+                        user.cgpa ||
+                        user.childCGPA ||
+                        user.studentCGPA;
+
+
+                    if (cgpa !== undefined) {
+
+                        const element =
+                            document.getElementById(
+                                "profileCGPA"
+                            );
+
+                        if (element) {
+
+                            element.textContent =
+                                cgpa;
+
+                        }
+
+                    }
+
+
+                    const credits =
+                        user.creditHours ||
+                        user.childCreditHours ||
+                        user.credit_hours;
+
+
+                    if (credits !== undefined) {
+
+                        const element =
+                            document.getElementById(
+                                "profileCredits"
+                            );
+
+                        if (element) {
+
+                            element.textContent =
+                                credits;
+
+                        }
+
+                    }
+
+
+                    const courses =
+                        user.courses ||
+                        user.enrolledCourses;
+
+
+                    if (courses !== undefined) {
+
+
+                        const count =
+                            Array.isArray(courses)
+                                ? courses.length
+                                : courses;
+
+
+                        const element =
+                            document.getElementById(
+                                "profileCourses"
+                            );
+
+
+                        if (element) {
+
+                            element.textContent =
+                                count;
+
+                        }
+
+                    }
+
+
+                }
+
+
+                /* =================================================
+                   SIDEBAR MOBILE
+                ================================================= */
+
+                const menuToggle =
+                    document.getElementById(
+                        "menuToggle"
+                    );
+
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+
+                if (
+                    menuToggle &&
+                    sidebar
+                ) {
+
+                    menuToggle.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.toggle(
+                                "open"
+                            );
+
+
+                            if (overlay) {
+
+                                overlay.classList.toggle(
+                                    "active"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+                            overlay.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* =================================================
+                   LOGOUT
+                ================================================= */
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+
+                if (logoutBtn) {
+
+                    logoutBtn.addEventListener(
+                        "click",
+                        function () {
+
+
+                            if (
+                                typeof logout ===
+                                "function"
+                            ) {
+
+                                logout();
+
+                            } else {
+
+
+                                localStorage.removeItem(
+                                    "learnora_current_user"
+                                );
+
+
+                                sessionStorage.removeItem(
+                                    "learnora_current_user"
+                                );
+
+
+                                window.location.href =
+                                    "../login.html";
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

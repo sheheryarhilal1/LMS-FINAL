@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Parent Attendance — Monitor your child's attendance and course-wise attendance records.">
+
+    <title>Attendance — Parent | Learnora LMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../Css/parent.css">
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <h2>Learnora</h2>
+                <span>LMS</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-profile">
+
+            <div class="profile-avatar"
+                id="sidebarParentAvatar">
+                P
+            </div>
+
+            <div class="profile-info">
+
+                <h4 id="sidebarParentName">
+                    Parent
+                </h4>
+
+                <span>
+                    <i class="fa-solid fa-user-group"></i>
+                    Parent
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="child-info">
+
+                <small>Child</small>
+
+                <strong id="sidebarChildName">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-regular fa-calendar-days"></i>
+                <span>Exam Schedule</span>
+            </a>
+
+            <a href="attendance.html"
+                class="nav-link active">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="assignments.html"
+                class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html"
+                class="nav-link">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Quizzes</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html"
+                class="nav-link">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="./announcements.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>Announcements</span>
+
+                <span class="nav-badge">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle"
+                    id="menuToggle">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        Parent Portal
+                    </span>
+
+                    <h1>
+                        Attendance
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <a href="./announcements.html"
+                    class="topbar-icon">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                </a>
+
+
+                <div class="topbar-profile">
+
+                    <div class="topbar-avatar"
+                        id="topbarParentAvatar">
+                        P
+                    </div>
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarParentName">
+                            Parent
+                        </strong>
+
+                        <span>Parent</span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-container">
+
+
+            <!-- INTRO -->
+            <section class="page-intro">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ATTENDANCE MONITORING
+                    </span>
+
+                    <h2>
+                        <span id="childNameHeading">
+                            Student
+                        </span>'s Attendance
+                    </h2>
+
+                    <p>
+                        Monitor your child's attendance
+                        across enrolled courses.
+                    </p>
+
+                </div>
+
+
+                <div class="student-mini-profile">
+
+                    <div class="mini-avatar"
+                        id="childAvatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong id="childNameMini">
+                            Loading...
+                        </strong>
+
+                        <span id="childProgramMini">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Overall Attendance
+                        </span>
+
+                        <h3 id="overallAttendance">
+                            —
+                        </h3>
+
+                        <small>
+                            Current Semester
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Present
+                        </span>
+
+                        <h3 id="presentDays">
+                            0
+                        </h3>
+
+                        <small>
+                            Classes attended
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-user-xmark"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Absent
+                        </span>
+
+                        <h3 id="absentDays">
+                            0
+                        </h3>
+
+                        <small>
+                            Classes missed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Total Classes
+                        </span>
+
+                        <h3 id="totalClasses">
+                            0
+                        </h3>
+
+                        <small>
+                            Recorded classes
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ATTENDANCE CIRCLE -->
+            <section class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            OVERALL RECORD
+                        </span>
+
+                        <h3>
+                            Attendance Overview
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attendance-main">
+
+                    <div class="attendance-circle"
+                        id="attendanceCircle">
+
+                        <div>
+
+                            <strong
+                                id="attendanceCircleValue">
+                                —
+                            </strong>
+
+                            <span>
+                                Attendance
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="attendance-description">
+
+                        <h3 id="attendanceMessage">
+                            Attendance data
+                        </h3>
+
+                        <p>
+                            This overview represents
+                            the attendance recorded for
+                            the linked student.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- COURSE ATTENDANCE -->
+            <section class="dashboard-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            COURSE WISE
+                        </span>
+
+                        <h3>
+                            Attendance by Course
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="results-table-wrapper">
+
+                    <table class="results-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Course</th>
+                                <th>Code</th>
+                                <th>Present</th>
+                                <th>Absent</th>
+                                <th>Total</th>
+                                <th>Percentage</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="attendanceTableBody">
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="table-loading">
+
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                    Loading attendance...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <div class="data-info">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>
+                    Attendance shown belongs to
+                    <strong id="dataChildName">
+                        the linked student
+                    </strong>.
+                </span>
+
+            </div>
+
+
+            <footer class="dashboard-footer">
+
+                <p>
+                    © 2026 Learnora LMS. All rights reserved.
+                </p>
+
+                <span>Parent Portal</span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <div class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/parent.js"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuToggle =
+                document.getElementById("menuToggle");
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+
+            if (menuToggle && sidebar) {
+
+                menuToggle.addEventListener("click", function () {
+
+                    sidebar.classList.toggle("open");
+
+                    if (overlay) {
+                        overlay.classList.toggle("active");
+                    }
+
+                });
+
+            }
+
+
+            if (overlay) {
+
+                overlay.addEventListener("click", function () {
+
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("active");
+
+                });
+
+            }
+
+
+            const logoutBtn =
+                document.getElementById("logoutBtn");
+
+
+            if (logoutBtn) {
+
+                logoutBtn.addEventListener("click", function () {
+
+                    if (typeof logout === "function") {
+
+                        logout();
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        sessionStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        window.location.href =
+                            "../login.html";
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

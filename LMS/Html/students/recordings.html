@@ -1,0 +1,2654 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Recordings — Watch and review recorded lectures.">
+
+    <title>Recordings — Learnora LMS</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- STUDENT CSS -->
+    <link rel="stylesheet"
+        href="../../Css/student.css">
+
+
+    <style>
+
+        /* =====================================================
+           RECORDINGS PAGE ADDITIONAL CSS
+        ===================================================== */
+
+        .recording-card.hidden {
+            display: none;
+        }
+
+        .recording-empty {
+            text-align: center;
+            padding: 55px 25px;
+            color: #64748b;
+            display: none;
+        }
+
+        .recording-empty i {
+            font-size: 46px;
+            color: #2878ff;
+            margin-bottom: 15px;
+        }
+
+        .recording-empty h3 {
+            margin: 0 0 8px;
+            color: #0f172a;
+            font-family: "Manrope", sans-serif;
+        }
+
+        .recording-empty p {
+            margin: 0;
+        }
+
+        .recording-filter-wrapper {
+            position: relative;
+        }
+
+        .recording-filter-menu {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            width: 210px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+            z-index: 100;
+            display: none;
+        }
+
+        .recording-filter-menu.show {
+            display: block;
+        }
+
+        .recording-filter-menu button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 10px 12px;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            color: #334155;
+        }
+
+        .recording-filter-menu button:hover {
+            background: #f1f5f9;
+        }
+
+        .recording-filter-menu button.active {
+            background: #eff6ff;
+            color: #2878ff;
+            font-weight: 700;
+        }
+
+        .recording-course-select {
+            min-width: 260px;
+        }
+
+        .recording-thumbnail {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recording-thumbnail::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(40, 120, 255, 0.18),
+                    rgba(39, 217, 244, 0.12)
+                );
+            pointer-events: none;
+        }
+
+        .thumbnail-icon {
+            position: relative;
+            z-index: 2;
+        }
+
+        .duration,
+        .watched-badge {
+            z-index: 3;
+        }
+
+        .recording-footer {
+            gap: 12px;
+        }
+
+        .watch-progress {
+            margin-top: 12px;
+        }
+
+        .watch-progress-bar {
+            width: 100%;
+            height: 5px;
+            border-radius: 20px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .watch-progress-bar span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: #2878ff;
+        }
+
+        .watch-progress-text {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .notification-popup {
+            position: fixed;
+            right: 25px;
+            top: 75px;
+            width: 320px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.15);
+            z-index: 9999;
+            display: none;
+        }
+
+        .notification-popup.show {
+            display: block;
+        }
+
+        .notification-popup h4 {
+            margin: 0 0 8px;
+            color: #0f172a;
+        }
+
+        .notification-popup p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .recent-empty {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+
+            .recording-filter-wrapper {
+                width: 100%;
+            }
+
+            .recording-filter-wrapper .secondary-btn {
+                width: 100%;
+            }
+
+            .recording-filter-menu {
+                left: 0;
+                right: auto;
+                width: 100%;
+            }
+
+            .recording-course-select {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .notification-popup {
+                left: 15px;
+                right: 15px;
+                width: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- BRAND -->
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    Learnora
+                </h2>
+
+                <span>
+                    Student Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- STUDENT PROFILE -->
+
+        <div class="student-mini-profile">
+
+            <div
+                class="avatar"
+                id="sidebarAvatar">
+
+                ST
+
+            </div>
+
+            <div>
+
+                <strong
+                    id="sidebarStudentName">
+
+                    Student
+
+                </strong>
+
+                <span
+                    id="sidebarProgram">
+
+                    Student
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-grid-2"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="courses.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <span>
+                    My Courses
+                </span>
+
+            </a>
+
+
+            <a
+                href="courses.html#add-drop"
+                class="nav-link">
+
+                <i class="fa-solid fa-plus-minus"></i>
+
+                <span>
+                    Add / Drop Course
+                </span>
+
+            </a>
+
+
+            <a
+                href="lectures.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-chalkboard"></i>
+
+                <span>
+                    Lectures
+                </span>
+
+            </a>
+
+
+            <a
+                href="recordings.html"
+                class="nav-link active">
+
+                <i class="fa-solid fa-circle-play"></i>
+
+                <span>
+                    Recordings
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+
+            <a
+                href="assignments.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>
+                    Assignments
+                </span>
+
+            </a>
+
+
+            <a
+                href="quizzes.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-clipboard-question"></i>
+
+                <span>
+                    Quizzes & Tests
+                </span>
+
+            </a>
+
+
+            <a
+                href="results.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>
+                    Results & Grades
+                </span>
+
+            </a>
+
+
+            <a
+                href="attendance.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+
+            <a
+                href="schedule.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>
+                    Schedule
+                </span>
+
+            </a>
+
+
+            <a
+                href="materials.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                <span>
+                    Study Materials
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                COMMUNICATION
+            </div>
+
+
+            <a
+                href="announcements.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+                <span>
+                    Announcements
+                </span>
+
+            </a>
+
+
+            <a
+                href="messages.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-message"></i>
+
+                <span>
+                    Messages
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a
+                href="profile.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="../login.html"
+                class="nav-link logout-link"
+                id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <!-- SEARCH -->
+
+            <div class="topbar-search">
+
+                <i
+                    class="fa-solid fa-magnifying-glass">
+                </i>
+
+                <input
+                    type="text"
+                    id="recordingSearch"
+                    placeholder="Search recordings...">
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="topbar-actions">
+
+
+                <button
+                    class="icon-btn notification-btn"
+                    id="notificationBtn">
+
+                    <i
+                        class="fa-regular fa-bell">
+                    </i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot">
+                    </span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topbarAvatar">
+
+                        ST
+
+                    </div>
+
+
+                    <div class="topbar-profile-info">
+
+                        <strong
+                            id="topbarStudentName">
+
+                            Student
+
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <i
+                        class="fa-solid fa-chevron-down">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- NOTIFICATION -->
+
+        <div
+            class="notification-popup"
+            id="notificationPopup">
+
+            <h4>
+
+                <i class="fa-regular fa-bell"></i>
+
+                Recording Updates
+
+            </h4>
+
+            <p id="notificationText">
+                Loading...
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <div class="page-content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-video"></i>
+
+                        LEARNING LIBRARY
+
+                    </span>
+
+
+                    <h1>
+                        Lecture Recordings
+                    </h1>
+
+
+                    <p>
+                        Rewatch your lectures anytime and learn at your own pace.
+                    </p>
+
+                </div>
+
+
+                <div class="recording-filter-wrapper">
+
+
+                    <button
+                        class="secondary-btn"
+                        id="filterBtn">
+
+                        <i
+                            class="fa-solid fa-filter">
+                        </i>
+
+                        Filter
+
+                    </button>
+
+
+                    <div
+                        class="recording-filter-menu"
+                        id="filterMenu">
+
+                        <button
+                            class="active"
+                            data-filter="all">
+
+                            All Recordings
+
+                        </button>
+
+
+                        <button
+                            data-filter="watched">
+
+                            Watched
+
+                        </button>
+
+
+                        <button
+                            data-filter="unwatched">
+
+                            Unwatched
+
+                        </button>
+
+
+                        <button
+                            data-filter="saved">
+
+                            Saved
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i
+                            class="fa-solid fa-video">
+                        </i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Recordings
+                        </span>
+
+                        <strong
+                            id="totalRecordings">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i
+                            class="fa-solid fa-circle-check">
+                        </i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Watched
+                        </span>
+
+                        <strong
+                            id="watchedRecordings">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon cyan">
+
+                        <i
+                            class="fa-solid fa-clock">
+                        </i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Watch Time
+                        </span>
+
+                        <strong
+                            id="watchTime">
+
+                            0h 0m
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <i
+                            class="fa-solid fa-bookmark">
+                        </i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Saved
+                        </span>
+
+                        <strong
+                            id="savedRecordings">
+
+                            0
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COURSE RECORDINGS
+            ================================================== -->
+
+            <section class="content-card">
+
+
+                <div class="card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Course Recordings
+                        </h2>
+
+                        <p>
+                            Select a course to view available recordings.
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        class="form-select recording-course-select"
+                        id="courseFilter">
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RECORDINGS -->
+
+                <div
+                    class="recordings-grid"
+                    id="recordingsGrid">
+
+                    <!-- Dynamic recordings -->
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="recording-empty"
+                    id="recordingEmpty">
+
+                    <i
+                        class="fa-solid fa-video-slash">
+                    </i>
+
+                    <h3>
+                        No recordings found
+                    </h3>
+
+                    <p>
+                        No recordings match your selected course or search.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RECENTLY WATCHED
+            ================================================== -->
+
+            <section class="content-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Recently Watched
+                        </h2>
+
+                        <p>
+                            Continue learning from where you stopped.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="lectures.html"
+                        class="text-link">
+
+                        View Lectures
+
+                        <i
+                            class="fa-solid fa-arrow-right">
+                        </i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="activity-list"
+                    id="recentlyWatched">
+
+                    <!-- Dynamic recent recordings -->
+
+                </div>
+
+
+                <div
+                    class="recent-empty"
+                    id="recentEmpty"
+                    style="display:none;">
+
+                    <i
+                        class="fa-solid fa-clock-rotate-left">
+                    </i>
+
+                    <p>
+                        Your recently watched recordings will appear here.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           GET CURRENT USER
+        ===================================================== */
+
+        let currentUser = null;
+
+
+        try {
+
+            const savedUser =
+                localStorage.getItem(
+                    "learnora_current_user"
+                );
+
+            if (savedUser) {
+
+                currentUser =
+                    JSON.parse(savedUser);
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Current user error:",
+                error
+            );
+
+        }
+
+
+        /* SESSION STORAGE FALLBACK */
+
+        if (!currentUser) {
+
+            try {
+
+                const sessionUser =
+                    sessionStorage.getItem(
+                        "learnora_current_user"
+                    );
+
+                if (sessionUser) {
+
+                    currentUser =
+                        JSON.parse(sessionUser);
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Session user error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGIN CHECK
+        ===================================================== */
+
+        if (!currentUser) {
+
+            window.location.href =
+                "../login.html";
+
+            return;
+
+        }
+
+
+        /* =====================================================
+           HELPERS
+        ===================================================== */
+
+        function getInitials(name) {
+
+            if (!name) {
+                return "ST";
+            }
+
+            return name
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map(
+                    word =>
+                        word.charAt(0)
+                            .toUpperCase()
+                )
+                .join("");
+
+        }
+
+
+        function escapeHTML(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function normalize(value) {
+
+            return String(value || "")
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, "");
+
+        }
+
+
+        /* =====================================================
+           STUDENT INFORMATION
+        ===================================================== */
+
+        const studentName =
+            currentUser.name ||
+            currentUser.fullName ||
+            currentUser.username ||
+            "Student";
+
+
+        const studentProgram =
+            currentUser.program ||
+            currentUser.department ||
+            currentUser.degree ||
+            "Student";
+
+
+        const initials =
+            getInitials(studentName);
+
+
+        document.getElementById(
+            "sidebarStudentName"
+        ).textContent =
+            studentName;
+
+
+        document.getElementById(
+            "topbarStudentName"
+        ).textContent =
+            studentName;
+
+
+        document.getElementById(
+            "sidebarProgram"
+        ).textContent =
+            studentProgram;
+
+
+        document.getElementById(
+            "sidebarAvatar"
+        ).textContent =
+            initials;
+
+
+        document.getElementById(
+            "topbarAvatar"
+        ).textContent =
+            initials;
+
+
+        /* =====================================================
+           RECORDINGS DATABASE
+        ===================================================== */
+
+        const allRecordings = [
+
+            {
+                id: "rec-se-001",
+                courseCode: "CS-401",
+                courseName: "Software Engineering",
+                title: "Software Testing Strategies",
+                description:
+                    "Learn unit testing, integration testing, system testing and acceptance testing.",
+                duration: "48:32",
+                durationMinutes: 49,
+                date: "Sep 26, 2026",
+                teacher: "Dr. Ahmed Khan",
+                icon: "fa-code",
+                color: "blue",
+                progress: 100,
+                watched: true,
+                saved: true
+            },
+
+            {
+                id: "rec-se-002",
+                courseCode: "CS-401",
+                courseName: "Software Engineering",
+                title: "Requirements Engineering",
+                description:
+                    "Understand functional requirements, use cases, validation and requirements management.",
+                duration: "42:18",
+                durationMinutes: 42,
+                date: "Sep 24, 2026",
+                teacher: "Dr. Ahmed Khan",
+                icon: "fa-code",
+                color: "blue",
+                progress: 100,
+                watched: true,
+                saved: false
+            },
+
+            {
+                id: "rec-db-001",
+                courseCode: "CS-403",
+                courseName: "Database Systems",
+                title: "SQL Joins & Relationships",
+                description:
+                    "Understand inner, left, right and full joins with practical database examples.",
+                duration: "55:18",
+                durationMinutes: 55,
+                date: "Sep 25, 2026",
+                teacher: "Prof. Sarah Ahmed",
+                icon: "fa-database",
+                color: "cyan",
+                progress: 62,
+                watched: false,
+                saved: true
+            },
+
+            {
+                id: "rec-db-002",
+                courseCode: "CS-403",
+                courseName: "Database Systems",
+                title: "Normalization in DBMS",
+                description:
+                    "Learn 1NF, 2NF, 3NF and BCNF with practical database design examples.",
+                duration: "51:10",
+                durationMinutes: 51,
+                date: "Sep 23, 2026",
+                teacher: "Prof. Sarah Ahmed",
+                icon: "fa-database",
+                color: "cyan",
+                progress: 74,
+                watched: false,
+                saved: false
+            },
+
+            {
+                id: "rec-da-001",
+                courseCode: "DS-301",
+                courseName: "Data Analytics",
+                title: "Data Cleaning with Python",
+                description:
+                    "Explore missing values, duplicate records, outliers and data transformation.",
+                duration: "46:09",
+                durationMinutes: 46,
+                date: "Sep 23, 2026",
+                teacher: "Dr. Muhammad Ali",
+                icon: "fa-chart-line",
+                color: "purple",
+                progress: 35,
+                watched: false,
+                saved: true
+            },
+
+            {
+                id: "rec-da-002",
+                courseCode: "DS-301",
+                courseName: "Data Analytics",
+                title: "Pandas Data Analysis",
+                description:
+                    "Learn how to use Pandas for filtering, grouping and analyzing datasets.",
+                duration: "49:24",
+                durationMinutes: 49,
+                date: "Sep 20, 2026",
+                teacher: "Dr. Muhammad Ali",
+                icon: "fa-chart-line",
+                color: "purple",
+                progress: 0,
+                watched: false,
+                saved: false
+            },
+
+            {
+                id: "rec-ma-001",
+                courseCode: "SE-405",
+                courseName: "Mobile Application Development",
+                title: "Flutter State Management",
+                description:
+                    "Introduction to state management patterns and practical Flutter implementation.",
+                duration: "51:44",
+                durationMinutes: 52,
+                date: "Sep 21, 2026",
+                teacher: "Mr. Hamza Raza",
+                icon: "fa-mobile-screen",
+                color: "blue",
+                progress: 100,
+                watched: true,
+                saved: true
+            },
+
+            {
+                id: "rec-sec-001",
+                courseCode: "CS-407",
+                courseName: "Information Security",
+                title: "Network Security Fundamentals",
+                description:
+                    "Learn basic network security concepts, threats and security controls.",
+                duration: "44:37",
+                durationMinutes: 45,
+                date: "Sep 18, 2026",
+                teacher: "Dr. Faisal Ahmed",
+                icon: "fa-shield-halved",
+                color: "orange",
+                progress: 0,
+                watched: false,
+                saved: false
+            }
+
+        ];
+
+
+        /* =====================================================
+           STUDENT COURSES
+        ===================================================== */
+
+        function getStudentCourses() {
+
+            let courses = [];
+
+
+            const fields = [
+
+                currentUser.courses,
+
+                currentUser.enrolledCourses,
+
+                currentUser.myCourses,
+
+                currentUser.courseList
+
+            ];
+
+
+            for (
+                const field of fields
+            ) {
+
+                if (
+                    Array.isArray(field)
+                ) {
+
+                    courses = field;
+
+                    break;
+
+                }
+
+            }
+
+
+            /* STRING COURSES */
+
+            if (
+                courses.length === 0 &&
+                typeof currentUser.courses === "string"
+            ) {
+
+                courses =
+                    currentUser.courses
+                        .split(",")
+                        .map(
+                            course =>
+                                course.trim()
+                        )
+                        .filter(Boolean);
+
+            }
+
+
+            return courses;
+
+        }
+
+
+        const studentCourses =
+            getStudentCourses();
+
+
+        /* =====================================================
+           MATCH RECORDING WITH COURSE
+        ===================================================== */
+
+        function recordingBelongsToStudent(
+            recording
+        ) {
+
+
+            /*
+             * If login system doesn't yet contain
+             * enrolled courses, show demo data.
+             */
+
+            if (
+                !studentCourses ||
+                studentCourses.length === 0
+            ) {
+
+                return true;
+
+            }
+
+
+            return studentCourses.some(
+                course => {
+
+                    let code = "";
+                    let name = "";
+
+
+                    if (
+                        typeof course === "string"
+                    ) {
+
+                        code = course;
+                        name = course;
+
+                    }
+
+
+                    else if (
+                        typeof course === "object"
+                    ) {
+
+                        code =
+                            course.code ||
+                            course.courseCode ||
+                            course.id ||
+                            "";
+
+                        name =
+                            course.name ||
+                            course.courseName ||
+                            course.title ||
+                            "";
+
+                    }
+
+
+                    const courseCode =
+                        normalize(
+                            recording.courseCode
+                        );
+
+
+                    const courseName =
+                        normalize(
+                            recording.courseName
+                        );
+
+
+                    const studentCode =
+                        normalize(code);
+
+
+                    const studentName =
+                        normalize(name);
+
+
+                    return (
+
+                        studentCode ===
+                        courseCode ||
+
+                        studentName ===
+                        courseName ||
+
+                        studentCode.includes(
+                            courseCode
+                        ) ||
+
+                        courseCode.includes(
+                            studentCode
+                        ) ||
+
+                        studentName.includes(
+                            courseName
+                        ) ||
+
+                        courseName.includes(
+                            studentName
+                        )
+
+                    );
+
+                }
+            );
+
+        }
+
+
+        let studentRecordings =
+            allRecordings.filter(
+                recording =>
+                    recordingBelongsToStudent(
+                        recording
+                    )
+            );
+
+
+        /* =====================================================
+           LOCAL STORAGE WATCH DATA
+        ===================================================== */
+
+        const watchStorageKey =
+            "learnora_recording_progress_" +
+            (
+                currentUser.email ||
+                currentUser.username ||
+                currentUser.id ||
+                "student"
+            );
+
+
+        let savedWatchData = {};
+
+
+        try {
+
+            savedWatchData =
+                JSON.parse(
+                    localStorage.getItem(
+                        watchStorageKey
+                    )
+                ) || {};
+
+        } catch {
+
+            savedWatchData = {};
+
+        }
+
+
+        /* APPLY SAVED PROGRESS */
+
+        studentRecordings.forEach(
+            recording => {
+
+                if (
+                    savedWatchData[
+                        recording.id
+                    ]
+                ) {
+
+                    const saved =
+                        savedWatchData[
+                            recording.id
+                        ];
+
+
+                    recording.progress =
+                        saved.progress ??
+                        recording.progress;
+
+
+                    recording.watched =
+                        saved.progress >= 100;
+
+
+                    recording.saved =
+                        saved.saved ??
+                        recording.saved;
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SAVE WATCH DATA
+        ===================================================== */
+
+        function saveRecordingData(
+            recording
+        ) {
+
+            savedWatchData[
+                recording.id
+            ] = {
+
+                progress:
+                    recording.progress,
+
+                saved:
+                    recording.saved,
+
+                updatedAt:
+                    new Date().toISOString()
+
+            };
+
+
+            localStorage.setItem(
+                watchStorageKey,
+                JSON.stringify(
+                    savedWatchData
+                )
+            );
+
+        }
+
+
+        /* =====================================================
+           UPDATE STATS
+        ===================================================== */
+
+        function updateStats() {
+
+
+            const total =
+                studentRecordings.length;
+
+
+            const watched =
+                studentRecordings.filter(
+                    recording =>
+                        recording.progress >= 100
+                ).length;
+
+
+            const saved =
+                studentRecordings.filter(
+                    recording =>
+                        recording.saved
+                ).length;
+
+
+            const minutes =
+                studentRecordings.reduce(
+                    (totalMinutes, recording) => {
+
+                        if (
+                            recording.progress <= 0
+                        ) {
+
+                            return totalMinutes;
+
+                        }
+
+
+                        return (
+                            totalMinutes +
+                            (
+                                recording.durationMinutes *
+                                (
+                                    recording.progress /
+                                    100
+                                )
+                            )
+                        );
+
+                    },
+                    0
+                );
+
+
+            const hours =
+                Math.floor(
+                    minutes / 60
+                );
+
+
+            const remainingMinutes =
+                Math.round(
+                    minutes % 60
+                );
+
+
+            document.getElementById(
+                "totalRecordings"
+            ).textContent =
+                total;
+
+
+            document.getElementById(
+                "watchedRecordings"
+            ).textContent =
+                watched;
+
+
+            document.getElementById(
+                "watchTime"
+            ).textContent =
+                `${hours}h ${remainingMinutes}m`;
+
+
+            document.getElementById(
+                "savedRecordings"
+            ).textContent =
+                saved;
+
+        }
+
+
+        /* =====================================================
+           COURSE DROPDOWN
+        ===================================================== */
+
+        const courseFilter =
+            document.getElementById(
+                "courseFilter"
+            );
+
+
+        const uniqueCourses = [];
+
+
+        studentRecordings.forEach(
+            recording => {
+
+                const exists =
+                    uniqueCourses.some(
+                        course =>
+                            course.code ===
+                            recording.courseCode
+                    );
+
+
+                if (!exists) {
+
+                    uniqueCourses.push({
+
+                        code:
+                            recording.courseCode,
+
+                        name:
+                            recording.courseName
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        uniqueCourses.forEach(
+            course => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    course.code;
+
+
+                option.textContent =
+                    `${course.code} — ${course.name}`;
+
+
+                courseFilter.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           RENDER RECORDINGS
+        ===================================================== */
+
+        const recordingsGrid =
+            document.getElementById(
+                "recordingsGrid"
+            );
+
+
+        const recordingEmpty =
+            document.getElementById(
+                "recordingEmpty"
+            );
+
+
+        function renderRecordings() {
+
+
+            const selectedCourse =
+                courseFilter.value;
+
+
+            const searchInput =
+                document.getElementById(
+                    "recordingSearch"
+                );
+
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const activeFilter =
+                document.querySelector(
+                    ".recording-filter-menu button.active"
+                );
+
+
+            const filter =
+                activeFilter
+                    ? activeFilter.dataset.filter
+                    : "all";
+
+
+            recordingsGrid.innerHTML = "";
+
+
+            const filtered =
+                studentRecordings.filter(
+                    recording => {
+
+
+                        const courseMatch =
+                            selectedCourse === "all" ||
+                            recording.courseCode ===
+                            selectedCourse;
+
+
+                        const searchMatch =
+                            !search ||
+
+                            recording.title
+                                .toLowerCase()
+                                .includes(search) ||
+
+                            recording.courseCode
+                                .toLowerCase()
+                                .includes(search) ||
+
+                            recording.courseName
+                                .toLowerCase()
+                                .includes(search) ||
+
+                            recording.teacher
+                                .toLowerCase()
+                                .includes(search);
+
+
+                        let filterMatch = true;
+
+
+                        if (
+                            filter === "watched"
+                        ) {
+
+                            filterMatch =
+                                recording.progress >=
+                                100;
+
+                        }
+
+
+                        if (
+                            filter === "unwatched"
+                        ) {
+
+                            filterMatch =
+                                recording.progress <
+                                100;
+
+                        }
+
+
+                        if (
+                            filter === "saved"
+                        ) {
+
+                            filterMatch =
+                                recording.saved === true;
+
+                        }
+
+
+                        return (
+                            courseMatch &&
+                            searchMatch &&
+                            filterMatch
+                        );
+
+                    }
+                );
+
+
+            if (
+                filtered.length === 0
+            ) {
+
+                recordingEmpty.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            recordingEmpty.style.display =
+                "none";
+
+
+            filtered.forEach(
+                recording => {
+
+
+                    const card =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    card.className =
+                        "recording-card";
+
+
+                    const isWatched =
+                        recording.progress >= 100;
+
+
+                    const buttonText =
+                        isWatched
+                            ? "Watch Again"
+                            : recording.progress > 0
+                                ? "Continue"
+                                : "Watch";
+
+
+                    const watchedBadge =
+                        isWatched
+                            ? `
+                                <span class="watched-badge">
+                                    <i class="fa-solid fa-check"></i>
+                                    Watched
+                                </span>
+                              `
+                            : "";
+
+
+                    card.innerHTML = `
+
+                        <div class="recording-thumbnail">
+
+                            <div class="thumbnail-icon">
+
+                                <i class="fa-solid fa-play"></i>
+
+                            </div>
+
+                            <span class="duration">
+                                ${escapeHTML(recording.duration)}
+                            </span>
+
+                            ${watchedBadge}
+
+                        </div>
+
+
+                        <div class="recording-body">
+
+                            <span class="course-label">
+                                ${escapeHTML(recording.courseCode)}
+                                ·
+                                ${escapeHTML(recording.courseName)}
+                            </span>
+
+
+                            <h3>
+                                ${escapeHTML(recording.title)}
+                            </h3>
+
+
+                            <p>
+                                ${escapeHTML(recording.description)}
+                            </p>
+
+
+                            <div class="recording-meta">
+
+                                <span>
+
+                                    <i class="fa-regular fa-calendar"></i>
+
+                                    ${escapeHTML(recording.date)}
+
+                                </span>
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                    ${escapeHTML(recording.teacher)}
+
+                                </span>
+
+                            </div>
+
+
+                            ${
+                                recording.progress > 0
+                                    ? `
+                                        <div class="watch-progress">
+
+                                            <div class="watch-progress-bar">
+
+                                                <span
+                                                    style="width:${recording.progress}%">
+                                                </span>
+
+                                            </div>
+
+                                            <span class="watch-progress-text">
+
+                                                ${recording.progress}% watched
+
+                                            </span>
+
+                                        </div>
+                                      `
+                                    : ""
+                            }
+
+
+                            <div class="recording-footer">
+
+                                <span class="progress-text">
+
+                                    ${
+                                        recording.progress >= 100
+                                            ? "Completed"
+                                            : recording.progress > 0
+                                                ? `${recording.progress}% watched`
+                                                : "Not watched"
+                                    }
+
+                                </span>
+
+
+                                <button
+                                    class="primary-btn small-btn watch-recording-btn"
+                                    data-id="${escapeHTML(recording.id)}">
+
+                                    <i class="fa-solid fa-play"></i>
+
+                                    ${buttonText}
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    recordingsGrid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+            /* WATCH BUTTONS */
+
+            document
+                .querySelectorAll(
+                    ".watch-recording-btn"
+                )
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                const id =
+                                    this.dataset.id;
+
+
+                                const recording =
+                                    studentRecordings.find(
+                                        item =>
+                                            item.id === id
+                                    );
+
+
+                                if (!recording) {
+                                    return;
+                                }
+
+
+                                /*
+                                 * Demo behaviour:
+                                 * Clicking Watch starts/resumes recording.
+                                 */
+
+                                if (
+                                    recording.progress === 0
+                                ) {
+
+                                    recording.progress =
+                                        10;
+
+                                }
+
+
+                                recording.watched =
+                                    recording.progress >= 100;
+
+
+                                saveRecordingData(
+                                    recording
+                                );
+
+
+                                /*
+                                 * Open recording page.
+                                 */
+
+                                window.location.href =
+                                    "recording.html?id=" +
+                                    encodeURIComponent(
+                                        recording.id
+                                    );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* =====================================================
+           RECENTLY WATCHED
+        ===================================================== */
+
+        function renderRecentlyWatched() {
+
+
+            const recentContainer =
+                document.getElementById(
+                    "recentlyWatched"
+                );
+
+
+            const recentEmpty =
+                document.getElementById(
+                    "recentEmpty"
+                );
+
+
+            recentContainer.innerHTML = "";
+
+
+            const recent =
+                studentRecordings
+                    .filter(
+                        recording =>
+                            recording.progress > 0
+                    )
+                    .sort(
+                        (a, b) =>
+                            b.progress -
+                            a.progress
+                    )
+                    .slice(0, 4);
+
+
+            if (
+                recent.length === 0
+            ) {
+
+                recentEmpty.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            recentEmpty.style.display =
+                "none";
+
+
+            recent.forEach(
+                recording => {
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "activity-item";
+
+
+                    item.innerHTML = `
+
+                        <div class="activity-icon ${escapeHTML(recording.color)}">
+
+                            <i class="fa-solid fa-play"></i>
+
+                        </div>
+
+
+                        <div class="activity-info">
+
+                            <strong>
+                                ${escapeHTML(recording.title)}
+                            </strong>
+
+                            <span>
+                                ${escapeHTML(recording.courseCode)}
+                                ·
+                                ${escapeHTML(recording.duration)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity-progress">
+
+                            <div class="progress-bar">
+
+                                <span
+                                    style="width:${recording.progress}%">
+                                </span>
+
+                            </div>
+
+                            <small>
+                                ${recording.progress}%
+                            </small>
+
+                        </div>
+
+                    `;
+
+
+                    recentContainer.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        document
+            .getElementById(
+                "recordingSearch"
+            )
+            .addEventListener(
+                "input",
+                function () {
+
+                    renderRecordings();
+
+                }
+            );
+
+
+        /* =====================================================
+           COURSE FILTER
+        ===================================================== */
+
+        courseFilter.addEventListener(
+            "change",
+            function () {
+
+                renderRecordings();
+
+            }
+        );
+
+
+        /* =====================================================
+           FILTER MENU
+        ===================================================== */
+
+        const filterBtn =
+            document.getElementById(
+                "filterBtn"
+            );
+
+
+        const filterMenu =
+            document.getElementById(
+                "filterMenu"
+            );
+
+
+        filterBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                filterMenu.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".recording-filter-menu button"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+
+                            document
+                                .querySelectorAll(
+                                    ".recording-filter-menu button"
+                                )
+                                .forEach(
+                                    btn =>
+                                        btn.classList.remove(
+                                            "active"
+                                        )
+                                );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+
+                            filterMenu.classList.remove(
+                                "show"
+                            );
+
+
+                            renderRecordings();
+
+                        }
+                    );
+
+                }
+            );
+
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                filterMenu.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           NOTIFICATIONS
+        ===================================================== */
+
+        const notificationBtn =
+            document.getElementById(
+                "notificationBtn"
+            );
+
+
+        const notificationPopup =
+            document.getElementById(
+                "notificationPopup"
+            );
+
+
+        const notificationText =
+            document.getElementById(
+                "notificationText"
+            );
+
+
+        const unfinished =
+            studentRecordings.filter(
+                recording =>
+                    recording.progress > 0 &&
+                    recording.progress < 100
+            );
+
+
+        if (
+            unfinished.length > 0
+        ) {
+
+            notificationText.textContent =
+                `You have ${unfinished.length} recording${unfinished.length > 1 ? "s" : ""} in progress. Continue learning from where you stopped.`;
+
+        }
+
+        else {
+
+            notificationText.textContent =
+                "No unfinished recordings. You're all caught up.";
+
+        }
+
+
+        notificationBtn.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                notificationPopup.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        notificationPopup.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                notificationPopup.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+        document
+            .getElementById(
+                "logoutBtn"
+            )
+            .addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    localStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+
+                    sessionStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+
+                    window.location.href =
+                        "../login.html";
+
+                }
+            );
+
+
+        /* =====================================================
+           MOBILE SIDEBAR
+        ===================================================== */
+
+        const mobileMenuBtn =
+            document.getElementById(
+                "mobileMenuBtn"
+            );
+
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+
+        if (mobileMenuBtn) {
+
+            mobileMenuBtn.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.toggle(
+                        "open"
+                    );
+
+                    sidebarOverlay.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (sidebarOverlay) {
+
+            sidebarOverlay.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                    sidebarOverlay.classList.remove(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           INITIALIZE
+        ===================================================== */
+
+        updateStats();
+
+        renderRecordings();
+
+        renderRecentlyWatched();
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Course Details — View lectures, recordings, assignments, quizzes and course progress.">
+
+    <title>Course Details — Learnora LMS</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link
+        rel="stylesheet"
+        href="../../Css/student.css">
+
+    <style>
+
+        /* =====================================================
+           COURSE DETAILS PAGE
+        ===================================================== */
+
+        .course-detail-hero {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .course-detail-info {
+            min-width: 0;
+        }
+
+        .course-detail-info h2 {
+            margin: 5px 0 10px;
+        }
+
+        .course-detail-info p {
+            max-width: 760px;
+            line-height: 1.7;
+        }
+
+        .course-detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 22px;
+        }
+
+        .course-detail-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .course-detail-progress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .course-detail-icon {
+            flex-shrink: 0;
+        }
+
+        .course-code {
+            font-weight: 700;
+        }
+
+        .dynamic-course-empty {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .dynamic-course-empty i {
+            font-size: 50px;
+            opacity: .45;
+            margin-bottom: 18px;
+        }
+
+        .dynamic-course-empty h2 {
+            margin: 0 0 8px;
+        }
+
+        .dynamic-course-empty p {
+            margin: 0 0 22px;
+        }
+
+        .course-stat-value {
+            display: block;
+        }
+
+        .course-stat-muted {
+            opacity: .55;
+        }
+
+        .course-assignment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .course-assignment-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, .035);
+            border: 1px solid rgba(15, 23, 42, .07);
+        }
+
+        .course-assignment-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .course-assignment-icon {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: rgba(37, 99, 235, .1);
+            color: #2563eb;
+        }
+
+        .course-assignment-info strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .course-assignment-info span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .course-assignment-status {
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .course-assignment-status.pending {
+            color: #d97706;
+        }
+
+        .course-assignment-status.submitted {
+            color: #16a34a;
+        }
+
+        .course-no-data {
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, .03);
+        }
+
+        .course-switcher {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .course-switcher label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .course-switcher select {
+            min-width: 230px;
+        }
+
+        @media (max-width: 900px) {
+
+            .course-detail-hero {
+                grid-template-columns: auto 1fr;
+            }
+
+            .course-detail-progress {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .course-detail-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .course-detail-icon {
+                width: 55px;
+                height: 55px;
+            }
+
+            .course-detail-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .course-switcher {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .course-switcher select {
+                width: 100%;
+            }
+
+            .course-assignment-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <a href="dashboard.html"
+                class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>
+                        Learnora
+                    </strong>
+
+                    <small>
+                        Student Portal
+                    </small>
+
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- DYNAMIC PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <div
+                class="profile-avatar"
+                id="sidebarAvatar">
+
+                SA
+
+            </div>
+
+            <div class="profile-info">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarStudentProgram">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-section">
+
+                <p class="nav-title">
+                    MAIN
+                </p>
+
+                <a href="dashboard.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-title">
+                    ACADEMICS
+                </p>
+
+
+                <a href="courses.html"
+                    class="nav-link active">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+
+                    <span>
+                        My Courses
+                    </span>
+
+                </a>
+
+
+                <a href="courses.html#add-drop"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-plus-minus"></i>
+                    </span>
+
+                    <span>
+                        Add / Drop Course
+                    </span>
+
+                </a>
+
+
+                <a href="lectures.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </span>
+
+                    <span>
+                        Lectures
+                    </span>
+
+                </a>
+
+
+                <a href="recordings.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </span>
+
+                    <span>
+                        Recordings
+                    </span>
+
+                </a>
+
+
+                <a href="assignments.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </span>
+
+                    <span>
+                        Assignments
+                    </span>
+
+                </a>
+
+
+                <a href="quizzes.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                    </span>
+
+                    <span>
+                        Quizzes & Tests
+                    </span>
+
+                </a>
+
+
+                <a href="results.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </span>
+
+                    <span>
+                        Results & Grades
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-title">
+                    MY LEARNING
+                </p>
+
+
+                <a href="attendance.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </span>
+
+                    <span>
+                        Attendance
+                    </span>
+
+                </a>
+
+
+                <a href="schedule.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </span>
+
+                    <span>
+                        Schedule
+                    </span>
+
+                </a>
+
+
+                <a href="materials.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </span>
+
+                    <span>
+                        Study Materials
+                    </span>
+
+                </a>
+
+
+                <a href="announcements.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </span>
+
+                    <span>
+                        Announcements
+                    </span>
+
+                </a>
+
+
+                <a href="messages.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+
+                    <span>
+                        Messages
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-title">
+                    ACCOUNT
+                </p>
+
+
+                <a href="profile.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+
+                <a href="settings.html"
+                    class="nav-link">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </span>
+
+                    <span>
+                        Settings
+                    </span>
+
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html"
+                class="logout-link">
+
+                <span class="nav-icon">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-title">
+
+                <span class="page-label">
+                    Student Portal
+                </span>
+
+                <h1>
+                    Course Details
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <button class="topbar-icon">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+
+                <button class="topbar-icon">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <a href="profile.html"
+                    class="topbar-profile">
+
+
+                    <div
+                        class="topbar-avatar"
+                        id="topbarAvatar">
+
+                        SA
+
+                    </div>
+
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <div class="dashboard-container">
+
+
+            <!-- =================================================
+                 COURSE SWITCHER
+            ================================================== -->
+
+            <div class="course-switcher">
+
+                <label for="courseSelector">
+                    Select Course
+                </label>
+
+                <select
+                    id="courseSelector"
+                    class="form-select">
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 COURSE HERO
+            ================================================== -->
+
+            <section
+                class="course-detail-hero"
+                id="courseHero">
+
+
+                <div class="course-detail-icon">
+
+                    <i
+                        id="courseIcon"
+                        class="fa-solid fa-code">
+                    </i>
+
+                </div>
+
+
+                <div class="course-detail-info">
+
+
+                    <span
+                        class="course-code"
+                        id="courseCode">
+
+                        CS-401
+
+                    </span>
+
+
+                    <h2 id="courseName">
+
+                        Software Engineering
+
+                    </h2>
+
+
+                    <p id="courseDescription">
+
+                        Course information loading...
+
+                    </p>
+
+
+                    <div class="course-detail-meta">
+
+
+                        <span>
+
+                            <i class="fa-solid fa-user-tie"></i>
+
+                            <span id="courseInstructor">
+                                Instructor
+                            </span>
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                            <span id="courseCredits">
+                                3 Credit Hours
+                            </span>
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-calendar"></i>
+
+                            Fall 2026
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course-detail-progress">
+
+                    <div class="circular-progress">
+
+                        <strong id="heroProgress">
+                            0%
+                        </strong>
+
+                        <span>
+                            Complete
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 COURSE NAVIGATION
+            ================================================== -->
+
+            <div class="course-tabs">
+
+
+                <a
+                    id="overviewLink"
+                    href="#"
+                    class="course-tab active">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Overview
+
+                </a>
+
+
+                <a
+                    id="lecturesLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    Lectures
+
+                </a>
+
+
+                <a
+                    id="recordingsLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-circle-play"></i>
+
+                    Recordings
+
+                </a>
+
+
+                <a
+                    id="materialsLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    Materials
+
+                </a>
+
+
+                <a
+                    id="assignmentsLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    Assignments
+
+                </a>
+
+
+                <a
+                    id="quizzesLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-clipboard-question"></i>
+
+                    Tests
+
+                </a>
+
+
+                <a
+                    id="resultsLink"
+                    href="#"
+                    class="course-tab">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Grades
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTENT GRID
+            ================================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- COURSE OVERVIEW -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                COURSE OVERVIEW
+                            </span>
+
+                            <h3>
+                                Your Learning Journey
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="learning-progress">
+
+                        <div class="progress-label">
+
+                            <span>
+                                Overall Course Progress
+                            </span>
+
+                            <strong id="overallCourseProgress">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-bar large">
+
+                            <span
+                                id="courseProgressBar"
+                                style="width:0%;">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-stats">
+
+
+                        <div>
+
+                            <i class="fa-solid fa-video"></i>
+
+                            <strong
+                                id="completedLectures"
+                                class="course-stat-value course-stat-muted">
+
+                                —
+
+                            </strong>
+
+                            <span>
+                                Completed Lectures
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-file-lines"></i>
+
+                            <strong
+                                id="courseMaterials"
+                                class="course-stat-value course-stat-muted">
+
+                                —
+
+                            </strong>
+
+                            <span>
+                                Materials
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-clipboard-check"></i>
+
+                            <strong
+                                id="testsCompleted"
+                                class="course-stat-value course-stat-muted">
+
+                                —
+
+                            </strong>
+
+                            <span>
+                                Tests Completed
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-trophy"></i>
+
+                            <strong
+                                id="currentGrade"
+                                class="course-stat-value">
+
+                                —
+
+                            </strong>
+
+                            <span>
+                                Current Grade
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- NEXT LECTURE -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                CONTINUE LEARNING
+                            </span>
+
+                            <h3>
+                                Next Lecture
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="next-lecture">
+
+
+                        <div class="next-lecture-icon">
+
+                            <i class="fa-solid fa-play"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Continue Course
+                            </span>
+
+                            <h4 id="nextLectureTitle">
+                                Course Lecture
+                            </h4>
+
+                            <p id="nextLectureText">
+                                Open lectures to continue learning.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        id="continueLectureBtn"
+                        href="#"
+                        class="primary-btn full">
+
+                        <i class="fa-solid fa-play"></i>
+
+                        Continue Lecture
+
+                    </a>
+
+                </section>
+
+
+                <!-- RECENT ACTIVITY -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                ACTIVITY
+                            </span>
+
+                            <h3>
+                                Recent Activity
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-list">
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon blue">
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong id="activityCourse">
+                                    Course enrolled
+                                </strong>
+
+                                <span>
+                                    Current account
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon green">
+
+                                <i class="fa-solid fa-chart-line"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong id="activityProgress">
+                                    Course progress
+                                </strong>
+
+                                <span>
+                                    Learning progress
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-icon purple">
+
+                                <i class="fa-solid fa-graduation-cap"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong id="activityGrade">
+                                    Current grade
+                                </strong>
+
+                                <span>
+                                    Academic performance
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- COURSE ASSIGNMENTS -->
+
+                <section class="dashboard-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                COURSE WORK
+                            </span>
+
+                            <h3>
+                                Course Assignments
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="course-assignment-list"
+                        id="courseAssignments">
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <footer class="dashboard-footer">
+
+                <span>
+                    © 2026 Learnora LMS
+                </span>
+
+                <span id="footerCourse">
+                    Learnora LMS
+                </span>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay">
+</div>
+
+
+<script src="../../js/student.js"></script>
+
+
+<script>
+
+    /* =========================================================
+       LEARNORA COURSE DETAILS
+       ACCOUNT-BASED SYSTEM
+    ========================================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* -------------------------------------------------
+               GET CURRENT USER
+            ------------------------------------------------- */
+
+            const storedUser =
+                localStorage.getItem(
+                    "learnora_current_user"
+                );
+
+
+            if (!storedUser) {
+
+                window.location.href =
+                    "../login.html";
+
+                return;
+
+            }
+
+
+            let currentUser;
+
+
+            try {
+
+                currentUser =
+                    JSON.parse(storedUser);
+
+            } catch (error) {
+
+                console.error(
+                    "Invalid Learnora user data:",
+                    error
+                );
+
+                localStorage.removeItem(
+                    "learnora_current_user"
+                );
+
+                window.location.href =
+                    "../login.html";
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               ROLE CHECK
+            ------------------------------------------------- */
+
+            if (
+                currentUser.role !==
+                "student"
+            ) {
+
+                if (
+                    currentUser.role ===
+                    "teacher"
+                ) {
+
+                    window.location.href =
+                        "../teacher/dashboard.html";
+
+                    return;
+
+                }
+
+
+                if (
+                    currentUser.role ===
+                    "parent"
+                ) {
+
+                    window.location.href =
+                        "../parent/dashboard.html";
+
+                    return;
+
+                }
+
+
+                window.location.href =
+                    "../login.html";
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               USER DATA
+            ------------------------------------------------- */
+
+            const studentName =
+                currentUser.name ||
+                "Student";
+
+
+            const studentProgram =
+                currentUser.program ||
+                "Student";
+
+
+            const studentAvatar =
+                currentUser.avatar ||
+                getInitials(studentName);
+
+
+            const courses =
+                Array.isArray(
+                    currentUser.courses
+                )
+                    ? currentUser.courses
+                    : [];
+
+
+            const assignments =
+                Array.isArray(
+                    currentUser.assignments
+                )
+                    ? currentUser.assignments
+                    : [];
+
+
+            /* -------------------------------------------------
+               PROFILE
+            ------------------------------------------------- */
+
+            setText(
+                "sidebarAvatar",
+                studentAvatar
+            );
+
+
+            setText(
+                "sidebarStudentName",
+                studentName
+            );
+
+
+            setText(
+                "sidebarStudentProgram",
+                studentProgram
+            );
+
+
+            setText(
+                "topbarAvatar",
+                studentAvatar
+            );
+
+
+            setText(
+                "topbarStudentName",
+                studentName
+            );
+
+
+            /* -------------------------------------------------
+               NO COURSES
+            ------------------------------------------------- */
+
+            if (!courses.length) {
+
+                showNoCourses();
+
+                return;
+
+            }
+
+
+            /* -------------------------------------------------
+               COURSE SELECTOR
+            ------------------------------------------------- */
+
+            const selector =
+                document.getElementById(
+                    "courseSelector"
+                );
+
+
+            courses.forEach(
+                function (course) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        course.code || "";
+
+
+                    option.textContent =
+                        `${course.code || "Course"} — ${course.name || "Course"}`;
+
+
+                    selector.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            /* -------------------------------------------------
+               URL COURSE
+            ------------------------------------------------- */
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const requestedCourse =
+                params.get("course");
+
+
+            let selectedCourse =
+                courses.find(
+                    course =>
+                        course.code ===
+                        requestedCourse
+                );
+
+
+            /* -------------------------------------------------
+               FALLBACK FIRST COURSE
+            ------------------------------------------------- */
+
+            if (!selectedCourse) {
+
+                selectedCourse =
+                    courses[0];
+
+            }
+
+
+            selector.value =
+                selectedCourse.code || "";
+
+
+            renderCourse(
+                selectedCourse,
+                assignments
+            );
+
+
+            /* -------------------------------------------------
+               COURSE CHANGE
+            ------------------------------------------------- */
+
+            selector.addEventListener(
+                "change",
+                function () {
+
+                    const selected =
+                        courses.find(
+                            course =>
+                                course.code ===
+                                this.value
+                        );
+
+
+                    if (!selected) {
+                        return;
+                    }
+
+
+                    const newUrl =
+                        new URL(
+                            window.location.href
+                        );
+
+
+                    newUrl.searchParams.set(
+                        "course",
+                        selected.code
+                    );
+
+
+                    window.history.replaceState(
+                        {},
+                        "",
+                        newUrl
+                    );
+
+
+                    renderCourse(
+                        selected,
+                        assignments
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       RENDER COURSE
+    ========================================================= */
+
+    function renderCourse(
+        course,
+        assignments
+    ) {
+
+
+        if (!course) {
+            return;
+        }
+
+
+        const code =
+            course.code ||
+            "COURSE";
+
+
+        const name =
+            course.name ||
+            "Course";
+
+
+        const instructor =
+            course.instructor ||
+            "Instructor not assigned";
+
+
+        const credits =
+            course.credits ||
+            "—";
+
+
+        const progress =
+            clamp(
+                Number(
+                    course.progress || 0
+                ),
+                0,
+                100
+            );
+
+
+        const grade =
+            course.grade ||
+            "Not graded";
+
+
+        /* -----------------------------------------------------
+           HERO
+        ----------------------------------------------------- */
+
+        setText(
+            "courseCode",
+            code
+        );
+
+
+        setText(
+            "courseName",
+            name
+        );
+
+
+        setText(
+            "courseInstructor",
+            instructor
+        );
+
+
+        setText(
+            "courseCredits",
+            `${credits} Credit Hours`
+        );
+
+
+        setText(
+            "heroProgress",
+            `${progress}%`
+        );
+
+
+        setText(
+            "overallCourseProgress",
+            `${progress}%`
+        );
+
+
+        document.getElementById(
+            "courseProgressBar"
+        ).style.width =
+            `${progress}%`;
+
+
+        /* -----------------------------------------------------
+           DESCRIPTION
+        ----------------------------------------------------- */
+
+        setText(
+            "courseDescription",
+            getCourseDescription(name)
+        );
+
+
+        /* -----------------------------------------------------
+           ICON
+        ----------------------------------------------------- */
+
+        const icon =
+            document.getElementById(
+                "courseIcon"
+            );
+
+
+        icon.className =
+            getCourseIcon(name);
+
+
+        /* -----------------------------------------------------
+           CURRENT GRADE
+        ----------------------------------------------------- */
+
+        setText(
+            "currentGrade",
+            grade
+        );
+
+
+        /* -----------------------------------------------------
+           ACTIVITY
+        ----------------------------------------------------- */
+
+        setText(
+            "activityCourse",
+            `${name} enrolled`
+        );
+
+
+        setText(
+            "activityProgress",
+            `${progress}% course progress`
+        );
+
+
+        setText(
+            "activityGrade",
+            `Current grade: ${grade}`
+        );
+
+
+        /* -----------------------------------------------------
+           FOOTER
+        ----------------------------------------------------- */
+
+        setText(
+            "footerCourse",
+            `${code} · ${name}`
+        );
+
+
+        /* -----------------------------------------------------
+           NEXT LECTURE
+        ----------------------------------------------------- */
+
+        setText(
+            "nextLectureTitle",
+            `Continue ${name}`
+        );
+
+
+        setText(
+            "nextLectureText",
+            "Open the lectures section to continue your learning."
+        );
+
+
+        /* -----------------------------------------------------
+           COURSE STATISTICS
+           
+           Current login.js only provides:
+           progress, grade, credits, instructor.
+           
+           Therefore we don't create fake lecture/material/test
+           numbers.
+        ----------------------------------------------------- */
+
+        setText(
+            "completedLectures",
+            "—"
+        );
+
+
+        setText(
+            "courseMaterials",
+            "—"
+        );
+
+
+        setText(
+            "testsCompleted",
+            "—"
+        );
+
+
+        /* -----------------------------------------------------
+           ASSIGNMENTS
+        ----------------------------------------------------- */
+
+        renderAssignments(
+            course,
+            assignments
+        );
+
+
+        /* -----------------------------------------------------
+           LINKS
+        ----------------------------------------------------- */
+
+        updateCourseLinks(
+            code
+        );
+
+    }
+
+
+    /* =========================================================
+       COURSE ASSIGNMENTS
+    ========================================================= */
+
+    function renderAssignments(
+        course,
+        assignments
+    ) {
+
+
+        const container =
+            document.getElementById(
+                "courseAssignments"
+            );
+
+
+        container.innerHTML = "";
+
+
+        const courseName =
+            normalize(
+                course.name
+            );
+
+
+        const courseCode =
+            normalize(
+                course.code
+            );
+
+
+        const relatedAssignments =
+            assignments.filter(
+                function (assignment) {
+
+                    const assignmentCourse =
+                        normalize(
+                            assignment.course
+                        );
+
+
+                    return (
+                        assignmentCourse ===
+                        courseName
+                    );
+
+                }
+            );
+
+
+        if (
+            !relatedAssignments.length
+        ) {
+
+            container.innerHTML = `
+
+                <div class="course-no-data">
+
+                    <i class="fa-solid fa-file-circle-check"></i>
+
+                    <p>
+                        No assignments are currently
+                        linked to this course.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        relatedAssignments.forEach(
+            function (assignment) {
+
+                const status =
+                    normalize(
+                        assignment.status
+                    );
+
+
+                const isSubmitted =
+                    [
+                        "submitted",
+                        "completed",
+                        "graded"
+                    ].includes(status);
+
+
+                const statusText =
+                    isSubmitted
+                        ? "Submitted"
+                        : "Pending";
+
+
+                const statusClass =
+                    isSubmitted
+                        ? "submitted"
+                        : "pending";
+
+
+                container.innerHTML += `
+
+                    <div class="course-assignment-item">
+
+                        <div class="course-assignment-info">
+
+                            <div class="course-assignment-icon">
+
+                                <i class="fa-solid fa-file-lines"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    ${escapeHTML(
+                                        assignment.title ||
+                                        "Assignment"
+                                    )}
+                                </strong>
+
+                                <span>
+                                    Due: ${
+                                        escapeHTML(
+                                            assignment.due ||
+                                            "Not specified"
+                                        )
+                                    }
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            class="course-assignment-status ${statusClass}">
+
+                            ${statusText}
+
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       COURSE LINKS
+    ========================================================= */
+
+    function updateCourseLinks(
+        courseCode
+    ) {
+
+
+        const encoded =
+            encodeURIComponent(
+                courseCode
+            );
+
+
+        document.getElementById(
+            "overviewLink"
+        ).href =
+            `course-detail.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "lecturesLink"
+        ).href =
+            `lectures.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "recordingsLink"
+        ).href =
+            `recordings.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "materialsLink"
+        ).href =
+            `materials.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "assignmentsLink"
+        ).href =
+            `assignments.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "quizzesLink"
+        ).href =
+            `quizzes.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "resultsLink"
+        ).href =
+            `results.html?course=${encoded}`;
+
+
+        document.getElementById(
+            "continueLectureBtn"
+        ).href =
+            `lectures.html?course=${encoded}`;
+
+    }
+
+
+    /* =========================================================
+       COURSE DESCRIPTION
+    ========================================================= */
+
+    function getCourseDescription(
+        courseName
+    ) {
+
+
+        const name =
+            normalize(courseName);
+
+
+        if (
+            name.includes(
+                "software engineering"
+            )
+        ) {
+
+            return (
+                "Learn software development methodologies, " +
+                "requirements engineering, system design, " +
+                "testing and project management."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "database"
+            )
+        ) {
+
+            return (
+                "Learn database design, SQL, normalization, " +
+                "data modeling and database management systems."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "data analytics"
+            )
+        ) {
+
+            return (
+                "Explore data analysis, visualization, " +
+                "statistics and business intelligence techniques."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "web"
+            )
+        ) {
+
+            return (
+                "Build modern responsive websites using " +
+                "web development concepts, design and programming."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "artificial intelligence"
+            )
+        ) {
+
+            return (
+                "Study artificial intelligence concepts, " +
+                "intelligent systems and modern AI techniques."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "machine learning"
+            )
+        ) {
+
+            return (
+                "Learn machine learning algorithms, " +
+                "model training, evaluation and predictive analytics."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "statistics"
+            )
+        ) {
+
+            return (
+                "Study statistical methods, probability, " +
+                "data interpretation and analytical techniques."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "python"
+            )
+        ) {
+
+            return (
+                "Learn Python programming, data handling, " +
+                "problem solving and application development."
+            );
+
+        }
+
+
+        if (
+            name.includes(
+                "testing"
+            )
+        ) {
+
+            return (
+                "Learn software testing strategies, " +
+                "quality assurance, test planning and automation."
+            );
+
+        }
+
+
+        return (
+            `Explore the learning materials, lectures, ` +
+            `assignments and assessments for ${courseName}.`
+        );
+
+    }
+
+
+    /* =========================================================
+       COURSE ICON
+    ========================================================= */
+
+    function getCourseIcon(
+        courseName
+    ) {
+
+
+        const name =
+            normalize(courseName);
+
+
+        if (
+            name.includes("database")
+        ) {
+
+            return "fa-solid fa-database";
+
+        }
+
+
+        if (
+            name.includes("analytics") ||
+            name.includes("data")
+        ) {
+
+            return "fa-solid fa-chart-line";
+
+        }
+
+
+        if (
+            name.includes("artificial intelligence") ||
+            name.includes("machine learning") ||
+            name.includes("ai")
+        ) {
+
+            return "fa-solid fa-brain";
+
+        }
+
+
+        if (
+            name.includes("web")
+        ) {
+
+            return "fa-solid fa-globe";
+
+        }
+
+
+        if (
+            name.includes("mobile")
+        ) {
+
+            return "fa-solid fa-mobile-screen";
+
+        }
+
+
+        if (
+            name.includes("security")
+        ) {
+
+            return "fa-solid fa-shield-halved";
+
+        }
+
+
+        if (
+            name.includes("statistics")
+        ) {
+
+            return "fa-solid fa-chart-column";
+
+        }
+
+
+        if (
+            name.includes("python")
+        ) {
+
+            return "fa-brands fa-python";
+
+        }
+
+
+        if (
+            name.includes("testing")
+        ) {
+
+            return "fa-solid fa-vial";
+
+        }
+
+
+        return "fa-solid fa-code";
+
+    }
+
+
+    /* =========================================================
+       NO COURSES
+    ========================================================= */
+
+    function showNoCourses() {
+
+
+        const container =
+            document.querySelector(
+                ".dashboard-container"
+            );
+
+
+        container.innerHTML = `
+
+            <div class="dynamic-course-empty">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <h2>
+                    No Courses Available
+                </h2>
+
+                <p>
+                    No courses are currently associated
+                    with this student account.
+                </p>
+
+                <a
+                    href="dashboard.html"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Dashboard
+
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       HELPERS
+    ========================================================= */
+
+    function setText(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(id);
+
+
+        if (element) {
+
+            element.textContent =
+                value;
+
+        }
+
+    }
+
+
+    function normalize(
+        value
+    ) {
+
+        return String(
+            value || ""
+        )
+            .trim()
+            .toLowerCase();
+
+    }
+
+
+    function clamp(
+        value,
+        min,
+        max
+    ) {
+
+        return Math.min(
+            Math.max(
+                value,
+                min
+            ),
+            max
+        );
+
+    }
+
+
+    function getInitials(
+        name
+    ) {
+
+        return String(name)
+            .trim()
+            .split(/\s+/)
+            .map(
+                word =>
+                    word.charAt(0)
+            )
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+    }
+
+
+    function escapeHTML(
+        value
+    ) {
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Announcements — Stay updated with important academic announcements.">
+
+    <title>Announcements — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" href="../../Css/student.css">
+
+
+    <style>
+
+        /* =========================================================
+           ANNOUNCEMENTS PAGE
+        ========================================================= */
+
+        .announcement-feature {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .announcement-feature-content {
+            min-width: 0;
+        }
+
+        .announcement-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .announcement-item {
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .announcement-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .announcement-item.read {
+            opacity: .82;
+        }
+
+        .announcement-item.unread {
+            opacity: 1;
+        }
+
+        .announcement-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .announcement-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .unread-dot {
+            width: 9px;
+            height: 9px;
+            min-width: 9px;
+            border-radius: 50%;
+            background: #27d9f4;
+            box-shadow: 0 0 12px rgba(39, 217, 244, .55);
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .empty-announcements {
+            display: none;
+            text-align: center;
+            padding: 65px 25px;
+        }
+
+        .empty-announcements.show {
+            display: block;
+        }
+
+        .empty-announcements-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(39, 217, 244, .08);
+            border: 1px solid rgba(39, 217, 244, .15);
+            color: #27d9f4;
+            font-size: 28px;
+        }
+
+        .empty-announcements h3 {
+            margin: 0 0 8px;
+        }
+
+        .empty-announcements p {
+            margin: 0;
+            color: #7d8da5;
+        }
+
+        .student-context {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 8px;
+            padding: 7px 12px;
+            border-radius: 8px;
+            background: rgba(40, 120, 255, .08);
+            color: #7fa9ff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .account-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: rgba(39, 217, 244, .08);
+            border: 1px solid rgba(39, 217, 244, .12);
+            color: #8feaf7;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* Announcement detail modal */
+
+        .announcement-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(2, 7, 15, .78);
+            backdrop-filter: blur(8px);
+        }
+
+        .announcement-modal.show {
+            display: flex;
+        }
+
+        .announcement-modal-card {
+            width: min(650px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #0b1422;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .45);
+        }
+
+        .announcement-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .announcement-modal-close {
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .announcement-modal-close:hover {
+            background: rgba(255, 255, 255, .1);
+        }
+
+        .announcement-modal-title {
+            margin: 16px 0 12px;
+            font-size: 26px;
+            line-height: 1.3;
+        }
+
+        .announcement-modal-description {
+            color: #9aa9bd;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .announcement-modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+            color: #8c9bb0;
+            font-size: 13px;
+        }
+
+        .announcement-modal-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .announcement-modal-meta i {
+            color: #27d9f4;
+        }
+
+        @media (max-width: 800px) {
+
+            .announcement-feature {
+                grid-template-columns: auto 1fr;
+            }
+
+            .announcement-feature .primary-btn {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .announcement-feature {
+                grid-template-columns: 1fr;
+            }
+
+            .announcement-feature .primary-btn {
+                grid-column: auto;
+            }
+
+            .announcement-title-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .announcement-modal-card {
+                padding: 22px;
+            }
+
+            .announcement-modal-title {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+
+        <!-- DYNAMIC STUDENT PROFILE -->
+
+        <div class="student-mini-profile">
+
+            <div class="avatar" id="sidebarAvatar">
+                SA
+            </div>
+
+            <div>
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarStudentProgram">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             NAVIGATION
+        ====================================================== -->
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a href="courses.html#add-drop" class="nav-link">
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                COMMUNICATION
+            </div>
+
+            <a href="announcements.html" class="nav-link active">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <a href="messages.html" class="nav-link">
+                <i class="fa-solid fa-message"></i>
+                <span>Messages</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="../login.html"
+                class="nav-link logout-link"
+                id="logoutLink"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================================
+             TOPBAR
+        ====================================================== -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="announcementSearch"
+                    placeholder="Search announcements..."
+                >
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-btn notification-btn"
+                    id="notificationButton"
+                    type="button"
+                    aria-label="Notifications"
+                >
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot"
+                    ></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topbarAvatar"
+                    >
+                        SA
+                    </div>
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span id="topbarStudentRole">
+                            Student
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+        ====================================================== -->
+
+        <div class="page-content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                        CAMPUS UPDATES
+
+                    </span>
+
+
+                    <h1>
+                        Announcements
+                    </h1>
+
+
+                    <p>
+                        Stay updated with announcements related to your
+                        courses and academic activities.
+                    </p>
+
+
+                    <div class="student-context">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <span id="announcementAccount">
+                            Loading account...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="secondary-btn"
+                    id="markAllReadBtn"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-check-double"></i>
+
+                    Mark All Read
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEATURED ANNOUNCEMENT
+            ================================================== -->
+
+            <section
+                class="announcement-feature"
+                id="featuredAnnouncement"
+            >
+
+                <div class="announcement-feature-icon">
+
+                    <i class="fa-solid fa-bullhorn"></i>
+
+                </div>
+
+
+                <div class="announcement-feature-content">
+
+                    <span class="announcement-label">
+                        IMPORTANT
+                    </span>
+
+
+                    <h2 id="featuredTitle">
+                        Loading...
+                    </h2>
+
+
+                    <p id="featuredDescription">
+                        Loading announcement...
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span>
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <span id="featuredDate">
+                                --
+                            </span>
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <span id="featuredAuthor">
+                                --
+                            </span>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    id="featuredReadBtn"
+                    type="button"
+                >
+
+                    Read More
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANNOUNCEMENTS
+            ================================================== -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Announcements
+                        </h2>
+
+                        <p id="announcementCount">
+                            Loading your announcements...
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        class="form-select"
+                        id="announcementFilter"
+                    >
+
+                        <option value="all">
+                            All Announcements
+                        </option>
+
+                        <option value="course">
+                            Course Updates
+                        </option>
+
+                        <option value="university">
+                            University
+                        </option>
+
+                        <option value="assignment">
+                            Assignments
+                        </option>
+
+                        <option value="exam">
+                            Exams
+                        </option>
+
+                        <option value="quiz">
+                            Quizzes
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="announcement-list"
+                    id="announcementList"
+                ></div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="empty-announcements"
+                    id="emptyAnnouncements"
+                >
+
+                    <div class="empty-announcements-icon">
+
+                        <i class="fa-regular fa-bell-slash"></i>
+
+                    </div>
+
+                    <h3>
+                        No announcements found
+                    </h3>
+
+                    <p>
+                        There are no announcements matching
+                        your account or filter.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     ANNOUNCEMENT DETAIL MODAL
+========================================================= -->
+
+<div
+    class="announcement-modal"
+    id="announcementModal"
+    aria-hidden="true"
+>
+
+    <div class="announcement-modal-card">
+
+        <div class="announcement-modal-header">
+
+            <div>
+
+                <span
+                    class="announcement-category"
+                    id="modalCategory"
+                >
+                    Announcement
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="announcement-modal-close"
+                id="announcementModalClose"
+                aria-label="Close announcement"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <h2
+            class="announcement-modal-title"
+            id="modalTitle"
+        >
+            Announcement
+        </h2>
+
+
+        <p
+            class="announcement-modal-description"
+            id="modalDescription"
+        >
+            Announcement details.
+        </p>
+
+
+        <div class="announcement-modal-meta">
+
+            <span>
+
+                <i class="fa-regular fa-calendar"></i>
+
+                <span id="modalDate">
+                    --
+                </span>
+
+            </span>
+
+
+            <span>
+
+                <i class="fa-solid fa-user"></i>
+
+                <span id="modalAuthor">
+                    --
+                </span>
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     STUDENT JS
+========================================================= -->
+
+<script src="../../js/student.js"></script>
+
+
+<!-- =========================================================
+     ANNOUNCEMENT ACCOUNT LOGIC
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =========================================================
+       1. CURRENT USER
+    ========================================================= */
+
+    let currentUser = null;
+
+
+    try {
+
+        const storedUser =
+            localStorage.getItem(
+                "learnora_current_user"
+            );
+
+
+        if (storedUser) {
+
+            currentUser =
+                JSON.parse(storedUser);
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to read current user:",
+            error
+        );
+
+    }
+
+
+    /* =========================================================
+       2. LOGIN PROTECTION
+    ========================================================= */
+
+    if (!currentUser) {
+
+        window.location.href =
+            "../login.html";
+
+        return;
+
+    }
+
+
+    const currentRole =
+        String(
+            currentUser.role || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /*
+     * Announcements page is specifically
+     * for students.
+     */
+
+    if (currentRole !== "student") {
+
+        if (currentRole === "teacher") {
+
+            window.location.href =
+                "../teacher/dashboard.html";
+
+        }
+
+        else if (currentRole === "parent") {
+
+            window.location.href =
+                "../parent/dashboard.html";
+
+        }
+
+        else {
+
+            window.location.href =
+                "../login.html";
+
+        }
+
+        return;
+
+    }
+
+
+    /* =========================================================
+       3. ACCOUNT DATA
+    ========================================================= */
+
+    const studentName =
+        currentUser.name ||
+        currentUser.fullName ||
+        currentUser.username ||
+        "Student";
+
+
+    const studentEmail =
+        String(
+            currentUser.email || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const studentProgram =
+        currentUser.program ||
+        currentUser.department ||
+        currentUser.degree ||
+        "Student";
+
+
+    const studentId =
+        currentUser.studentId ||
+        currentUser.id ||
+        "Student";
+
+
+    /* =========================================================
+       4. COURSES
+    ========================================================= */
+
+    let studentCourses = [];
+
+
+    if (
+        Array.isArray(
+            currentUser.courses
+        )
+    ) {
+
+        studentCourses =
+            currentUser.courses
+                .map(function (course) {
+
+                    if (
+                        typeof course ===
+                        "string"
+                    ) {
+
+                        return course
+                            .trim()
+                            .toUpperCase();
+
+                    }
+
+
+                    return String(
+                        course.code ||
+                        course.courseCode ||
+                        course.course_id ||
+                        course.id ||
+                        ""
+                    )
+                    .trim()
+                    .toUpperCase();
+
+                })
+                .filter(Boolean);
+
+    }
+
+
+    /*
+     * Also support a separate courseCodes array
+     * if another page/account uses that format.
+     */
+
+    if (
+        Array.isArray(
+            currentUser.courseCodes
+        )
+    ) {
+
+        currentUser.courseCodes.forEach(
+            function (courseCode) {
+
+                const code =
+                    String(courseCode)
+                    .trim()
+                    .toUpperCase();
+
+
+                if (
+                    code &&
+                    !studentCourses.includes(code)
+                ) {
+
+                    studentCourses.push(code);
+
+                }
+
+            }
+        );
+
+    }
+
+
+    console.log(
+        "Learnora Current Student:",
+        currentUser
+    );
+
+    console.log(
+        "Student Courses:",
+        studentCourses
+    );
+
+
+    /* =========================================================
+       5. INITIALS
+    ========================================================= */
+
+    function getInitials(name) {
+
+        const cleanName =
+            String(name || "")
+            .trim();
+
+
+        if (!cleanName) {
+
+            return "ST";
+
+        }
+
+
+        const parts =
+            cleanName.split(/\s+/);
+
+
+        if (parts.length === 1) {
+
+            return parts[0]
+                .substring(0, 2)
+                .toUpperCase();
+
+        }
+
+
+        return (
+            parts[0][0] +
+            parts[parts.length - 1][0]
+        ).toUpperCase();
+
+    }
+
+
+    const initials =
+        getInitials(studentName);
+
+
+    /* =========================================================
+       6. SAFE DOM HELPER
+    ========================================================= */
+
+    function setText(id, value) {
+
+        const element =
+            document.getElementById(id);
+
+
+        if (element) {
+
+            element.textContent =
+                value;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       7. UPDATE USER INTERFACE
+    ========================================================= */
+
+    setText(
+        "sidebarStudentName",
+        studentName
+    );
+
+
+    setText(
+        "sidebarStudentProgram",
+        studentProgram
+    );
+
+
+    setText(
+        "topbarStudentName",
+        studentName
+    );
+
+
+    setText(
+        "topbarStudentRole",
+        "Student"
+    );
+
+
+    setText(
+        "sidebarAvatar",
+        initials
+    );
+
+
+    setText(
+        "topbarAvatar",
+        initials
+    );
+
+
+    setText(
+        "announcementAccount",
+        studentName +
+        " · " +
+        studentProgram
+    );
+
+
+    /* =========================================================
+       8. ANNOUNCEMENT DATABASE
+    ========================================================= */
+
+    const announcements = [
+
+        /* -----------------------------------------------------
+           001 — EVERYONE
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-001",
+
+            title:
+                "Mid-Semester Assessment Schedule Released",
+
+            description:
+                "The mid-semester assessment schedule has been published. Please review your schedule and make sure you are available for all scheduled assessments.",
+
+            date:
+                "September 28, 2026",
+
+            author:
+                "Academic Office",
+
+            category:
+                "exam",
+
+            categoryLabel:
+                "University · Exam",
+
+            icon:
+                "fa-bullhorn",
+
+            color:
+                "blue",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                [],
+
+            featured:
+                true
+
+        },
+
+
+        /* -----------------------------------------------------
+           002 — CS-401
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-002",
+
+            title:
+                "Software Testing Assignment Updated",
+
+            description:
+                "Assignment #03 has been updated with additional requirements. Please review the instructions before submission.",
+
+            date:
+                "September 27, 2026",
+
+            author:
+                "Dr. Ahmed Khan",
+
+            category:
+                "course",
+
+            categoryLabel:
+                "CS-401 · Course Update",
+
+            icon:
+                "fa-code",
+
+            color:
+                "blue",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "CS-401",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           003 — CS-403
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-003",
+
+            title:
+                "Database Lab Session Rescheduled",
+
+            description:
+                "This week's database laboratory session will take place on Thursday at 2:00 PM instead of Wednesday.",
+
+            date:
+                "September 26, 2026",
+
+            author:
+                "Prof. Sarah Ahmed",
+
+            category:
+                "course",
+
+            categoryLabel:
+                "CS-403 · Course Update",
+
+            icon:
+                "fa-database",
+
+            color:
+                "cyan",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "CS-403",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           004 — DS-301
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-004",
+
+            title:
+                "Data Analytics Assignment #02",
+
+            description:
+                "The deadline for Exploratory Data Analysis assignment is October 7, 2026.",
+
+            date:
+                "September 25, 2026",
+
+            author:
+                "Dr. Muhammad Ali",
+
+            category:
+                "assignment",
+
+            categoryLabel:
+                "DS-301 · Assignment",
+
+            icon:
+                "fa-chart-line",
+
+            color:
+                "purple",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "DS-301",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           005 — EVERYONE
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-005",
+
+            title:
+                "Fall Semester Academic Calendar",
+
+            description:
+                "Students can now view the updated academic calendar for the Fall 2026 semester.",
+
+            date:
+                "September 23, 2026",
+
+            author:
+                "Academic Office",
+
+            category:
+                "university",
+
+            categoryLabel:
+                "University · Academic",
+
+            icon:
+                "fa-calendar-days",
+
+            color:
+                "green",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           006 — CS-401
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-006",
+
+            title:
+                "Software Testing Quiz Available",
+
+            description:
+                "Quiz #03 is now available. Students have 20 minutes to complete the assessment.",
+
+            date:
+                "September 22, 2026",
+
+            author:
+                "Dr. Ahmed Khan",
+
+            category:
+                "quiz",
+
+            categoryLabel:
+                "CS-401 · Quiz",
+
+            icon:
+                "fa-clipboard-question",
+
+            color:
+                "orange",
+
+            targetEmail:
+                "all",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "CS-401",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           007 — SHEHERYAR ONLY
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-007",
+
+            title:
+                "Your Academic Advisor Meeting",
+
+            description:
+                "You are requested to meet your academic advisor regarding your Fall 2026 course progress.",
+
+            date:
+                "September 20, 2026",
+
+            author:
+                "Student Affairs",
+
+            category:
+                "university",
+
+            categoryLabel:
+                "Personal · Academic",
+
+            icon:
+                "fa-user-check",
+
+            color:
+                "cyan",
+
+            /*
+             * IMPORTANT:
+             * This now matches the login.js account.
+             */
+
+            targetEmail:
+                "student@learnora.com",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           008 — ALI ONLY
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-008",
+
+            title:
+                "AI Research Submission Reminder",
+
+            description:
+                "Your AI research paper submission is approaching. Please make sure the final document is uploaded before the deadline.",
+
+            date:
+                "September 29, 2026",
+
+            author:
+                "Dr. Usman Raza",
+
+            category:
+                "assignment",
+
+            categoryLabel:
+                "Personal · Artificial Intelligence",
+
+            icon:
+                "fa-robot",
+
+            color:
+                "purple",
+
+            targetEmail:
+                "ali@learnora.com",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           009 — SARA ONLY
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-009",
+
+            title:
+                "Software Testing Lab Reminder",
+
+            description:
+                "Please bring your Software Testing lab documentation to the next practical session.",
+
+            date:
+                "September 29, 2026",
+
+            author:
+                "Dr. Fatima Noor",
+
+            category:
+                "course",
+
+            categoryLabel:
+                "Personal · Software Testing",
+
+            icon:
+                "fa-flask",
+
+            color:
+                "cyan",
+
+            targetEmail:
+                "sara@learnora.com",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                []
+
+        },
+
+
+        /* -----------------------------------------------------
+           010 — HAMZA ONLY
+        ----------------------------------------------------- */
+
+        {
+            id: "ANN-010",
+
+            title:
+                "Machine Learning Project Checkpoint",
+
+            description:
+                "The first checkpoint for your Machine Learning project is scheduled for October 1, 2026.",
+
+            date:
+                "September 28, 2026",
+
+            author:
+                "Dr. Usman Raza",
+
+            category:
+                "assignment",
+
+            categoryLabel:
+                "Personal · Machine Learning",
+
+            icon:
+                "fa-brain",
+
+            color:
+                "orange",
+
+            targetEmail:
+                "hamza@learnora.com",
+
+            targetEmails:
+                [],
+
+            targetCourse:
+                "all",
+
+            targetCourses:
+                []
+
+        }
+
+    ];
+
+
+    /* =========================================================
+       9. CHECK ANNOUNCEMENT ACCESS
+    ========================================================= */
+
+    function announcementBelongsToStudent(
+        announcement
+    ) {
+
+        const targetEmail =
+            String(
+                announcement.targetEmail || "all"
+            )
+            .trim()
+            .toLowerCase();
+
+
+        /*
+         * -----------------------------------------------
+         * SPECIFIC EMAIL
+         * -----------------------------------------------
+         */
+
+        if (
+            targetEmail !== "all"
+        ) {
+
+            return (
+                targetEmail ===
+                studentEmail
+            );
+
+        }
+
+
+        /*
+         * -----------------------------------------------
+         * MULTIPLE EMAILS
+         * -----------------------------------------------
+         */
+
+        if (
+            Array.isArray(
+                announcement.targetEmails
+            ) &&
+            announcement.targetEmails.length > 0
+        ) {
+
+            const allowedEmails =
+                announcement.targetEmails
+                    .map(
+                        email =>
+                            String(email)
+                            .trim()
+                            .toLowerCase()
+                    );
+
+
+            return allowedEmails.includes(
+                studentEmail
+            );
+
+        }
+
+
+        /*
+         * -----------------------------------------------
+         * MULTIPLE COURSES
+         * -----------------------------------------------
+         */
+
+        if (
+            Array.isArray(
+                announcement.targetCourses
+            ) &&
+            announcement.targetCourses.length > 0
+        ) {
+
+            const allowedCourses =
+                announcement.targetCourses
+                    .map(
+                        code =>
+                            String(code)
+                            .trim()
+                            .toUpperCase()
+                    );
+
+
+            return allowedCourses.some(
+                code =>
+                    studentCourses.includes(code)
+            );
+
+        }
+
+
+        /*
+         * -----------------------------------------------
+         * SINGLE COURSE
+         * -----------------------------------------------
+         */
+
+        const targetCourse =
+            String(
+                announcement.targetCourse || "all"
+            )
+            .trim()
+            .toUpperCase();
+
+
+        if (
+            targetCourse !== "ALL"
+        ) {
+
+            return studentCourses.includes(
+                targetCourse
+            );
+
+        }
+
+
+        /*
+         * -----------------------------------------------
+         * EVERYONE
+         * -----------------------------------------------
+         */
+
+        return true;
+
+    }
+
+
+    /* =========================================================
+       10. FILTER FOR CURRENT STUDENT
+    ========================================================= */
+
+    let userAnnouncements =
+        announcements.filter(
+            announcementBelongsToStudent
+        );
+
+
+    console.log(
+        "Announcements for:",
+        studentEmail
+    );
+
+    console.log(
+        "Available announcements:",
+        userAnnouncements
+    );
+
+
+    /* =========================================================
+       11. READ STORAGE
+    ========================================================= */
+
+    const safeEmailKey =
+        studentEmail
+            .replace(
+                /[^a-zA-Z0-9]/g,
+                "_"
+            );
+
+
+    const readStorageKey =
+        "learnora_read_announcements_" +
+        safeEmailKey;
+
+
+    let readAnnouncements = [];
+
+
+    try {
+
+        const storedRead =
+            localStorage.getItem(
+                readStorageKey
+            );
+
+
+        if (storedRead) {
+
+            const parsed =
+                JSON.parse(storedRead);
+
+
+            if (
+                Array.isArray(parsed)
+            ) {
+
+                readAnnouncements =
+                    parsed;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load read announcements:",
+            error
+        );
+
+        readAnnouncements = [];
+
+    }
+
+
+    /* =========================================================
+       12. IS READ
+    ========================================================= */
+
+    function isRead(id) {
+
+        return readAnnouncements.includes(id);
+
+    }
+
+
+    /* =========================================================
+       13. MARK READ
+    ========================================================= */
+
+    function markAsRead(id) {
+
+        if (
+            !readAnnouncements.includes(id)
+        ) {
+
+            readAnnouncements.push(id);
+
+            localStorage.setItem(
+                readStorageKey,
+                JSON.stringify(
+                    readAnnouncements
+                )
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       14. GET FEATURED
+    ========================================================= */
+
+    function getFeaturedAnnouncement() {
+
+        const featured =
+            userAnnouncements.find(
+                announcement =>
+                    announcement.featured === true
+            );
+
+
+        return (
+            featured ||
+            userAnnouncements[0] ||
+            null
+        );
+
+    }
+
+
+    /* =========================================================
+       15. MODAL ELEMENTS
+    ========================================================= */
+
+    const announcementModal =
+        document.getElementById(
+            "announcementModal"
+        );
+
+
+    const announcementModalClose =
+        document.getElementById(
+            "announcementModalClose"
+        );
+
+
+    /* =========================================================
+       16. OPEN ANNOUNCEMENT MODAL
+    ========================================================= */
+
+    function openAnnouncementModal(
+        announcement
+    ) {
+
+        if (!announcementModal) {
+            return;
+        }
+
+
+        setText(
+            "modalCategory",
+            announcement.categoryLabel ||
+            announcement.category ||
+            "Announcement"
+        );
+
+
+        setText(
+            "modalTitle",
+            announcement.title
+        );
+
+
+        setText(
+            "modalDescription",
+            announcement.description
+        );
+
+
+        setText(
+            "modalDate",
+            announcement.date
+        );
+
+
+        setText(
+            "modalAuthor",
+            announcement.author
+        );
+
+
+        announcementModal.classList.add(
+            "show"
+        );
+
+
+        announcementModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =========================================================
+       17. CLOSE MODAL
+    ========================================================= */
+
+    function closeAnnouncementModal() {
+
+        if (!announcementModal) {
+            return;
+        }
+
+
+        announcementModal.classList.remove(
+            "show"
+        );
+
+
+        announcementModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    if (announcementModalClose) {
+
+        announcementModalClose.addEventListener(
+            "click",
+            closeAnnouncementModal
+        );
+
+    }
+
+
+    if (announcementModal) {
+
+        announcementModal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    announcementModal
+                ) {
+
+                    closeAnnouncementModal();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeAnnouncementModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       18. RENDER FEATURED
+    ========================================================= */
+
+    function renderFeatured() {
+
+        const featured =
+            getFeaturedAnnouncement();
+
+
+        const featureBox =
+            document.getElementById(
+                "featuredAnnouncement"
+            );
+
+
+        if (!featureBox) {
+            return;
+        }
+
+
+        if (!featured) {
+
+            featureBox.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        featureBox.style.display =
+            "";
+
+
+        setText(
+            "featuredTitle",
+            featured.title
+        );
+
+
+        setText(
+            "featuredDescription",
+            featured.description
+        );
+
+
+        setText(
+            "featuredDate",
+            featured.date
+        );
+
+
+        setText(
+            "featuredAuthor",
+            featured.author
+        );
+
+
+        const featuredReadBtn =
+            document.getElementById(
+                "featuredReadBtn"
+            );
+
+
+        if (featuredReadBtn) {
+
+            featuredReadBtn.onclick =
+                function () {
+
+                    markAsRead(
+                        featured.id
+                    );
+
+
+                    updateNotificationCount();
+
+
+                    openAnnouncementModal(
+                        featured
+                    );
+
+
+                    renderAnnouncements();
+
+                };
+
+        }
+
+    }
+
+
+    /* =========================================================
+       19. RENDER ANNOUNCEMENTS
+    ========================================================= */
+
+    function renderAnnouncements() {
+
+        const list =
+            document.getElementById(
+                "announcementList"
+            );
+
+
+        const empty =
+            document.getElementById(
+                "emptyAnnouncements"
+            );
+
+
+        const filterElement =
+            document.getElementById(
+                "announcementFilter"
+            );
+
+
+        const searchElement =
+            document.getElementById(
+                "announcementSearch"
+            );
+
+
+        if (
+            !list ||
+            !empty ||
+            !filterElement ||
+            !searchElement
+        ) {
+
+            return;
+
+        }
+
+
+        const filter =
+            filterElement.value;
+
+
+        const search =
+            searchElement.value
+                .toLowerCase()
+                .trim();
+
+
+        list.innerHTML = "";
+
+
+        /*
+         * FILTER
+         */
+
+        const filtered =
+            userAnnouncements.filter(
+                function (announcement) {
+
+
+                    const categoryMatch =
+                        filter === "all" ||
+                        announcement.category === filter;
+
+
+                    const searchText =
+                        (
+                            announcement.title +
+                            " " +
+                            announcement.description +
+                            " " +
+                            announcement.author +
+                            " " +
+                            (
+                                announcement.categoryLabel ||
+                                ""
+                            )
+                        )
+                        .toLowerCase();
+
+
+                    const searchMatch =
+                        !search ||
+                        searchText.includes(
+                            search
+                        );
+
+
+                    return (
+                        categoryMatch &&
+                        searchMatch
+                    );
+
+                }
+            );
+
+
+        /*
+         * EMPTY
+         */
+
+        if (
+            filtered.length === 0
+        ) {
+
+            empty.classList.add(
+                "show"
+            );
+
+
+            setText(
+                "announcementCount",
+                "No announcements available for this account."
+            );
+
+
+            updateNotificationCount();
+
+            return;
+
+        }
+
+
+        empty.classList.remove(
+            "show"
+        );
+
+
+        /*
+         * UNREAD COUNT
+         */
+
+        const unreadCount =
+            filtered.filter(
+                announcement =>
+                    !isRead(
+                        announcement.id
+                    )
+            ).length;
+
+
+        setText(
+            "announcementCount",
+
+            filtered.length +
+            " announcement" +
+            (
+                filtered.length !== 1
+                    ? "s"
+                    : ""
+            ) +
+            " for your account" +
+            (
+                unreadCount > 0
+                    ? " · " +
+                      unreadCount +
+                      " unread"
+                    : ""
+            )
+        );
+
+
+        /*
+         * CREATE CARDS
+         */
+
+        filtered.forEach(
+            function (announcement) {
+
+                const article =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                const read =
+                    isRead(
+                        announcement.id
+                    );
+
+
+                article.className =
+                    "announcement-item" +
+                    (
+                        read
+                            ? " read"
+                            : " unread"
+                    );
+
+
+                article.dataset.id =
+                    announcement.id;
+
+
+                const categoryLabel =
+                    announcement.categoryLabel ||
+                    "University · Academic";
+
+
+                article.innerHTML = `
+
+                    <div class="announcement-icon ${announcement.color || "blue"}">
+
+                        <i class="fa-solid ${announcement.icon || "fa-bullhorn"}"></i>
+
+                    </div>
+
+
+                    <div class="announcement-content">
+
+                        <div class="announcement-title-row">
+
+                            <div>
+
+                                <span class="announcement-category">
+                                    ${categoryLabel}
+                                </span>
+
+                                <h3>
+                                    ${announcement.title}
+                                </h3>
+
+                            </div>
+
+                            ${
+                                !read
+                                    ?
+                                    `<span class="unread-dot"></span>`
+                                    :
+                                    ""
+                            }
+
+                        </div>
+
+
+                        <p>
+                            ${announcement.description}
+                        </p>
+
+
+                        <div class="announcement-meta">
+
+                            <span>
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                ${announcement.date}
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-user"></i>
+
+                                ${announcement.author}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                /*
+                 * CLICK
+                 */
+
+                article.addEventListener(
+                    "click",
+                    function () {
+
+                        markAsRead(
+                            announcement.id
+                        );
+
+
+                        article.classList.remove(
+                            "unread"
+                        );
+
+
+                        article.classList.add(
+                            "read"
+                        );
+
+
+                        const unreadDot =
+                            article.querySelector(
+                                ".unread-dot"
+                            );
+
+
+                        if (unreadDot) {
+
+                            unreadDot.remove();
+
+                        }
+
+
+                        updateNotificationCount();
+
+
+                        openAnnouncementModal(
+                            announcement
+                        );
+
+                    }
+                );
+
+
+                list.appendChild(
+                    article
+                );
+
+            }
+        );
+
+
+        updateNotificationCount();
+
+    }
+
+
+    /* =========================================================
+       20. NOTIFICATION COUNT
+    ========================================================= */
+
+    function updateNotificationCount() {
+
+        const unreadCount =
+            userAnnouncements.filter(
+                announcement =>
+                    !isRead(
+                        announcement.id
+                    )
+            ).length;
+
+
+        const dot =
+            document.getElementById(
+                "notificationDot"
+            );
+
+
+        if (dot) {
+
+            dot.style.display =
+                unreadCount > 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        const notificationButton =
+            document.getElementById(
+                "notificationButton"
+            );
+
+
+        if (notificationButton) {
+
+            notificationButton.setAttribute(
+                "aria-label",
+                unreadCount > 0
+                    ? `${unreadCount} unread notifications`
+                    : "No unread notifications"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       21. MARK ALL READ
+    ========================================================= */
+
+    const markAllReadBtn =
+        document.getElementById(
+            "markAllReadBtn"
+        );
+
+
+    if (markAllReadBtn) {
+
+        markAllReadBtn.addEventListener(
+            "click",
+            function () {
+
+
+                userAnnouncements.forEach(
+                    function (announcement) {
+
+                        if (
+                            !readAnnouncements.includes(
+                                announcement.id
+                            )
+                        ) {
+
+                            readAnnouncements.push(
+                                announcement.id
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                localStorage.setItem(
+                    readStorageKey,
+                    JSON.stringify(
+                        readAnnouncements
+                    )
+                );
+
+
+                renderAnnouncements();
+
+                updateNotificationCount();
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       22. SEARCH
+    ========================================================= */
+
+    const announcementSearch =
+        document.getElementById(
+            "announcementSearch"
+        );
+
+
+    if (announcementSearch) {
+
+        announcementSearch.addEventListener(
+            "input",
+            renderAnnouncements
+        );
+
+    }
+
+
+    /* =========================================================
+       23. CATEGORY FILTER
+    ========================================================= */
+
+    const announcementFilter =
+        document.getElementById(
+            "announcementFilter"
+        );
+
+
+    if (announcementFilter) {
+
+        announcementFilter.addEventListener(
+            "change",
+            renderAnnouncements
+        );
+
+    }
+
+
+    /* =========================================================
+       24. NOTIFICATION BUTTON
+    ========================================================= */
+
+    const notificationButton =
+        document.getElementById(
+            "notificationButton"
+        );
+
+
+    if (notificationButton) {
+
+        notificationButton.addEventListener(
+            "click",
+            function () {
+
+                const firstUnread =
+                    userAnnouncements.find(
+                        announcement =>
+                            !isRead(
+                                announcement.id
+                            )
+                    );
+
+
+                if (firstUnread) {
+
+                    markAsRead(
+                        firstUnread.id
+                    );
+
+
+                    openAnnouncementModal(
+                        firstUnread
+                    );
+
+
+                    renderAnnouncements();
+
+                    updateNotificationCount();
+
+                }
+
+                else {
+
+                    /*
+                     * No unread announcement.
+                     * Scroll to announcement list.
+                     */
+
+                    const list =
+                        document.getElementById(
+                            "announcementList"
+                        );
+
+
+                    if (list) {
+
+                        list.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       25. LOGOUT
+    ========================================================= */
+
+    const logoutLink =
+        document.getElementById(
+            "logoutLink"
+        );
+
+
+    if (logoutLink) {
+
+        logoutLink.addEventListener(
+            "click",
+            function () {
+
+                /*
+                 * Clear current session.
+                 */
+
+                localStorage.removeItem(
+                    "learnora_current_user"
+                );
+
+                localStorage.removeItem(
+                    "learnora_logged_in"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_role"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_email"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_id"
+                );
+
+                localStorage.removeItem(
+                    "learnora_student_name"
+                );
+
+                localStorage.removeItem(
+                    "learnora_remember"
+                );
+
+                /*
+                 * IMPORTANT:
+                 * Do not delete read announcement storage.
+                 * This allows the account's read/unread state
+                 * to remain saved.
+                 */
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       26. INITIAL LOAD
+    ========================================================= */
+
+    renderFeatured();
+
+    renderAnnouncements();
+
+    updateNotificationCount();
+
+
+    /* =========================================================
+       27. FINAL DEBUG
+    ========================================================= */
+
+    console.log(
+        "========================================"
+    );
+
+    console.log(
+        "LEARNORA ANNOUNCEMENT SYSTEM READY"
+    );
+
+    console.log(
+        "Student:",
+        studentName
+    );
+
+    console.log(
+        "Email:",
+        studentEmail
+    );
+
+    console.log(
+        "Program:",
+        studentProgram
+    );
+
+    console.log(
+        "Student ID:",
+        studentId
+    );
+
+    console.log(
+        "Courses:",
+        studentCourses
+    );
+
+    console.log(
+        "Announcements:",
+        userAnnouncements.length
+    );
+
+    console.log(
+        "========================================"
+    );
+
+});
+
+</script>
+
+</body>
+
+</html>

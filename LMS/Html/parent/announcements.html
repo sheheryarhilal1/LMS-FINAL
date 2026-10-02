@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Learnora LMS Parent Announcements — Child-specific academic and school updates.">
+
+    <title>Announcements — Learnora LMS</title>
+
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================================================
+         FONT AWESOME
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================================
+         PARENT CSS
+
+         File:
+         Html/parents/announcements.html
+
+         CSS:
+         Css/parent.css
+
+         Therefore:
+         ../../Css/parent.css
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../../Css/parent.css">
+
+
+    <style>
+
+        /* =========================================================
+           ANNOUNCEMENTS PAGE
+        ========================================================== */
+
+        .announcements-container {
+            padding: 28px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           WELCOME BANNER
+        ========================================================== */
+
+        .announcement-banner {
+            position: relative;
+            overflow: hidden;
+
+            border-radius: 24px;
+
+            padding: 30px;
+
+            margin-bottom: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(40, 120, 255, 0.20),
+                    rgba(39, 217, 244, 0.08)
+                );
+
+            border:
+                1px solid
+                rgba(39, 217, 244, 0.18);
+        }
+
+
+        .announcement-banner::before {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            right: -70px;
+            top: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(39, 217, 244, 0.08);
+        }
+
+
+        .announcement-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .announcement-banner h2 {
+            margin: 0 0 8px;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 26px;
+            font-weight: 800;
+
+            color: #ffffff;
+        }
+
+
+        .announcement-banner p {
+            margin: 0;
+
+            max-width: 760px;
+
+            color: #aab9cc;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           CHILD CONTEXT
+        ========================================================== */
+
+        .child-context {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 18px;
+
+            padding: 11px 14px;
+
+            width: fit-content;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            color: #b8c5d5;
+
+            font-size: 13px;
+        }
+
+
+        .child-context i {
+            color: #27d9f4;
+        }
+
+
+        .child-context strong {
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================== */
+
+        .announcements-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .announcements-title h2 {
+            margin: 0 0 5px;
+
+            font-family: "Manrope", sans-serif;
+
+            color: #ffffff;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .announcements-title p {
+            margin: 0;
+
+            color: #8392a7;
+
+            font-size: 14px;
+        }
+
+
+        .mark-all-btn {
+            border:
+                1px solid
+                rgba(39, 217, 244, 0.25);
+
+            background:
+                rgba(39, 217, 244, 0.08);
+
+            color: #27d9f4;
+
+            padding: 11px 16px;
+
+            border-radius: 12px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+
+        .mark-all-btn:hover {
+            background:
+                rgba(39, 217, 244, 0.15);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           TOOLBAR
+        ========================================================== */
+
+        .announcement-toolbar {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+            padding: 7px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.06);
+
+            border-radius: 15px;
+        }
+
+
+        .announcement-filters {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+        }
+
+
+        .filter-btn {
+            border: 0;
+
+            background: transparent;
+
+            color: #8d9bad;
+
+            padding: 9px 15px;
+
+            border-radius: 10px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+
+        .filter-btn:hover {
+            color: #ffffff;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+        }
+
+
+        .filter-btn.active {
+            background: #2878ff;
+
+            color: #ffffff;
+
+            box-shadow:
+                0 7px 18px
+                rgba(40, 120, 255, 0.20);
+        }
+
+
+        .announcement-count {
+            color: #718097;
+
+            font-size: 13px;
+
+            padding-right: 10px;
+
+            white-space: nowrap;
+        }
+
+
+        .announcement-count strong {
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           ANNOUNCEMENT LIST
+        ========================================================== */
+
+        .announcement-list {
+            display: grid;
+
+            gap: 14px;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================== */
+
+        .announcement-card {
+            position: relative;
+
+            display: flex;
+
+            gap: 17px;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.06);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .announcement-card:hover {
+            transform: translateY(-2px);
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border-color:
+                rgba(39, 217, 244, 0.18);
+        }
+
+
+        .announcement-card.unread {
+            border-left:
+                3px solid #2878ff;
+        }
+
+
+        /* =========================================================
+           ICON
+        ========================================================== */
+
+        .announcement-icon {
+            flex: 0 0 48px;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(40, 120, 255, 0.12);
+
+            color: #4c91ff;
+
+            font-size: 18px;
+        }
+
+
+        /* FIXED SELECTORS */
+
+        .announcement-card.exam .announcement-icon {
+            background:
+                rgba(245, 158, 11, 0.12);
+
+            color: #f59e0b;
+        }
+
+
+        .announcement-card.attendance .announcement-icon {
+            background:
+                rgba(34, 197, 94, 0.12);
+
+            color: #22c55e;
+        }
+
+
+        .announcement-card.important .announcement-icon {
+            background:
+                rgba(239, 68, 68, 0.12);
+
+            color: #ef4444;
+        }
+
+
+        .announcement-card.meeting .announcement-icon {
+            background:
+                rgba(168, 85, 247, 0.12);
+
+            color: #a855f7;
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================== */
+
+        .announcement-content {
+            min-width: 0;
+
+            flex: 1;
+        }
+
+
+        .announcement-top {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .announcement-content h3 {
+            margin: 0 0 7px;
+
+            color: #ffffff;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            line-height: 1.4;
+        }
+
+
+        .announcement-content p {
+            margin: 0;
+
+            color: #8998aa;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .announcement-date {
+            flex-shrink: 0;
+
+            color: #657387;
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           META
+        ========================================================== */
+
+        .announcement-meta {
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin-top: 13px;
+        }
+
+
+        .announcement-tag {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(40, 120, 255, 0.10);
+
+            color: #5598ff;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* FIXED SELECTORS */
+
+        .announcement-card.exam .announcement-tag {
+            background:
+                rgba(245, 158, 11, 0.10);
+
+            color: #f5a91b;
+        }
+
+
+        .announcement-card.attendance .announcement-tag {
+            background:
+                rgba(34, 197, 94, 0.10);
+
+            color: #38cf69;
+        }
+
+
+        .announcement-card.important .announcement-tag {
+            background:
+                rgba(239, 68, 68, 0.10);
+
+            color: #f87171;
+        }
+
+
+        .announcement-card.meeting .announcement-tag {
+            background:
+                rgba(168, 85, 247, 0.10);
+
+            color: #b979f3;
+        }
+
+
+        /* =========================================================
+           CHILD TAG
+        ========================================================== */
+
+        .announcement-child-tag {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 5px 9px;
+
+            border-radius: 7px;
+
+            background:
+                rgba(39, 217, 244, 0.08);
+
+            color: #27d9f4;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           READ BUTTON
+        ========================================================== */
+
+        .read-btn {
+            border: 0;
+
+            background: transparent;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            padding: 5px;
+        }
+
+
+        .read-btn:hover {
+            color: #27d9f4;
+        }
+
+
+        .read-btn:disabled {
+            cursor: default;
+
+            color: #475569;
+        }
+
+
+        /* =========================================================
+           UNREAD DOT
+        ========================================================== */
+
+        .unread-dot {
+            position: absolute;
+
+            top: 21px;
+
+            right: 20px;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #27d9f4;
+
+            box-shadow:
+                0 0 12px
+                rgba(39, 217, 244, 0.55);
+        }
+
+
+        /* =========================================================
+           EMPTY STATE
+        ========================================================== */
+
+        .empty-state {
+            display: none;
+
+            padding: 60px 25px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            border:
+                1px dashed
+                rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.02);
+        }
+
+
+        .empty-state.show {
+            display: block;
+        }
+
+
+        .empty-state i {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 65px;
+            height: 65px;
+
+            margin-bottom: 16px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(39, 217, 244, 0.08);
+
+            color: #27d9f4;
+
+            font-size: 24px;
+        }
+
+
+        .empty-state h3 {
+            margin: 0 0 7px;
+
+            color: #ffffff;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 18px;
+        }
+
+
+        .empty-state p {
+            margin: 0;
+
+            color: #718096;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           NAVIGATION FIX
+        ========================================================== */
+
+        .sidebar {
+            z-index: 1001 !important;
+        }
+
+
+        .sidebar-overlay {
+            z-index: 1000 !important;
+        }
+
+
+        .sidebar .nav-link {
+            position: relative;
+
+            z-index: 1002;
+
+            pointer-events: auto !important;
+        }
+
+
+        .topbar-icon {
+            position: relative;
+
+            z-index: 1002;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================== */
+
+        @media (max-width: 900px) {
+
+            .announcements-container {
+                padding: 20px;
+            }
+
+
+            .announcement-banner {
+                padding: 24px;
+            }
+
+
+            .announcements-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .announcement-toolbar {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .announcement-count {
+                padding: 0 10px 5px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .announcements-container {
+                padding: 15px;
+            }
+
+
+            .announcement-banner {
+                padding: 20px;
+
+                border-radius: 18px;
+            }
+
+
+            .announcement-banner h2 {
+                font-size: 21px;
+            }
+
+
+            .announcement-banner p {
+                font-size: 13px;
+            }
+
+
+            .announcement-card {
+                padding: 17px;
+
+                gap: 12px;
+            }
+
+
+            .announcement-icon {
+                flex-basis: 42px;
+
+                width: 42px;
+                height: 42px;
+
+                border-radius: 11px;
+
+                font-size: 15px;
+            }
+
+
+            .announcement-top {
+                flex-direction: column;
+
+                gap: 3px;
+            }
+
+
+            .announcement-date {
+                font-size: 11px;
+            }
+
+
+            .announcement-content h3 {
+                font-size: 14px;
+            }
+
+
+            .announcement-content p {
+                font-size: 13px;
+            }
+
+
+            .filter-btn {
+                padding: 8px 11px;
+
+                font-size: 12px;
+            }
+
+
+            .mark-all-btn {
+                width: 100%;
+            }
+
+
+            .child-context {
+                width: 100%;
+
+                box-sizing: border-box;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+            </div>
+
+
+            <div class="logo-text">
+
+                <h2>Learnora</h2>
+
+                <span>LMS</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PARENT PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <div
+                class="profile-avatar"
+                id="sidebarParentAvatar">
+
+                P
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <h4 id="sidebarParentName">
+                    Parent
+                </h4>
+
+
+                <span>
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    Parent
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHILD -->
+
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+            </div>
+
+
+            <div class="child-info">
+
+                <small>
+                    Child
+                </small>
+
+
+                <strong id="sidebarChildName">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             NAVIGATION
+
+             Current folder:
+             Html/parents/
+
+             Therefore:
+             ./dashboard.html
+             ./results.html
+             etc.
+        ====================================================== -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+
+            <a
+                href="./dashboard.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="./results.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>
+                    Results & Grades
+                </span>
+
+            </a>
+
+
+            <a
+                href="./schedule.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-calendar-days"></i>
+
+                <span>
+                    Exam Schedule
+                </span>
+
+            </a>
+
+
+            <a
+                href="./attendance.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>
+                    Attendance
+                </span>
+
+            </a>
+
+
+            <a
+                href="./assignments.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-file-pen"></i>
+
+                <span>
+                    Assignments
+                </span>
+
+            </a>
+
+
+            <a
+                href="./quizzes.html"
+                class="nav-link">
+
+                <i class="fa-solid fa-circle-question"></i>
+
+                <span>
+                    Quizzes
+                </span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a
+                href="./profile.html"
+                class="nav-link">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="./announcements.html"
+                class="nav-link active"
+                aria-current="page">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    Announcements
+                </span>
+
+                <span
+                    class="nav-badge"
+                    id="announcementCount">
+
+                    0
+
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="logout-btn"
+                id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main
+        class="main-content"
+        id="mainContent">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Open menu">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <span class="page-label">
+                        Parent Portal
+                    </span>
+
+
+                    <h1>
+                        Announcements
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- NOTIFICATION -->
+
+                <a
+                    href="./announcements.html"
+                    class="topbar-icon"
+                    aria-label="Announcements">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot">
+                    </span>
+
+                </a>
+
+
+                <!-- PROFILE -->
+
+                <div class="topbar-profile">
+
+
+                    <div
+                        class="topbar-avatar"
+                        id="topbarParentAvatar">
+
+                        P
+
+                    </div>
+
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarParentName">
+                            Parent
+                        </strong>
+
+
+                        <span>
+                            Parent
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================================================
+             PAGE CONTENT
+        ========================================================== -->
+
+        <section class="announcements-container">
+
+
+            <!-- WELCOME BANNER -->
+
+            <div class="announcement-banner">
+
+
+                <div class="announcement-banner-content">
+
+
+                    <h2>
+                        Stay Updated with Learnora
+                    </h2>
+
+
+                    <p id="announcementIntro">
+
+                        View the latest academic updates,
+                        examination notices, attendance information,
+                        meetings and important announcements
+                        related to your child's education.
+
+                    </p>
+
+
+                    <!-- CHILD CONTEXT -->
+
+                    <div class="child-context">
+
+                        <i class="fa-solid fa-user-graduate"></i>
+
+                        <span>
+
+                            Showing announcements for
+
+                            <strong id="contextChildName">
+                                Your Child
+                            </strong>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HEADER -->
+
+            <div class="announcements-header">
+
+
+                <div class="announcements-title">
+
+
+                    <h2>
+                        Recent Announcements
+                    </h2>
+
+
+                    <p id="announcementSubtitle">
+                        Important updates related to your child
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="mark-all-btn"
+                    id="markAllBtn">
+
+                    <i class="fa-solid fa-check-double"></i>
+
+                    Mark all as read
+
+                </button>
+
+            </div>
+
+
+            <!-- TOOLBAR -->
+
+            <div class="announcement-toolbar">
+
+
+                <div class="announcement-filters">
+
+
+                    <button
+                        type="button"
+                        class="filter-btn active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="unread">
+
+                        Unread
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="academic">
+
+                        Academic
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="important">
+
+                        Important
+
+                    </button>
+
+                </div>
+
+
+                <div class="announcement-count">
+
+                    Showing
+
+                    <strong id="visibleCount">
+                        0
+                    </strong>
+
+                    announcements
+
+                </div>
+
+            </div>
+
+
+            <!-- ANNOUNCEMENT LIST -->
+
+            <div
+                class="announcement-list"
+                id="announcementList">
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="empty-state"
+                id="emptyState">
+
+                <i class="fa-regular fa-bell-slash"></i>
+
+
+                <h3>
+                    No announcements found
+                </h3>
+
+
+                <p>
+                    There are no announcements matching
+                    your selected filter.
+                </p>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- MOBILE OVERLAY -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =========================================================
+         PARENT JS
+
+         Current structure:
+
+         Html/parents/announcements.html
+         js/parent.js
+
+         Therefore:
+         ../../js/parent.js
+
+         IMPORTANT:
+         auth.js does NOT exist, so it is NOT loaded.
+    ========================================================== -->
+
+    <script src="../../js/parent.js"></script>
+
+
+    <!-- =========================================================
+         ANNOUNCEMENTS PAGE JS
+         
+         Wrapped inside an IIFE so it does NOT conflict with
+         currentParent/currentChild declared inside parent.js.
+    ========================================================== -->
+
+    <script>
+
+        (() => {
+
+            "use strict";
+
+
+            /* =====================================================
+               PRIVATE STATE
+
+               These names are intentionally different from
+               parent.js variables.
+            ===================================================== */
+
+            let announcementParent = null;
+
+            let announcementChild = null;
+
+            let allAnnouncements = [];
+
+            let currentFilter = "all";
+
+
+            /* =====================================================
+               GET CURRENT USER
+            ===================================================== */
+
+            function getCurrentParent() {
+
+                const storageSources = [
+
+                    {
+                        storage: sessionStorage,
+                        key: "learnora_current_user"
+                    },
+
+                    {
+                        storage: localStorage,
+                        key: "learnora_current_user"
+                    },
+
+                    {
+                        storage: localStorage,
+                        key: "learnora_remember_user"
+                    }
+
+                ];
+
+
+                for (const source of storageSources) {
+
+                    try {
+
+                        const raw =
+                            source.storage.getItem(
+                                source.key
+                            );
+
+
+                        if (!raw) {
+                            continue;
+                        }
+
+
+                        const parsed =
+                            JSON.parse(raw);
+
+
+                        if (parsed) {
+                            return parsed;
+                        }
+
+                    } catch (error) {
+
+                        console.warn(
+                            "Unable to parse user data:",
+                            source.key
+                        );
+
+                    }
+
+                }
+
+
+                return null;
+
+            }
+
+
+            /* =====================================================
+               NORMALIZE
+            ===================================================== */
+
+            function normalize(value) {
+
+                return String(
+                    value ?? ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+            }
+
+
+            /* =====================================================
+               RESOLVE CHILD
+            ===================================================== */
+
+            function resolveChild(user) {
+
+                if (!user) {
+
+                    return {
+
+                        id: "",
+
+                        email: "",
+
+                        name: "Your Child",
+
+                        course: "",
+
+                        section: ""
+
+                    };
+
+                }
+
+
+                const child =
+                    user.child;
+
+
+                const childObject =
+                    child &&
+                    typeof child === "object"
+                        ? child
+                        : {};
+
+
+                const childId =
+
+                    user.childId ||
+
+                    user.studentId ||
+
+                    user.child_id ||
+
+                    user.student_id ||
+
+                    childObject.id ||
+
+                    childObject.studentId ||
+
+                    childObject.student_id ||
+
+                    "";
+
+
+                const childEmail =
+
+                    user.childEmail ||
+
+                    user.studentEmail ||
+
+                    user.child_email ||
+
+                    user.student_email ||
+
+                    childObject.email ||
+
+                    "";
+
+
+                const childName =
+
+                    user.childName ||
+
+                    user.studentName ||
+
+                    user.child_name ||
+
+                    user.student_name ||
+
+                    childObject.name ||
+
+                    childObject.fullName ||
+
+                    childObject.full_name ||
+
+                    (
+                        typeof child === "string"
+                            ? child
+                            : ""
+                    ) ||
+
+                    "Your Child";
+
+
+                const childCourse =
+
+                    user.childCourse ||
+
+                    user.studentCourse ||
+
+                    childObject.course ||
+
+                    childObject.program ||
+
+                    childObject.courseName ||
+
+                    "";
+
+
+                const childSection =
+
+                    user.childSection ||
+
+                    user.studentSection ||
+
+                    childObject.section ||
+
+                    "";
+
+
+                return {
+
+                    id: String(childId),
+
+                    email: String(childEmail),
+
+                    name: String(childName),
+
+                    course: String(childCourse),
+
+                    section: String(childSection)
+
+                };
+
+            }
+
+
+            /* =====================================================
+               PARENT STORAGE KEY
+            ===================================================== */
+
+            function getParentKey(user) {
+
+                return normalize(
+
+                    user?.email ||
+
+                    user?.id ||
+
+                    user?.username ||
+
+                    user?.name ||
+
+                    "parent"
+
+                ).replace(
+                    /[^a-z0-9_-]/g,
+                    "_"
+                );
+
+            }
+
+
+            /* =====================================================
+               CHILD STORAGE KEY
+            ===================================================== */
+
+            function getChildKey(child) {
+
+                return normalize(
+
+                    child?.id ||
+
+                    child?.email ||
+
+                    child?.name ||
+
+                    "child"
+
+                ).replace(
+                    /[^a-z0-9_-]/g,
+                    "_"
+                );
+
+            }
+
+
+            /* =====================================================
+               READ STORAGE KEY
+            ===================================================== */
+
+            function getReadStorageKey() {
+
+                return (
+
+                    "learnora_parent_announcement_read_" +
+
+                    getParentKey(
+                        announcementParent
+                    ) +
+
+                    "_" +
+
+                    getChildKey(
+                        announcementChild
+                    )
+
+                );
+
+            }
+
+
+            /* =====================================================
+               GET READ STATE
+            ===================================================== */
+
+            function getReadState() {
+
+                try {
+
+                    const raw =
+                        localStorage.getItem(
+                            getReadStorageKey()
+                        );
+
+
+                    if (!raw) {
+                        return {};
+                    }
+
+
+                    const parsed =
+                        JSON.parse(raw);
+
+
+                    return parsed || {};
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to read announcement state."
+                    );
+
+                    return {};
+
+                }
+
+            }
+
+
+            /* =====================================================
+               SAVE READ STATE
+            ===================================================== */
+
+            function saveReadState(state) {
+
+                try {
+
+                    localStorage.setItem(
+
+                        getReadStorageKey(),
+
+                        JSON.stringify(state)
+
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to save announcement state."
+                    );
+
+                }
+
+            }
+
+
+            /* =====================================================
+               DEFAULT ANNOUNCEMENTS
+            ===================================================== */
+
+            const DEFAULT_ANNOUNCEMENTS = [
+
+                {
+                    id: "midterm-results",
+
+                    category: "academic",
+
+                    type: "academic",
+
+                    icon:
+                        "fa-solid fa-graduation-cap",
+
+                    tag: "Academic",
+
+                    title:
+                        "Mid-Term Results Have Been Published",
+
+                    message:
+                        "Mid-term examination results for {{childName}} have been published. You can review subject-wise performance from the Results & Grades section.",
+
+                    date: "2026-10-01",
+
+                    audience: "all"
+                },
+
+
+                {
+                    id: "exam-schedule",
+
+                    category: "academic",
+
+                    type: "exam",
+
+                    icon:
+                        "fa-solid fa-file-circle-check",
+
+                    tag: "Examination",
+
+                    title:
+                        "Upcoming Examination Schedule",
+
+                    message:
+                        "The upcoming examination schedule for {{childName}} is now available. Please review examination dates, subjects and reporting times from the Exam Schedule section.",
+
+                    date: "2026-09-29",
+
+                    audience: "all"
+                },
+
+
+                {
+                    id: "attendance-update",
+
+                    category: "attendance",
+
+                    type: "attendance",
+
+                    icon:
+                        "fa-solid fa-calendar-check",
+
+                    tag: "Attendance",
+
+                    title:
+                        "Attendance Records Updated",
+
+                    message:
+                        "The latest attendance records for {{childName}} have been updated. You can review monthly attendance details from the Attendance page.",
+
+                    date: "2026-09-27",
+
+                    audience: "all"
+                },
+
+
+                {
+                    id: "academic-notice",
+
+                    category: "important",
+
+                    type: "important",
+
+                    icon:
+                        "fa-solid fa-triangle-exclamation",
+
+                    tag: "Important",
+
+                    title:
+                        "Important Academic Notice",
+
+                    message:
+                        "Please regularly check Learnora for {{childName}}'s academic updates, assignments, quizzes and important school notices.",
+
+                    date: "2026-09-25",
+
+                    audience: "all"
+                },
+
+
+                {
+                    id: "parent-teacher-meeting",
+
+                    category: "meeting",
+
+                    type: "meeting",
+
+                    icon:
+                        "fa-solid fa-people-group",
+
+                    tag: "Meeting",
+
+                    title:
+                        "Parent-Teacher Meeting",
+
+                    message:
+                        "Parents will be able to discuss {{childName}}'s academic progress, attendance and upcoming learning goals during the scheduled parent-teacher meeting.",
+
+                    date: "2026-09-22",
+
+                    audience: "all"
+                }
+
+            ];
+
+
+            /* =====================================================
+               ARRAY HELPER
+            ===================================================== */
+
+            function toArray(value) {
+
+                if (Array.isArray(value)) {
+                    return value;
+                }
+
+
+                if (
+                    value !== undefined &&
+                    value !== null &&
+                    value !== ""
+                ) {
+
+                    return [value];
+
+                }
+
+
+                return [];
+
+            }
+
+
+            /* =====================================================
+               MATCH ANNOUNCEMENT WITH CHILD
+            ===================================================== */
+
+            function announcementMatchesChild(
+                announcement,
+                child
+            ) {
+
+                if (!announcement) {
+                    return false;
+                }
+
+
+                const ids = [
+
+                    ...toArray(
+                        announcement.childIds
+                    ),
+
+                    ...toArray(
+                        announcement.studentIds
+                    ),
+
+                    ...toArray(
+                        announcement.childId
+                    ),
+
+                    ...toArray(
+                        announcement.studentId
+                    )
+
+                ]
+                    .map(normalize)
+                    .filter(Boolean);
+
+
+                const emails = [
+
+                    ...toArray(
+                        announcement.childEmails
+                    ),
+
+                    ...toArray(
+                        announcement.studentEmails
+                    ),
+
+                    ...toArray(
+                        announcement.childEmail
+                    ),
+
+                    ...toArray(
+                        announcement.studentEmail
+                    )
+
+                ]
+                    .map(normalize)
+                    .filter(Boolean);
+
+
+                const names = [
+
+                    ...toArray(
+                        announcement.childNames
+                    ),
+
+                    ...toArray(
+                        announcement.studentNames
+                    ),
+
+                    ...toArray(
+                        announcement.childName
+                    ),
+
+                    ...toArray(
+                        announcement.studentName
+                    )
+
+                ]
+                    .map(normalize)
+                    .filter(Boolean);
+
+
+                const courses = [
+
+                    ...toArray(
+                        announcement.courses
+                    ),
+
+                    ...toArray(
+                        announcement.course
+                    )
+
+                ]
+                    .map(normalize)
+                    .filter(Boolean);
+
+
+                const hasTarget =
+
+                    ids.length > 0 ||
+
+                    emails.length > 0 ||
+
+                    names.length > 0 ||
+
+                    courses.length > 0;
+
+
+                /*
+                 * No target means school-wide announcement.
+                 */
+
+                if (!hasTarget) {
+                    return true;
+                }
+
+
+                const childId =
+                    normalize(child?.id);
+
+
+                const childEmail =
+                    normalize(child?.email);
+
+
+                const childName =
+                    normalize(child?.name);
+
+
+                const childCourse =
+                    normalize(child?.course);
+
+
+                return (
+
+                    (
+                        childId &&
+                        ids.includes(childId)
+                    ) ||
+
+                    (
+                        childEmail &&
+                        emails.includes(childEmail)
+                    ) ||
+
+                    (
+                        childName &&
+                        names.includes(childName)
+                    ) ||
+
+                    (
+                        childCourse &&
+                        courses.includes(childCourse)
+                    )
+
+                );
+
+            }
+
+
+            /* =====================================================
+               LOAD STORED ANNOUNCEMENTS
+            ===================================================== */
+
+            function getStoredAnnouncements() {
+
+                const storageKeys = [
+
+                    "learnora_announcements",
+
+                    "learnora_school_announcements",
+
+                    "learnora_parent_announcements"
+
+                ];
+
+
+                for (const key of storageKeys) {
+
+                    try {
+
+                        const raw =
+                            localStorage.getItem(key);
+
+
+                        if (!raw) {
+                            continue;
+                        }
+
+
+                        const parsed =
+                            JSON.parse(raw);
+
+
+                        if (Array.isArray(parsed)) {
+
+                            return parsed;
+
+                        }
+
+                    } catch (error) {
+
+                        console.warn(
+                            "Invalid announcement storage:",
+                            key
+                        );
+
+                    }
+
+                }
+
+
+                return [];
+
+            }
+
+
+            /* =====================================================
+               BUILD ANNOUNCEMENTS
+            ===================================================== */
+
+            function buildAnnouncements() {
+
+                const stored =
+                    getStoredAnnouncements();
+
+
+                const combined = [
+
+                    ...DEFAULT_ANNOUNCEMENTS,
+
+                    ...stored
+
+                ];
+
+
+                const unique =
+                    new Map();
+
+
+                combined.forEach(
+                    announcement => {
+
+                        if (!announcement) {
+                            return;
+                        }
+
+
+                        const id =
+
+                            announcement.id ||
+
+                            (
+                                "announcement-" +
+
+                                Math.random()
+                                    .toString(36)
+                                    .slice(2)
+                            );
+
+
+                        unique.set(
+
+                            String(id),
+
+                            {
+                                ...announcement,
+
+                                id: String(id)
+                            }
+
+                        );
+
+                    }
+                );
+
+
+                const readState =
+                    getReadState();
+
+
+                allAnnouncements =
+
+                    Array.from(
+                        unique.values()
+                    )
+
+                    .filter(
+                        announcement =>
+                            announcementMatchesChild(
+                                announcement,
+                                announcementChild
+                            )
+                    )
+
+                    .map(
+                        announcement => ({
+
+                            ...announcement,
+
+                            isRead:
+                                readState[
+                                    announcement.id
+                                ] === true
+
+                        })
+                    )
+
+                    .sort(
+                        (a, b) =>
+
+                            new Date(
+                                b.date || 0
+                            ) -
+
+                            new Date(
+                                a.date || 0
+                            )
+
+                    );
+
+            }
+
+
+            /* =====================================================
+               TEMPLATE REPLACEMENT
+            ===================================================== */
+
+            function replaceTemplate(text) {
+
+                if (!text) {
+                    return "";
+                }
+
+
+                return String(text)
+
+                    .replace(
+                        /\{\{childName\}\}/gi,
+
+                        announcementChild?.name ||
+                        "Your Child"
+                    )
+
+                    .replace(
+                        /\{\{parentName\}\}/gi,
+
+                        announcementParent?.name ||
+
+                        announcementParent?.fullName ||
+
+                        "Parent"
+                    )
+
+                    .replace(
+                        /\{\{course\}\}/gi,
+
+                        announcementChild?.course ||
+
+                        "your child's course"
+                    );
+
+            }
+
+
+            /* =====================================================
+               FORMAT DATE
+            ===================================================== */
+
+            function formatDate(dateValue) {
+
+                if (!dateValue) {
+                    return "Recent";
+                }
+
+
+                const date =
+                    new Date(dateValue);
+
+
+                if (
+                    Number.isNaN(
+                        date.getTime()
+                    )
+                ) {
+
+                    return String(dateValue);
+
+                }
+
+
+                return date.toLocaleDateString(
+                    "en-US",
+                    {
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric"
+                    }
+                );
+
+            }
+
+
+            /* =====================================================
+               SAFE HTML
+            ===================================================== */
+
+            function escapeHtml(value) {
+
+                return String(
+                    value ?? ""
+                )
+
+                    .replace(
+                        /&/g,
+                        "&amp;"
+                    )
+
+                    .replace(
+                        /</g,
+                        "&lt;"
+                    )
+
+                    .replace(
+                        />/g,
+                        "&gt;"
+                    )
+
+                    .replace(
+                        /"/g,
+                        "&quot;"
+                    )
+
+                    .replace(
+                        /'/g,
+                        "&#039;"
+                    );
+
+            }
+
+
+            /* =====================================================
+               FILTER ANNOUNCEMENTS
+            ===================================================== */
+
+            function filterAnnouncements(filter) {
+
+                return allAnnouncements.filter(
+                    announcement => {
+
+                        if (
+                            filter === "unread"
+                        ) {
+
+                            return !announcement.isRead;
+
+                        }
+
+
+                        if (
+                            filter === "academic"
+                        ) {
+
+                            return (
+                                announcement.category ===
+                                "academic"
+                            );
+
+                        }
+
+
+                        if (
+                            filter === "important"
+                        ) {
+
+                            return (
+                                announcement.category ===
+                                "important"
+                            );
+
+                        }
+
+
+                        return true;
+
+                    }
+                );
+
+            }
+
+
+            /* =====================================================
+               RENDER ANNOUNCEMENTS
+            ===================================================== */
+
+            function renderAnnouncements(
+                filter = "all"
+            ) {
+
+                currentFilter =
+                    filter;
+
+
+                const list =
+                    document.getElementById(
+                        "announcementList"
+                    );
+
+
+                const emptyState =
+                    document.getElementById(
+                        "emptyState"
+                    );
+
+
+                if (!list) {
+                    return;
+                }
+
+
+                const filtered =
+                    filterAnnouncements(
+                        filter
+                    );
+
+
+                list.innerHTML = "";
+
+
+                if (
+                    filtered.length === 0
+                ) {
+
+                    if (emptyState) {
+
+                        emptyState.classList.add(
+                            "show"
+                        );
+
+                    }
+
+
+                    updateCounts();
+
+                    return;
+
+                }
+
+
+                if (emptyState) {
+
+                    emptyState.classList.remove(
+                        "show"
+                    );
+
+                }
+
+
+                filtered.forEach(
+                    announcement => {
+
+                        const card =
+                            document.createElement(
+                                "article"
+                            );
+
+
+                        const type =
+                            announcement.type ||
+                            announcement.category ||
+                            "academic";
+
+
+                        const icon =
+                            announcement.icon ||
+                            "fa-solid fa-bell";
+
+
+                        const tag =
+                            announcement.tag ||
+                            "Announcement";
+
+
+                        const title =
+                            replaceTemplate(
+                                announcement.title ||
+                                "Announcement"
+                            );
+
+
+                        const message =
+                            replaceTemplate(
+                                announcement.message ||
+                                announcement.description ||
+                                ""
+                            );
+
+
+                        const date =
+                            formatDate(
+                                announcement.date
+                            );
+
+
+                        const unreadClass =
+                            announcement.isRead
+                                ? ""
+                                : "unread";
+
+
+                        card.className =
+                            "announcement-card " +
+                            escapeHtml(type) +
+                            " " +
+                            unreadClass;
+
+
+                        card.dataset.id =
+                            announcement.id;
+
+
+                        card.dataset.category =
+                            announcement.category ||
+                            "general";
+
+
+                        card.innerHTML = `
+
+                            <div class="announcement-icon">
+
+                                <i class="${escapeHtml(icon)}"></i>
+
+                            </div>
+
+
+                            <div class="announcement-content">
+
+                                <div class="announcement-top">
+
+                                    <div>
+
+                                        <h3>
+                                            ${escapeHtml(title)}
+                                        </h3>
+
+                                    </div>
+
+
+                                    <span class="announcement-date">
+
+                                        ${escapeHtml(date)}
+
+                                    </span>
+
+                                </div>
+
+
+                                <p>
+                                    ${escapeHtml(message)}
+                                </p>
+
+
+                                <div class="announcement-meta">
+
+                                    <span class="announcement-tag">
+
+                                        <i class="fa-solid fa-tag"></i>
+
+                                        ${escapeHtml(tag)}
+
+                                    </span>
+
+
+                                    <span class="announcement-child-tag">
+
+                                        <i class="fa-solid fa-user-graduate"></i>
+
+                                        ${escapeHtml(
+                                            announcementChild?.name ||
+                                            "Your Child"
+                                        )}
+
+                                    </span>
+
+
+                                    ${
+                                        announcement.isRead
+
+                                            ? `
+
+                                                <button
+                                                    type="button"
+                                                    class="read-btn"
+                                                    disabled>
+
+                                                    Read
+
+                                                </button>
+
+                                            `
+
+                                            : `
+
+                                                <button
+                                                    type="button"
+                                                    class="read-btn"
+                                                    data-read-id="${escapeHtml(
+                                                        announcement.id
+                                                    )}">
+
+                                                    Mark as read
+
+                                                </button>
+
+                                            `
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            ${
+                                announcement.isRead
+                                    ? ""
+
+                                    : `<span class="unread-dot"></span>`
+                            }
+
+                        `;
+
+
+                        list.appendChild(
+                            card
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Read button events
+                 */
+
+                list
+                    .querySelectorAll(
+                        "[data-read-id]"
+                    )
+
+                    .forEach(
+                        button => {
+
+                            button.addEventListener(
+                                "click",
+                                function () {
+
+                                    markAsRead(
+                                        this.dataset.readId
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                updateCounts();
+
+            }
+
+
+            /* =====================================================
+               MARK ONE AS READ
+            ===================================================== */
+
+            function markAsRead(id) {
+
+                const announcement =
+                    allAnnouncements.find(
+                        item =>
+                            item.id === String(id)
+                    );
+
+
+                if (!announcement) {
+                    return;
+                }
+
+
+                announcement.isRead =
+                    true;
+
+
+                const readState =
+                    getReadState();
+
+
+                readState[
+                    announcement.id
+                ] = true;
+
+
+                saveReadState(
+                    readState
+                );
+
+
+                renderAnnouncements(
+                    currentFilter
+                );
+
+            }
+
+
+            /* =====================================================
+               MARK ALL AS READ
+            ===================================================== */
+
+            function markAllAsRead() {
+
+                const readState =
+                    getReadState();
+
+
+                allAnnouncements.forEach(
+                    announcement => {
+
+                        announcement.isRead =
+                            true;
+
+
+                        readState[
+                            announcement.id
+                        ] = true;
+
+                    }
+                );
+
+
+                saveReadState(
+                    readState
+                );
+
+
+                renderAnnouncements(
+                    currentFilter
+                );
+
+            }
+
+
+            /* =====================================================
+               UPDATE COUNTS
+            ===================================================== */
+
+            function updateCounts() {
+
+                const unreadCount =
+                    allAnnouncements.filter(
+                        announcement =>
+                            !announcement.isRead
+                    ).length;
+
+
+                const visibleCount =
+                    filterAnnouncements(
+                        currentFilter
+                    ).length;
+
+
+                const announcementCount =
+                    document.getElementById(
+                        "announcementCount"
+                    );
+
+
+                const notificationDot =
+                    document.getElementById(
+                        "notificationDot"
+                    );
+
+
+                const visibleCountElement =
+                    document.getElementById(
+                        "visibleCount"
+                    );
+
+
+                if (announcementCount) {
+
+                    announcementCount.textContent =
+                        unreadCount;
+
+                }
+
+
+                if (notificationDot) {
+
+                    notificationDot.style.display =
+                        unreadCount > 0
+                            ? "block"
+                            : "none";
+
+                }
+
+
+                if (visibleCountElement) {
+
+                    visibleCountElement.textContent =
+                        visibleCount;
+
+                }
+
+            }
+
+
+            /* =====================================================
+               LOAD PARENT DATA
+            ===================================================== */
+
+            function loadParentData() {
+
+                announcementParent =
+                    getCurrentParent();
+
+
+                if (!announcementParent) {
+
+                    console.warn(
+                        "No logged-in parent found."
+                    );
+
+
+                    announcementChild =
+                        resolveChild(null);
+
+
+                    return;
+
+                }
+
+
+                announcementChild =
+                    resolveChild(
+                        announcementParent
+                    );
+
+
+                const parentName =
+
+                    announcementParent.name ||
+
+                    announcementParent.fullName ||
+
+                    announcementParent.username ||
+
+                    "Parent";
+
+
+                const childName =
+
+                    announcementChild.name ||
+
+                    "Your Child";
+
+
+                /* SIDEBAR */
+
+                const sidebarParentName =
+                    document.getElementById(
+                        "sidebarParentName"
+                    );
+
+
+                const topbarParentName =
+                    document.getElementById(
+                        "topbarParentName"
+                    );
+
+
+                const sidebarChildName =
+                    document.getElementById(
+                        "sidebarChildName"
+                    );
+
+
+                const contextChildName =
+                    document.getElementById(
+                        "contextChildName"
+                    );
+
+
+                if (sidebarParentName) {
+
+                    sidebarParentName.textContent =
+                        parentName;
+
+                }
+
+
+                if (topbarParentName) {
+
+                    topbarParentName.textContent =
+                        parentName;
+
+                }
+
+
+                if (sidebarChildName) {
+
+                    sidebarChildName.textContent =
+                        childName;
+
+                }
+
+
+                if (contextChildName) {
+
+                    contextChildName.textContent =
+                        childName;
+
+                }
+
+
+                /* AVATAR */
+
+                const firstLetter =
+                    parentName
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase() ||
+                    "P";
+
+
+                const sidebarAvatar =
+                    document.getElementById(
+                        "sidebarParentAvatar"
+                    );
+
+
+                const topbarAvatar =
+                    document.getElementById(
+                        "topbarParentAvatar"
+                    );
+
+
+                if (sidebarAvatar) {
+
+                    sidebarAvatar.textContent =
+                        firstLetter;
+
+                }
+
+
+                if (topbarAvatar) {
+
+                    topbarAvatar.textContent =
+                        firstLetter;
+
+                }
+
+
+                /* COURSE / SECTION */
+
+                const subtitle =
+                    document.getElementById(
+                        "announcementSubtitle"
+                    );
+
+
+                if (subtitle) {
+
+                    let text =
+                        `Important updates related to ${childName}`;
+
+
+                    if (
+                        announcementChild.course
+                    ) {
+
+                        text +=
+                            ` • ${announcementChild.course}`;
+
+                    }
+
+
+                    if (
+                        announcementChild.section
+                    ) {
+
+                        text +=
+                            ` • Section ${announcementChild.section}`;
+
+                    }
+
+
+                    subtitle.textContent =
+                        text;
+
+                }
+
+            }
+
+
+            /* =====================================================
+               FILTER INITIALIZATION
+            ===================================================== */
+
+            function initializeFilters() {
+
+                const buttons =
+                    document.querySelectorAll(
+                        ".filter-btn"
+                    );
+
+
+                buttons.forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            function () {
+
+                                buttons.forEach(
+                                    item =>
+                                        item.classList.remove(
+                                            "active"
+                                        )
+                                );
+
+
+                                this.classList.add(
+                                    "active"
+                                );
+
+
+                                renderAnnouncements(
+                                    this.dataset.filter
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+
+            /* =====================================================
+               MOBILE SIDEBAR
+            ===================================================== */
+
+            function initializeSidebar() {
+
+                const menuToggle =
+                    document.getElementById(
+                        "menuToggle"
+                    );
+
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+
+                if (
+                    !menuToggle ||
+                    !sidebar
+                ) {
+
+                    return;
+
+                }
+
+
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle(
+                            "open"
+                        );
+
+
+                        if (overlay) {
+
+                            overlay.classList.toggle(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                if (overlay) {
+
+                    overlay.addEventListener(
+                        "click",
+                        function () {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+
+                            overlay.classList.remove(
+                                "show"
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+
+
+            /* =====================================================
+               CLOSE SIDEBAR AFTER NAVIGATION
+            ===================================================== */
+
+            function initializeNavigation() {
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+
+                const overlay =
+                    document.getElementById(
+                        "sidebarOverlay"
+                    );
+
+
+                if (!sidebar) {
+                    return;
+                }
+
+
+                sidebar
+                    .querySelectorAll(
+                        ".nav-link"
+                    )
+
+                    .forEach(
+                        link => {
+
+                            link.addEventListener(
+                                "click",
+                                function () {
+
+                                    sidebar.classList.remove(
+                                        "open"
+                                    );
+
+
+                                    if (overlay) {
+
+                                        overlay.classList.remove(
+                                            "show"
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            /* =====================================================
+               LOGOUT
+            ===================================================== */
+
+            function initializeLogout() {
+
+                const logoutBtn =
+                    document.getElementById(
+                        "logoutBtn"
+                    );
+
+
+                if (!logoutBtn) {
+                    return;
+                }
+
+
+                logoutBtn.addEventListener(
+                    "click",
+                    function () {
+
+                        /*
+                         * parent.js may already provide logout().
+                         */
+
+                        if (
+                            typeof window.logout ===
+                            "function"
+                        ) {
+
+                            window.logout();
+
+                            return;
+
+                        }
+
+
+                        /*
+                         * Fallback logout.
+                         */
+
+                        sessionStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+
+                        sessionStorage.removeItem(
+                            "learnora_user_role"
+                        );
+
+
+                        sessionStorage.removeItem(
+                            "learnora_logged_in"
+                        );
+
+
+                        localStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+
+                        localStorage.removeItem(
+                            "learnora_remember_user"
+                        );
+
+
+                        localStorage.removeItem(
+                            "learnora_user_role"
+                        );
+
+
+                        localStorage.removeItem(
+                            "learnora_logged_in"
+                        );
+
+
+                        /*
+                         * Current page:
+                         *
+                         * Html/parents/announcements.html
+                         *
+                         * Login:
+                         *
+                         * Html/login.html
+                         *
+                         * Correct:
+                         *
+                         * ../login.html
+                         */
+
+                        window.location.href =
+                            "../login.html";
+
+                    }
+                );
+
+            }
+
+
+            /* =====================================================
+               MARK ALL BUTTON
+            ===================================================== */
+
+            function initializeMarkAll() {
+
+                const markAllBtn =
+                    document.getElementById(
+                        "markAllBtn"
+                    );
+
+
+                if (!markAllBtn) {
+                    return;
+                }
+
+
+                markAllBtn.addEventListener(
+                    "click",
+                    markAllAsRead
+                );
+
+            }
+
+
+            /* =====================================================
+               PAGE INITIALIZATION
+            ===================================================== */
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
+
+                    /*
+                     * 1. Parent
+                     */
+
+                    loadParentData();
+
+
+                    /*
+                     * 2. Announcements
+                     */
+
+                    buildAnnouncements();
+
+
+                    /*
+                     * 3. Render
+                     */
+
+                    renderAnnouncements(
+                        "all"
+                    );
+
+
+                    /*
+                     * 4. Filters
+                     */
+
+                    initializeFilters();
+
+
+                    /*
+                     * 5. Mobile sidebar
+                     */
+
+                    initializeSidebar();
+
+
+                    /*
+                     * 6. Navigation
+                     */
+
+                    initializeNavigation();
+
+
+                    /*
+                     * 7. Logout
+                     */
+
+                    initializeLogout();
+
+
+                    /*
+                     * 8. Mark all
+                     */
+
+                    initializeMarkAll();
+
+                }
+            );
+
+        })();
+
+    </script>
+
+</body>
+
+</html>

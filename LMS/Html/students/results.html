@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Results and Grades — View academic performance and course grades.">
+
+    <title>Results & Grades — Learnora LMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../Css/student.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+
+        <!-- DYNAMIC LOGGED-IN STUDENT -->
+
+        <div class="student-mini-profile">
+
+            <div class="avatar" id="sidebarAvatar">
+                SA
+            </div>
+
+            <div>
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarStudentProgram">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">MAIN</div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a href="courses.html#add-drop" class="nav-link">
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link active">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                COMMUNICATION
+            </div>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <a href="messages.html" class="nav-link">
+                <i class="fa-solid fa-message"></i>
+                <span>Messages</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html"
+                class="nav-link logout-link">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================================
+             TOPBAR
+             ===================================================== -->
+
+        <header class="topbar">
+
+            <!-- IMPORTANT:
+                 student.js handles sidebar -->
+
+            <button
+                type="button"
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Toggle sidebar">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="resultSearch"
+                    placeholder="Search results...">
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-btn notification-btn"
+                    type="button">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topbarAvatar">
+
+                        SA
+
+                    </div>
+
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+             ===================================================== -->
+
+        <div class="page-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+                 ================================================= -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                        ACADEMIC PERFORMANCE
+
+                    </span>
+
+
+                    <h1>
+                        Results & Grades
+                    </h1>
+
+
+                    <p>
+                        Track your course grades, assessments and academic progress.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="secondary-btn"
+                    id="downloadReportBtn"
+                    type="button">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download Report
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATS
+                 ================================================= -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Current CGPA
+                        </span>
+
+                        <strong id="currentCGPA">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Semester GPA
+                        </span>
+
+                        <strong id="semesterGPA">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon cyan">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Credit Hours
+                        </span>
+
+                        <strong id="creditHours">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Overall Grade
+                        </span>
+
+                        <strong id="overallGrade">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CURRENT SEMESTER
+                 ================================================= -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2 id="semesterTitle">
+                            Current Semester Results
+                        </h2>
+
+                        <p>
+                            Current semester academic performance.
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        class="form-select"
+                        id="semesterSelect">
+
+                        <option value="current">
+                            Current Semester
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="data-table">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Credit Hours
+                            </th>
+
+                            <th>
+                                Assignments
+                            </th>
+
+                            <th>
+                                Quizzes
+                            </th>
+
+                            <th>
+                                Final
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Grade
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody id="resultsTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PERFORMANCE
+                 ================================================= -->
+
+            <div class="two-column-grid">
+
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Performance Breakdown
+                            </h2>
+
+                            <p>
+                                Current semester assessment distribution.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-list">
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <strong>
+                                    Assignments
+                                </strong>
+
+                                <span id="assignmentPercent">
+                                    --%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <span
+                                    id="assignmentProgress"
+                                    style="width:0%;">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <strong>
+                                    Quizzes
+                                </strong>
+
+                                <span id="quizPercent">
+                                    --%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <span
+                                    id="quizProgress"
+                                    style="width:0%;">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <strong>
+                                    Attendance
+                                </strong>
+
+                                <span id="attendancePercent">
+                                    --%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <span
+                                    id="attendanceProgress"
+                                    style="width:0%;">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="performance-row">
+
+                            <div>
+
+                                <strong>
+                                    Final Assessments
+                                </strong>
+
+                                <span id="finalPercent">
+                                    --%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-bar">
+
+                                <span
+                                    id="finalProgress"
+                                    style="width:0%;">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     ACADEMIC SUMMARY
+                     ================================================= -->
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Academic Summary
+                            </h2>
+
+                            <p>
+                                Your semester overview.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Completed Courses
+                            </span>
+
+                            <strong id="completedCourses">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Passed Courses
+                            </span>
+
+                            <strong id="passedCourses">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Failed Courses
+                            </span>
+
+                            <strong id="failedCourses">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Current Standing
+                            </span>
+
+                            <strong
+                                id="currentStanding"
+                                class="success-text">
+
+                                --
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             FOOTER
+             ===================================================== -->
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =============================================================
+     RESULTS PAGE JAVASCRIPT
+     ============================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           1. GET LOGGED-IN USER
+           ===================================================== */
+
+        let currentUser = null;
+
+        try {
+
+            const localUser =
+                localStorage.getItem(
+                    "learnora_current_user"
+                );
+
+            const sessionUser =
+                sessionStorage.getItem(
+                    "learnora_current_user"
+                );
+
+            const savedUser =
+                localUser || sessionUser;
+
+
+            if (savedUser) {
+
+                currentUser =
+                    JSON.parse(savedUser);
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read logged-in student:",
+                error
+            );
+
+        }
+
+
+        /* =====================================================
+           2. DEFAULT RESULTS
+           
+           Ye sirf fallback hai.
+           Agar logged-in user ke andar result data hai,
+           to us student ka data use hoga.
+           ===================================================== */
+
+        const defaultResults = {
+
+            currentSemester: "Fall 2026",
+
+            cgpa: "3.42",
+
+            semesterGPA: "3.58",
+
+            creditHours: 15,
+
+            overallGrade: "A-",
+
+            attendance: 91,
+
+            courses: [
+
+                {
+                    name: "Software Engineering",
+                    code: "CS-401",
+                    credits: 3,
+                    assignments: "18/20",
+                    quizzes: "18/20",
+                    final: "42/50",
+                    total: "78/90",
+                    grade: "A-",
+                    icon: "fa-code",
+                    color: "blue"
+                },
+
+                {
+                    name: "Database Systems",
+                    code: "CS-403",
+                    credits: 3,
+                    assignments: "22/25",
+                    quizzes: "17/20",
+                    final: "40/50",
+                    total: "79/95",
+                    grade: "A-",
+                    icon: "fa-database",
+                    color: "cyan"
+                },
+
+                {
+                    name: "Data Analytics",
+                    code: "DS-301",
+                    credits: 3,
+                    assignments: "17/20",
+                    quizzes: "16/20",
+                    final: "38/50",
+                    total: "71/90",
+                    grade: "B+",
+                    icon: "fa-chart-line",
+                    color: "purple"
+                },
+
+                {
+                    name: "Mobile Application Development",
+                    code: "SE-405",
+                    credits: 3,
+                    assignments: "19/20",
+                    quizzes: "18/20",
+                    final: "44/50",
+                    total: "81/90",
+                    grade: "A",
+                    icon: "fa-mobile-screen",
+                    color: "green"
+                },
+
+                {
+                    name: "Information Security",
+                    code: "CS-407",
+                    credits: 3,
+                    assignments: "16/20",
+                    quizzes: "15/20",
+                    final: "36/50",
+                    total: "67/90",
+                    grade: "B",
+                    icon: "fa-shield-halved",
+                    color: "orange"
+                }
+
+            ]
+
+        };
+
+
+        /* =====================================================
+           3. GET STUDENT-SPECIFIC RESULTS
+           ===================================================== */
+
+        function getStudentResults(user) {
+
+            if (!user) {
+
+                return defaultResults;
+
+            }
+
+
+            /*
+             * Priority 1:
+             * user.results
+             */
+
+            if (
+                user.results &&
+                typeof user.results === "object"
+            ) {
+
+                return {
+
+                    ...defaultResults,
+
+                    ...user.results
+
+                };
+
+            }
+
+
+            /*
+             * Priority 2:
+             * user.academicData.results
+             */
+
+            if (
+                user.academicData &&
+                user.academicData.results
+            ) {
+
+                return {
+
+                    ...defaultResults,
+
+                    ...user.academicData.results
+
+                };
+
+            }
+
+
+            /*
+             * Priority 3:
+             * user.courses
+             */
+
+            if (
+                Array.isArray(user.courses)
+            ) {
+
+                return {
+
+                    ...defaultResults,
+
+                    courses: user.courses
+
+                };
+
+            }
+
+
+            return defaultResults;
+
+        }
+
+
+        const results =
+            getStudentResults(
+                currentUser
+            );
+
+
+        /* =====================================================
+           4. STUDENT INFORMATION
+           ===================================================== */
+
+        const studentName =
+
+            currentUser?.name ||
+
+            currentUser?.fullName ||
+
+            currentUser?.username ||
+
+            "Student";
+
+
+        const studentEmail =
+
+            currentUser?.email ||
+
+            "";
+
+
+        const studentProgram =
+
+            currentUser?.program ||
+
+            currentUser?.degree ||
+
+            currentUser?.department ||
+
+            "Student";
+
+
+        /* =====================================================
+           5. INITIALS
+           ===================================================== */
+
+        function getInitials(name) {
+
+            if (!name) {
+
+                return "ST";
+
+            }
+
+
+            return name
+
+                .trim()
+
+                .split(/\s+/)
+
+                .slice(0, 2)
+
+                .map(
+                    word =>
+                        word
+                            .charAt(0)
+                            .toUpperCase()
+                )
+
+                .join("");
+
+        }
+
+
+        const initials =
+            getInitials(
+                studentName
+            );
+
+
+        /* =====================================================
+           6. UPDATE SIDEBAR PROFILE
+           ===================================================== */
+
+        const sidebarName =
+            document.getElementById(
+                "sidebarStudentName"
+            );
+
+        const sidebarProgram =
+            document.getElementById(
+                "sidebarStudentProgram"
+            );
+
+        const sidebarAvatar =
+            document.getElementById(
+                "sidebarAvatar"
+            );
+
+
+        if (sidebarName) {
+
+            sidebarName.textContent =
+                studentName;
+
+        }
+
+
+        if (sidebarProgram) {
+
+            sidebarProgram.textContent =
+                studentProgram;
+
+        }
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        /* =====================================================
+           7. UPDATE TOPBAR PROFILE
+           ===================================================== */
+
+        const topbarName =
+            document.getElementById(
+                "topbarStudentName"
+            );
+
+        const topbarAvatar =
+            document.getElementById(
+                "topbarAvatar"
+            );
+
+
+        if (topbarName) {
+
+            topbarName.textContent =
+                studentName;
+
+        }
+
+
+        if (topbarAvatar) {
+
+            topbarAvatar.textContent =
+                initials;
+
+        }
+
+
+        /* =====================================================
+           8. UPDATE STATS
+           ===================================================== */
+
+        document.getElementById(
+            "currentCGPA"
+        ).textContent =
+
+            currentUser?.cgpa ??
+
+            currentUser?.CGPA ??
+
+            results.cgpa ??
+
+            "--";
+
+
+        document.getElementById(
+            "semesterGPA"
+        ).textContent =
+
+            currentUser?.semesterGPA ??
+
+            currentUser?.gpa ??
+
+            results.semesterGPA ??
+
+            "--";
+
+
+        document.getElementById(
+            "creditHours"
+        ).textContent =
+
+            currentUser?.creditHours ??
+
+            results.creditHours ??
+
+            "--";
+
+
+        document.getElementById(
+            "overallGrade"
+        ).textContent =
+
+            currentUser?.overallGrade ??
+
+            results.overallGrade ??
+
+            "--";
+
+
+        /* =====================================================
+           9. SEMESTER
+           ===================================================== */
+
+        document.getElementById(
+            "semesterTitle"
+        ).textContent =
+
+            `${results.currentSemester || "Current Semester"} Results`;
+
+
+        const semesterSelect =
+            document.getElementById(
+                "semesterSelect"
+            );
+
+
+        if (semesterSelect) {
+
+            semesterSelect.innerHTML = `
+
+                <option value="current">
+
+                    ${results.currentSemester || "Current Semester"}
+
+                </option>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           10. COURSES
+           ===================================================== */
+
+        const courses =
+
+            Array.isArray(results.courses)
+
+                ? results.courses
+
+                : [];
+
+
+        const tableBody =
+            document.getElementById(
+                "resultsTableBody"
+            );
+
+
+        function getGradeClass(grade) {
+
+            if (!grade) {
+
+                return "grade-b";
+
+            }
+
+
+            const normalized =
+
+                String(grade)
+                    .trim()
+                    .toUpperCase();
+
+
+            if (
+
+                normalized === "A+" ||
+
+                normalized === "A" ||
+
+                normalized === "A-"
+
+            ) {
+
+                return "grade-a";
+
+            }
+
+
+            if (
+
+                normalized === "B+" ||
+
+                normalized === "B" ||
+
+                normalized === "B-"
+
+            ) {
+
+                return "grade-b";
+
+            }
+
+
+            if (
+
+                normalized === "C+" ||
+
+                normalized === "C" ||
+
+                normalized === "C-"
+
+            ) {
+
+                return "grade-c";
+
+            }
+
+
+            return "grade-b";
+
+        }
+
+
+        function renderCourses() {
+
+            tableBody.innerHTML = "";
+
+
+            if (
+                !courses.length
+            ) {
+
+                tableBody.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            <div class="no-results">
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                                <h3>
+                                    No Results Available
+                                </h3>
+
+                                <p>
+                                    No result data is available
+                                    for your enrolled courses yet.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            courses.forEach(
+                function (course) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const gradeClass =
+                        getGradeClass(
+                            course.grade
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div class="table-title">
+
+                                <div class="table-icon ${course.color || "blue"}">
+
+                                    <i class="fa-solid ${course.icon || "fa-book"}"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${course.name || "Course"}
+                                    </strong>
+
+                                    <span>
+                                        ${course.code || "N/A"}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            ${course.credits ??
+                            course.creditHours ??
+                            0}
+
+                        </td>
+
+
+                        <td>
+
+                            ${course.assignments || "--"}
+
+                        </td>
+
+
+                        <td>
+
+                            ${course.quizzes || "--"}
+
+                        </td>
+
+
+                        <td>
+
+                            ${course.final || "--"}
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${course.total || "--"}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="grade-badge ${gradeClass}">
+
+                                ${course.grade || "--"}
+
+                            </span>
+
+                        </td>
+
+                    `;
+
+
+                    tableBody.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+
+
+        renderCourses();
+
+
+        /* =====================================================
+           11. PERCENTAGE CALCULATION
+           ===================================================== */
+
+        function calculatePercentage(
+            value
+        ) {
+
+            if (!value) {
+
+                return 0;
+
+            }
+
+
+            const parts =
+
+                String(value)
+                    .split("/")
+                    .map(Number);
+
+
+            if (
+
+                parts.length !== 2 ||
+
+                !parts[1]
+
+            ) {
+
+                return 0;
+
+            }
+
+
+            return Math.round(
+
+                (
+                    parts[0] /
+                    parts[1]
+                ) * 100
+
+            );
+
+        }
+
+
+        function average(values) {
+
+            if (!values.length) {
+
+                return 0;
+
+            }
+
+
+            return Math.round(
+
+                values.reduce(
+
+                    (
+                        sum,
+                        value
+                    ) =>
+                        sum + value,
+
+                    0
+
+                ) / values.length
+
+            );
+
+        }
+
+
+        /* =====================================================
+           12. PERFORMANCE VALUES
+           ===================================================== */
+
+        const assignmentScores =
+
+            courses.map(
+                course =>
+
+                    calculatePercentage(
+                        course.assignments
+                    )
+            );
+
+
+        const quizScores =
+
+            courses.map(
+                course =>
+
+                    calculatePercentage(
+                        course.quizzes
+                    )
+            );
+
+
+        const finalScores =
+
+            courses.map(
+                course =>
+
+                    calculatePercentage(
+                        course.final
+                    )
+            );
+
+
+        const assignmentAverage =
+
+            currentUser?.assignmentPercentage ??
+
+            results.assignmentPercentage ??
+
+            average(
+                assignmentScores
+            );
+
+
+        const quizAverage =
+
+            currentUser?.quizPercentage ??
+
+            results.quizPercentage ??
+
+            average(
+                quizScores
+            );
+
+
+        const finalAverage =
+
+            currentUser?.finalPercentage ??
+
+            results.finalPercentage ??
+
+            average(
+                finalScores
+            );
+
+
+        const attendance =
+
+            currentUser?.attendance ??
+
+            results.attendance ??
+
+            0;
+
+
+        /* =====================================================
+           13. PERFORMANCE UI
+           ===================================================== */
+
+        function setPerformance(
+            textId,
+            progressId,
+            value
+        ) {
+
+            const safeValue =
+
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        Number(value) || 0
+                    )
+                );
+
+
+            document.getElementById(
+                textId
+            ).textContent =
+
+                `${safeValue}%`;
+
+
+            document.getElementById(
+                progressId
+            ).style.width =
+
+                `${safeValue}%`;
+
+        }
+
+
+        setPerformance(
+            "assignmentPercent",
+            "assignmentProgress",
+            assignmentAverage
+        );
+
+
+        setPerformance(
+            "quizPercent",
+            "quizProgress",
+            quizAverage
+        );
+
+
+        setPerformance(
+            "attendancePercent",
+            "attendanceProgress",
+            attendance
+        );
+
+
+        setPerformance(
+            "finalPercent",
+            "finalProgress",
+            finalAverage
+        );
+
+
+        /* =====================================================
+           14. ACADEMIC SUMMARY
+           ===================================================== */
+
+        const completed =
+            courses.length;
+
+
+        let passed = 0;
+
+        let failed = 0;
+
+
+        courses.forEach(
+            function (course) {
+
+                const grade =
+
+                    String(
+                        course.grade || ""
+                    )
+                    .trim()
+                    .toUpperCase();
+
+
+                if (
+
+                    grade === "F" ||
+
+                    grade === "FAIL"
+
+                ) {
+
+                    failed++;
+
+                } else {
+
+                    passed++;
+
+                }
+
+            }
+        );
+
+
+        document.getElementById(
+            "completedCourses"
+        ).textContent =
+
+            `${completed} / ${completed}`;
+
+
+        document.getElementById(
+            "passedCourses"
+        ).textContent =
+
+            passed;
+
+
+        document.getElementById(
+            "failedCourses"
+        ).textContent =
+
+            failed;
+
+
+        document.getElementById(
+            "currentStanding"
+        ).textContent =
+
+            failed > 0
+
+                ? "Needs Improvement"
+
+                : "Good";
+
+
+        /* =====================================================
+           15. SEARCH RESULTS
+           ===================================================== */
+
+        const searchInput =
+            document.getElementById(
+                "resultSearch"
+            );
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    const query =
+
+                        this.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    const rows =
+                        tableBody.querySelectorAll(
+                            "tr"
+                        );
+
+
+                    rows.forEach(
+                        function (row) {
+
+                            const text =
+
+                                row.textContent
+                                    .toLowerCase();
+
+
+                            row.style.display =
+
+                                text.includes(
+                                    query
+                                )
+
+                                    ? ""
+
+                                    : "none";
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           16. DOWNLOAD REPORT
+           ===================================================== */
+
+        const downloadButton =
+            document.getElementById(
+                "downloadReportBtn"
+            );
+
+
+        if (downloadButton) {
+
+            downloadButton.addEventListener(
+                "click",
+                function () {
+
+                    const reportLines = [];
+
+
+                    reportLines.push(
+                        "LEARNORA LMS - RESULTS REPORT"
+                    );
+
+                    reportLines.push(
+                        "================================"
+                    );
+
+
+                    reportLines.push(
+                        `Student: ${studentName}`
+                    );
+
+
+                    if (studentEmail) {
+
+                        reportLines.push(
+                            `Email: ${studentEmail}`
+                        );
+
+                    }
+
+
+                    reportLines.push(
+                        `Program: ${studentProgram}`
+                    );
+
+
+                    reportLines.push(
+                        `CGPA: ${document.getElementById("currentCGPA").textContent}`
+                    );
+
+
+                    reportLines.push(
+                        `Semester GPA: ${document.getElementById("semesterGPA").textContent}`
+                    );
+
+
+                    reportLines.push(
+                        `Credit Hours: ${document.getElementById("creditHours").textContent}`
+                    );
+
+
+                    reportLines.push(
+                        `Overall Grade: ${document.getElementById("overallGrade").textContent}`
+                    );
+
+
+                    reportLines.push("");
+
+
+                    reportLines.push(
+                        "COURSE RESULTS"
+                    );
+
+
+                    reportLines.push(
+                        "================================"
+                    );
+
+
+                    courses.forEach(
+                        function (course) {
+
+                            reportLines.push(
+                                `${course.name || "Course"} (${course.code || "N/A"})`
+                            );
+
+
+                            reportLines.push(
+                                `Credit Hours: ${course.credits ?? course.creditHours ?? 0}`
+                            );
+
+
+                            reportLines.push(
+                                `Assignments: ${course.assignments || "--"}`
+                            );
+
+
+                            reportLines.push(
+                                `Quizzes: ${course.quizzes || "--"}`
+                            );
+
+
+                            reportLines.push(
+                                `Final: ${course.final || "--"}`
+                            );
+
+
+                            reportLines.push(
+                                `Total: ${course.total || "--"}`
+                            );
+
+
+                            reportLines.push(
+                                `Grade: ${course.grade || "--"}`
+                            );
+
+
+                            reportLines.push("");
+
+                        }
+                    );
+
+
+                    const blob =
+                        new Blob(
+                            [
+                                reportLines.join("\n")
+                            ],
+                            {
+                                type: "text/plain"
+                            }
+                        );
+
+
+                    const url =
+                        URL.createObjectURL(
+                            blob
+                        );
+
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.href = url;
+
+
+                    link.download =
+
+                        `${studentName
+                            .replace(/\s+/g, "_")
+                        }_Results_Report.txt`;
+
+
+                    document.body.appendChild(
+                        link
+                    );
+
+
+                    link.click();
+
+
+                    link.remove();
+
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           17. LOGOUT
+           ===================================================== */
+
+        const logoutLink =
+            document.querySelector(
+                ".logout-link"
+            );
+
+
+        if (logoutLink) {
+
+            logoutLink.addEventListener(
+                "click",
+                function () {
+
+                    localStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+
+                    sessionStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+                }
+            );
+
+        }
+
+    });
+
+</script>
+
+
+<!-- =============================================================
+     IMPORTANT:
+     SIDEBAR FUNCTIONALITY COMES FROM student.js
+     ============================================================= -->
+
+<script src="../../js/student.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Study Materials — Access course-related lecture notes, PDFs, presentations and learning resources.">
+
+    <title>Study Materials — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" href="../../Css/student.css">
+
+    <style>
+        /* ================================
+           MATERIAL PAGE EXTRA STYLES
+        ================================= */
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .material-card {
+            display: flex;
+            gap: 18px;
+            padding: 22px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.025);
+            transition: 0.25s ease;
+        }
+
+        .material-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(39, 217, 244, 0.28);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+        }
+
+        .material-file-icon {
+            width: 54px;
+            min-width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .material-file-icon.pdf {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.12);
+        }
+
+        .material-file-icon.ppt {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.12);
+        }
+
+        .material-file-icon.doc {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        .material-file-icon.sheet {
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.12);
+        }
+
+        .material-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .course-label {
+            display: inline-block;
+            margin-bottom: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #27d9f4;
+            letter-spacing: 0.2px;
+        }
+
+        .material-content h3 {
+            margin: 0 0 8px;
+            font-family: "Manrope", sans-serif;
+            font-size: 17px;
+            line-height: 1.35;
+        }
+
+        .material-content p {
+            margin: 0 0 15px;
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .material-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .material-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .small-btn {
+            min-height: 36px;
+            padding: 8px 13px;
+            font-size: 12px;
+        }
+
+        .empty-materials {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            border: 1px dashed rgba(148, 163, 184, 0.2);
+            border-radius: 18px;
+            color: #94a3b8;
+        }
+
+        .empty-materials i {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #27d9f4;
+        }
+
+        .empty-materials h3 {
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .course-count-info {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .material-card {
+                flex-direction: column;
+            }
+
+            .material-file-icon {
+                width: 52px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+        <!-- DYNAMIC STUDENT PROFILE -->
+        <div class="student-mini-profile">
+
+            <div class="avatar" id="sidebarAvatar">ST</div>
+
+            <div>
+                <strong id="sidebarStudentName">Student</strong>
+                <span id="sidebarProgram">Program</span>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">MAIN</div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a href="courses.html#add-drop" class="nav-link">
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+            <div class="nav-section-title">ACADEMICS</div>
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+                <span class="nav-badge" id="assignmentBadge">0</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link active">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+            <div class="nav-section-title">COMMUNICATION</div>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <a href="messages.html" class="nav-link">
+                <i class="fa-solid fa-message"></i>
+                <span>Messages</span>
+            </a>
+
+            <div class="nav-section-title">ACCOUNT</div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="../login.html" class="nav-link logout-link" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search study materials...">
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="icon-btn notification-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="topbar-profile">
+
+                    <div class="avatar small" id="topAvatar">ST</div>
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topStudentName">Student</strong>
+
+                        <span>Student</span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- =========================================
+             PAGE CONTENT
+        ========================================== -->
+        <div class="page-content">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        <i class="fa-solid fa-folder-open"></i>
+                        LEARNING RESOURCES
+                    </span>
+
+                    <h1>Study Materials</h1>
+
+                    <p id="pageDescription">
+                        Access learning resources for your enrolled courses.
+                    </p>
+
+                </div>
+
+                <button class="secondary-btn" id="resetFiltersBtn">
+                    <i class="fa-solid fa-filter-circle-xmark"></i>
+                    Reset Filters
+                </button>
+
+            </div>
+
+            <!-- =========================================
+                 STATS
+            ========================================== -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-folder"></i>
+                    </div>
+
+                    <div>
+                        <span>Total Materials</span>
+                        <strong id="totalMaterials">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+
+                    <div>
+                        <span>PDF Documents</span>
+                        <strong id="pdfCount">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-file-powerpoint"></i>
+                    </div>
+
+                    <div>
+                        <span>Presentations</span>
+                        <strong id="presentationCount">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+
+                    <div>
+                        <span>Available Courses</span>
+                        <strong id="courseCount">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- =========================================
+                 FILTERS
+            ========================================== -->
+            <section class="content-card">
+
+                <div class="material-toolbar">
+
+                    <div class="material-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="materialSearch"
+                            placeholder="Search materials by title...">
+
+                    </div>
+
+                    <select class="form-select" id="courseFilter">
+                        <option value="all">All My Courses</option>
+                    </select>
+
+                    <select class="form-select" id="typeFilter">
+
+                        <option value="all">All Types</option>
+                        <option value="pdf">PDF</option>
+                        <option value="presentation">Presentation</option>
+                        <option value="document">Document</option>
+                        <option value="spreadsheet">Spreadsheet</option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+            <!-- =========================================
+                 MATERIALS
+            ========================================== -->
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>Course Materials</h2>
+
+                        <p id="materialSubtitle">
+                            Resources related to your enrolled courses.
+                        </p>
+
+                    </div>
+
+                    <span class="results-count" id="resultsCount">
+                        0 materials
+                    </span>
+
+                </div>
+
+                <div class="materials-grid" id="materialsGrid"></div>
+
+            </section>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="main-footer">
+
+            <span>© 2026 Learnora LMS</span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="../../js/student.js"></script>
+
+<script>
+/* =========================================================
+   LEARNORA — ACCOUNT BASED STUDY MATERIALS
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* -----------------------------------------
+       1. GET CURRENT LOGGED-IN USER
+    ----------------------------------------- */
+
+    const storedUser = localStorage.getItem("learnora_current_user");
+
+    if (!storedUser) {
+        window.location.href = "../login.html";
+        return;
+    }
+
+    let currentUser;
+
+    try {
+        currentUser = JSON.parse(storedUser);
+    } catch (error) {
+        console.error("Invalid current user data:", error);
+        localStorage.removeItem("learnora_current_user");
+        window.location.href = "../login.html";
+        return;
+    }
+
+    /* -----------------------------------------
+       2. ROLE CHECK
+    ----------------------------------------- */
+
+    if (currentUser.role && currentUser.role !== "student") {
+        window.location.href = "../login.html";
+        return;
+    }
+
+    /* -----------------------------------------
+       3. SAFE USER DATA
+    ----------------------------------------- */
+
+    const studentName =
+        currentUser.name ||
+        currentUser.firstName ||
+        "Student";
+
+    const program =
+        currentUser.program ||
+        "Student";
+
+    const courses =
+        Array.isArray(currentUser.courses)
+            ? currentUser.courses
+            : [];
+
+    const assignments =
+        Array.isArray(currentUser.assignments)
+            ? currentUser.assignments
+            : [];
+
+    /* -----------------------------------------
+       4. HELPER FUNCTIONS
+    ----------------------------------------- */
+
+    function getInitials(name) {
+
+        if (!name) return "ST";
+
+        return name
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(word => word.charAt(0).toUpperCase())
+            .join("");
+    }
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function normalize(value) {
+
+        return String(value || "")
+            .toLowerCase()
+            .trim();
+    }
+
+    /* -----------------------------------------
+       5. SET USER INFORMATION
+    ----------------------------------------- */
+
+    const initials =
+        currentUser.avatar ||
+        getInitials(studentName);
+
+    document.getElementById("sidebarAvatar").textContent = initials;
+    document.getElementById("topAvatar").textContent = initials;
+
+    document.getElementById("sidebarStudentName").textContent =
+        studentName;
+
+    document.getElementById("topStudentName").textContent =
+        studentName;
+
+    document.getElementById("sidebarProgram").textContent =
+        program;
+
+    document.getElementById("assignmentBadge").textContent =
+        assignments.length;
+
+    /* -----------------------------------------
+       6. COURSE MATERIAL DATA
+       
+       These are only shown if the student is
+       enrolled in the related course.
+    ----------------------------------------- */
+
+    const materialLibrary = [
+
+        {
+            id: "MAT001",
+            courseCode: "CS-401",
+            courseName: "Software Engineering",
+            title: "Software Testing Strategies",
+            description:
+                "Lecture notes covering unit, integration, system and acceptance testing.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.4 MB",
+            date: "Sep 26, 2026"
+        },
+
+        {
+            id: "MAT002",
+            courseCode: "CS-401",
+            courseName: "Software Engineering",
+            title: "Software Architecture",
+            description:
+                "Presentation covering architecture patterns, design decisions and system structure.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "5.2 MB",
+            date: "Sep 18, 2026"
+        },
+
+        {
+            id: "MAT003",
+            courseCode: "CS-401",
+            courseName: "Software Engineering",
+            title: "Software Requirements Engineering",
+            description:
+                "Learning material covering requirements gathering, analysis and documentation.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.8 MB",
+            date: "Sep 15, 2026"
+        },
+
+        {
+            id: "MAT004",
+            courseCode: "CS-403",
+            courseName: "Database Systems",
+            title: "SQL Joins & Relationships",
+            description:
+                "Presentation covering SQL joins and relational database relationships.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.8 MB",
+            date: "Sep 25, 2026"
+        },
+
+        {
+            id: "MAT005",
+            courseCode: "CS-403",
+            courseName: "Database Systems",
+            title: "Database Normalization",
+            description:
+                "Study notes explaining normalization, functional dependencies and normal forms.",
+            type: "pdf",
+            extension: "PDF",
+            size: "3.2 MB",
+            date: "Sep 20, 2026"
+        },
+
+        {
+            id: "MAT006",
+            courseCode: "CS-403",
+            courseName: "Database Systems",
+            title: "Relational Database Design",
+            description:
+                "Document covering entities, relationships and relational schema design.",
+            type: "document",
+            extension: "DOCX",
+            size: "1.9 MB",
+            date: "Sep 16, 2026"
+        },
+
+        {
+            id: "MAT007",
+            courseCode: "DS-301",
+            courseName: "Data Analytics",
+            title: "Python Data Cleaning Guide",
+            description:
+                "Practical guide for cleaning and preparing datasets using Python and Pandas.",
+            type: "pdf",
+            extension: "PDF",
+            size: "3.1 MB",
+            date: "Sep 23, 2026"
+        },
+
+        {
+            id: "MAT008",
+            courseCode: "DS-301",
+            courseName: "Data Analytics",
+            title: "Exploratory Data Analysis",
+            description:
+                "Learning material covering data exploration, statistics and visualization.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.3 MB",
+            date: "Sep 19, 2026"
+        },
+
+        {
+            id: "MAT009",
+            courseCode: "DS-301",
+            courseName: "Data Analytics",
+            title: "Data Analysis Practice Dataset",
+            description:
+                "Spreadsheet resource for practicing data cleaning and analytical techniques.",
+            type: "spreadsheet",
+            extension: "XLSX",
+            size: "1.6 MB",
+            date: "Sep 14, 2026"
+        },
+
+        {
+            id: "MAT010",
+            courseCode: "CS-405",
+            courseName: "Web Engineering",
+            title: "Modern Web Development",
+            description:
+                "Course material covering modern web development concepts and practices.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.9 MB",
+            date: "Sep 22, 2026"
+        },
+
+        {
+            id: "MAT011",
+            courseCode: "CS-405",
+            courseName: "Web Engineering",
+            title: "HTML & CSS Design Patterns",
+            description:
+                "Presentation covering responsive layouts, reusable components and styling patterns.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.6 MB",
+            date: "Sep 17, 2026"
+        },
+
+        {
+            id: "MAT012",
+            courseCode: "CS-405",
+            courseName: "Web Engineering",
+            title: "JavaScript Fundamentals",
+            description:
+                "Document covering JavaScript fundamentals, DOM manipulation and browser APIs.",
+            type: "document",
+            extension: "DOCX",
+            size: "2.1 MB",
+            date: "Sep 12, 2026"
+        },
+
+        {
+            id: "MAT013",
+            courseCode: "SE-410",
+            courseName: "Software Project Management",
+            title: "Project Planning & Management",
+            description:
+                "Study notes covering project planning, scheduling and project management concepts.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.7 MB",
+            date: "Sep 21, 2026"
+        },
+
+        {
+            id: "MAT014",
+            courseCode: "SE-410",
+            courseName: "Software Project Management",
+            title: "Risk Management",
+            description:
+                "Presentation covering software project risks, analysis and mitigation strategies.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "3.9 MB",
+            date: "Sep 16, 2026"
+        },
+
+        {
+            id: "MAT015",
+            courseCode: "SE-410",
+            courseName: "Software Project Management",
+            title: "Project Estimation Worksheet",
+            description:
+                "Spreadsheet resource for project estimation and planning practice.",
+            type: "spreadsheet",
+            extension: "XLSX",
+            size: "1.4 MB",
+            date: "Sep 11, 2026"
+        },
+
+        /* -----------------------------------------
+           EXTRA COURSES FOR OTHER ACCOUNTS
+        ----------------------------------------- */
+
+        {
+            id: "MAT016",
+            courseCode: "AI-310",
+            courseName: "Artificial Intelligence",
+            title: "Introduction to Artificial Intelligence",
+            description:
+                "Introduction to artificial intelligence concepts and problem-solving approaches.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.6 MB",
+            date: "Sep 24, 2026"
+        },
+
+        {
+            id: "MAT017",
+            courseCode: "AI-310",
+            courseName: "Artificial Intelligence",
+            title: "Search Algorithms",
+            description:
+                "Presentation covering uninformed and informed search algorithms.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.1 MB",
+            date: "Sep 18, 2026"
+        },
+
+        {
+            id: "MAT018",
+            courseCode: "DS-303",
+            courseName: "Machine Learning",
+            title: "Machine Learning Fundamentals",
+            description:
+                "Course notes covering supervised and unsupervised machine learning.",
+            type: "pdf",
+            extension: "PDF",
+            size: "3.4 MB",
+            date: "Sep 22, 2026"
+        },
+
+        {
+            id: "MAT019",
+            courseCode: "DS-303",
+            courseName: "Machine Learning",
+            title: "Model Evaluation",
+            description:
+                "Presentation covering model evaluation metrics and validation techniques.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.5 MB",
+            date: "Sep 17, 2026"
+        },
+
+        {
+            id: "MAT020",
+            courseCode: "STAT-301",
+            courseName: "Statistics",
+            title: "Descriptive Statistics",
+            description:
+                "Study notes covering descriptive statistics and data summaries.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.2 MB",
+            date: "Sep 20, 2026"
+        },
+
+        {
+            id: "MAT021",
+            courseCode: "CS-305",
+            courseName: "Python Programming",
+            title: "Python Programming Fundamentals",
+            description:
+                "Learning material covering Python syntax, functions and programming concepts.",
+            type: "document",
+            extension: "DOCX",
+            size: "2.0 MB",
+            date: "Sep 19, 2026"
+        },
+
+        {
+            id: "MAT022",
+            courseCode: "SE-301",
+            courseName: "Software Design",
+            title: "Software Design Principles",
+            description:
+                "Course material covering software design principles and reusable design concepts.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.5 MB",
+            date: "Sep 21, 2026"
+        },
+
+        {
+            id: "MAT023",
+            courseCode: "WEB-302",
+            courseName: "Web Development",
+            title: "Responsive Web Design",
+            description:
+                "Presentation covering responsive layouts and modern web design techniques.",
+            type: "presentation",
+            extension: "PPTX",
+            size: "4.2 MB",
+            date: "Sep 18, 2026"
+        },
+
+        {
+            id: "MAT024",
+            courseCode: "SE-305",
+            courseName: "Software Testing",
+            title: "Software Testing Fundamentals",
+            description:
+                "Study notes covering software testing principles and testing techniques.",
+            type: "pdf",
+            extension: "PDF",
+            size: "2.8 MB",
+            date: "Sep 16, 2026"
+        },
+
+        {
+            id: "MAT025",
+            courseCode: "CS-303",
+            courseName: "Database Systems",
+            title: "Advanced Database Concepts",
+            description:
+                "Material covering advanced relational database concepts and design.",
+            type: "pdf",
+            extension: "PDF",
+            size: "3.0 MB",
+            date: "Sep 14, 2026"
+        }
+
+    ];
+
+    /* -----------------------------------------
+       7. ONLY MATERIALS OF ENROLLED COURSES
+    ----------------------------------------- */
+
+    const enrolledCourseCodes =
+        courses.map(course =>
+            normalize(course.code)
+        );
+
+    const allowedMaterials =
+        materialLibrary.filter(material =>
+            enrolledCourseCodes.includes(
+                normalize(material.courseCode)
+            )
+        );
+
+    /* -----------------------------------------
+       8. DOM REFERENCES
+    ----------------------------------------- */
+
+    const materialsGrid =
+        document.getElementById("materialsGrid");
+
+    const materialSearch =
+        document.getElementById("materialSearch");
+
+    const globalSearch =
+        document.getElementById("globalSearch");
+
+    const courseFilter =
+        document.getElementById("courseFilter");
+
+    const typeFilter =
+        document.getElementById("typeFilter");
+
+    const totalMaterials =
+        document.getElementById("totalMaterials");
+
+    const pdfCount =
+        document.getElementById("pdfCount");
+
+    const presentationCount =
+        document.getElementById("presentationCount");
+
+    const courseCount =
+        document.getElementById("courseCount");
+
+    const resultsCount =
+        document.getElementById("resultsCount");
+
+    /* -----------------------------------------
+       9. POPULATE COURSE FILTER
+    ----------------------------------------- */
+
+    function populateCourseFilter() {
+
+        courseFilter.innerHTML =
+            `<option value="all">All My Courses</option>`;
+
+        courses.forEach(course => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = course.code;
+
+            option.textContent =
+                `${course.code} — ${course.name}`;
+
+            courseFilter.appendChild(option);
+
+        });
+
+    }
+
+    populateCourseFilter();
+
+    /* -----------------------------------------
+       10. STATS
+    ----------------------------------------- */
+
+    totalMaterials.textContent =
+        allowedMaterials.length;
+
+    pdfCount.textContent =
+        allowedMaterials.filter(
+            material => material.type === "pdf"
+        ).length;
+
+    presentationCount.textContent =
+        allowedMaterials.filter(
+            material => material.type === "presentation"
+        ).length;
+
+    courseCount.textContent =
+        courses.length;
+
+    document.getElementById("materialSubtitle").textContent =
+        `${allowedMaterials.length} resources available across your ${courses.length} enrolled course${courses.length === 1 ? "" : "s"}.`;
+
+    document.getElementById("pageDescription").textContent =
+        `Access study materials related to ${studentName}'s enrolled courses.`;
+
+    /* -----------------------------------------
+       11. MATERIAL ICON
+    ----------------------------------------- */
+
+    function getMaterialIcon(type) {
+
+        if (type === "pdf") {
+            return {
+                className: "pdf",
+                icon: "fa-file-pdf"
+            };
+        }
+
+        if (type === "presentation") {
+            return {
+                className: "ppt",
+                icon: "fa-file-powerpoint"
+            };
+        }
+
+        if (type === "spreadsheet") {
+            return {
+                className: "sheet",
+                icon: "fa-file-excel"
+            };
+        }
+
+        return {
+            className: "doc",
+            icon: "fa-file-word"
+        };
+    }
+
+    /* -----------------------------------------
+       12. RENDER MATERIALS
+    ----------------------------------------- */
+
+    function renderMaterials() {
+
+        const searchValue =
+            normalize(materialSearch.value);
+
+        const selectedCourse =
+            courseFilter.value;
+
+        const selectedType =
+            typeFilter.value;
+
+        let filteredMaterials =
+            allowedMaterials.filter(material => {
+
+                const matchesSearch =
+                    !searchValue ||
+                    normalize(material.title).includes(searchValue) ||
+                    normalize(material.description).includes(searchValue) ||
+                    normalize(material.courseName).includes(searchValue) ||
+                    normalize(material.courseCode).includes(searchValue);
+
+                const matchesCourse =
+                    selectedCourse === "all" ||
+                    material.courseCode === selectedCourse;
+
+                const matchesType =
+                    selectedType === "all" ||
+                    material.type === selectedType;
+
+                return (
+                    matchesSearch &&
+                    matchesCourse &&
+                    matchesType
+                );
+
+            });
+
+        resultsCount.textContent =
+            `${filteredMaterials.length} material${filteredMaterials.length === 1 ? "" : "s"}`;
+
+        if (!filteredMaterials.length) {
+
+            materialsGrid.innerHTML = `
+                <div class="empty-materials">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    <h3>No Materials Found</h3>
+
+                    <p>
+                        No study materials are available for the selected
+                        course or filter.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+        materialsGrid.innerHTML =
+            filteredMaterials.map(material => {
+
+                const icon =
+                    getMaterialIcon(material.type);
+
+                return `
+                    <article
+                        class="material-card"
+                        data-material-id="${escapeHTML(material.id)}">
+
+                        <div class="material-file-icon ${icon.className}">
+                            <i class="fa-solid ${icon.icon}"></i>
+                        </div>
+
+                        <div class="material-content">
+
+                            <span class="course-label">
+                                ${escapeHTML(material.courseCode)}
+                                ·
+                                ${escapeHTML(material.courseName)}
+                            </span>
+
+                            <h3>
+                                ${escapeHTML(material.title)}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(material.description)}
+                            </p>
+
+                            <div class="material-meta">
+
+                                <span>
+                                    <i class="fa-solid fa-file"></i>
+                                    ${escapeHTML(material.extension)}
+                                    ·
+                                    ${escapeHTML(material.size)}
+                                </span>
+
+                                <span>
+                                    ${escapeHTML(material.date)}
+                                </span>
+
+                            </div>
+
+                            <div class="material-actions">
+
+                                <button
+                                    class="secondary-btn small-btn preview-btn"
+                                    data-id="${escapeHTML(material.id)}">
+
+                                    <i class="fa-solid fa-eye"></i>
+                                    Preview
+
+                                </button>
+
+                                <button
+                                    class="primary-btn small-btn download-btn"
+                                    data-id="${escapeHTML(material.id)}">
+
+                                    <i class="fa-solid fa-download"></i>
+                                    Download
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+                `;
+
+            }).join("");
+
+        attachMaterialActions();
+
+    }
+
+    /* -----------------------------------------
+       13. PREVIEW / DOWNLOAD BUTTONS
+    ----------------------------------------- */
+
+    function attachMaterialActions() {
+
+        document
+            .querySelectorAll(".preview-btn")
+            .forEach(button => {
+
+                button.addEventListener("click", function () {
+
+                    const material =
+                        allowedMaterials.find(
+                            item => item.id === this.dataset.id
+                        );
+
+                    if (!material) return;
+
+                    alert(
+                        `Preview\n\n${material.title}\n${material.courseCode} — ${material.courseName}\n\nPreview functionality can be connected to the actual file when backend/file storage is added.`
+                    );
+
+                });
+
+            });
+
+        document
+            .querySelectorAll(".download-btn")
+            .forEach(button => {
+
+                button.addEventListener("click", function () {
+
+                    const material =
+                        allowedMaterials.find(
+                            item => item.id === this.dataset.id
+                        );
+
+                    if (!material) return;
+
+                    alert(
+                        `Download\n\n${material.title}\n${material.extension} · ${material.size}\n\nActual download will work once the file URL is connected.`
+                    );
+
+                });
+
+            });
+
+    }
+
+    /* -----------------------------------------
+       14. SEARCH EVENTS
+    ----------------------------------------- */
+
+    materialSearch.addEventListener(
+        "input",
+        renderMaterials
+    );
+
+    courseFilter.addEventListener(
+        "change",
+        renderMaterials
+    );
+
+    typeFilter.addEventListener(
+        "change",
+        renderMaterials
+    );
+
+    /* -----------------------------------------
+       15. GLOBAL SEARCH
+    ----------------------------------------- */
+
+    globalSearch.addEventListener(
+        "input",
+        function () {
+
+            materialSearch.value =
+                this.value;
+
+            renderMaterials();
+
+        }
+    );
+
+    /* -----------------------------------------
+       16. RESET FILTERS
+    ----------------------------------------- */
+
+    document
+        .getElementById("resetFiltersBtn")
+        .addEventListener("click", function () {
+
+            materialSearch.value = "";
+
+            globalSearch.value = "";
+
+            courseFilter.value = "all";
+
+            typeFilter.value = "all";
+
+            renderMaterials();
+
+        });
+
+    /* -----------------------------------------
+       17. LOGOUT
+    ----------------------------------------- */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function () {
+
+            localStorage.removeItem(
+                "learnora_current_user"
+            );
+
+            localStorage.removeItem(
+                "learnora_logged_in"
+            );
+
+            localStorage.removeItem(
+                "learnora_user_role"
+            );
+
+            localStorage.removeItem(
+                "learnora_user_email"
+            );
+
+            localStorage.removeItem(
+                "learnora_user_id"
+            );
+
+            localStorage.removeItem(
+                "learnora_student_name"
+            );
+
+        });
+
+    /* -----------------------------------------
+       18. INITIAL RENDER
+    ----------------------------------------- */
+
+    renderMaterials();
+
+});
+</script>
+
+</body>
+</html>

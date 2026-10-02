@@ -1,0 +1,4630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS — Account based online quiz and assessment system.">
+
+    <title>Quiz — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" href="../../Css/student.css">
+
+    <style>
+        /* =========================================
+           QUIZ PAGE
+        ========================================= */
+
+        .quiz-header-card {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: center;
+            padding: 28px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            background: linear-gradient(
+                135deg,
+                rgba(40, 120, 255, 0.14),
+                rgba(39, 217, 244, 0.07)
+            );
+            border: 1px solid rgba(39, 217, 244, 0.14);
+        }
+
+        .quiz-header-left {
+            flex: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #27d9f4;
+        }
+
+        .quiz-header-left .course-label {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #27d9f4;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .quiz-header-left h1 {
+            margin: 0 0 10px;
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(24px, 4vw, 34px);
+        }
+
+        .quiz-header-left p {
+            margin: 0;
+            max-width: 700px;
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .quiz-timer {
+            min-width: 150px;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            background: rgba(5, 11, 20, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .quiz-timer span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
+
+        .quiz-timer strong {
+            display: block;
+            margin-top: 8px;
+            color: #27d9f4;
+            font-size: 28px;
+            font-family: "Manrope", sans-serif;
+        }
+
+        .quiz-timer.warning strong {
+            color: #f59e0b;
+        }
+
+        .quiz-timer.danger strong {
+            color: #ef4444;
+        }
+
+        .quiz-progress-card {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .quiz-progress-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 13px;
+        }
+
+        .quiz-progress-top div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .quiz-progress-top strong {
+            font-size: 14px;
+        }
+
+        .quiz-progress-top span {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .quiz-progress-bar {
+            width: 100%;
+            height: 8px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.13);
+        }
+
+        .quiz-progress-bar span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #2878ff, #27d9f4);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 310px;
+            gap: 20px;
+        }
+
+        .quiz-question-card {
+            padding: 28px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .question-number {
+            display: inline-flex;
+            padding: 7px 11px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: rgba(39, 217, 244, 0.1);
+            color: #27d9f4;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .quiz-question-card h2 {
+            margin: 0;
+            max-width: 900px;
+            font-family: "Manrope", sans-serif;
+            font-size: 22px;
+            line-height: 1.5;
+        }
+
+        .question-instruction {
+            margin: 10px 0 24px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .answer-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(255, 255, 255, 0.018);
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .answer-option:hover {
+            border-color: rgba(39, 217, 244, 0.35);
+            background: rgba(39, 217, 244, 0.04);
+        }
+
+        .answer-option.selected {
+            border-color: rgba(39, 217, 244, 0.65);
+            background: rgba(39, 217, 244, 0.08);
+        }
+
+        .answer-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .option-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            min-width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(148, 163, 184, 0.1);
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .answer-option.selected .option-letter {
+            background: #2878ff;
+            color: white;
+        }
+
+        .option-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .option-content strong {
+            font-size: 14px;
+        }
+
+        .option-content small {
+            color: #94a3b8;
+            line-height: 1.5;
+            font-size: 12px;
+        }
+
+        .option-check {
+            display: none;
+            color: #27d9f4;
+        }
+
+        .answer-option.selected .option-check {
+            display: block;
+        }
+
+        .question-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .question-actions button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .quiz-navigation {
+            height: fit-content;
+            padding: 22px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .quiz-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-nav-header h3 {
+            margin: 0 0 4px;
+            font-size: 17px;
+        }
+
+        .quiz-nav-header span {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .question-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .question-legend span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .question-legend i {
+            font-size: 8px;
+        }
+
+        .question-legend span:first-child i {
+            color: #27d9f4;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .question-number-btn {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.02);
+            color: #94a3b8;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .question-number-btn:hover {
+            border-color: #27d9f4;
+            color: #27d9f4;
+        }
+
+        .question-number-btn.answered {
+            background: rgba(39, 217, 244, 0.12);
+            border-color: rgba(39, 217, 244, 0.25);
+            color: #27d9f4;
+        }
+
+        .question-number-btn.current {
+            background: #2878ff;
+            border-color: #2878ff;
+            color: white;
+        }
+
+        .quiz-submit-box {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .quiz-submit-box p {
+            margin: 0 0 14px;
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .danger-btn {
+            width: 100%;
+            min-height: 44px;
+            border: 0;
+            border-radius: 10px;
+            background: #ef4444;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .danger-btn:hover {
+            background: #dc2626;
+        }
+
+        .quiz-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-top: 20px;
+            padding: 18px 20px;
+            border-radius: 15px;
+            background: rgba(40, 120, 255, 0.07);
+            border: 1px solid rgba(40, 120, 255, 0.14);
+        }
+
+        .quiz-notice > i {
+            color: #27d9f4;
+            font-size: 20px;
+        }
+
+        .quiz-notice strong {
+            font-size: 13px;
+        }
+
+        .quiz-notice p {
+            margin: 5px 0 0;
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* Result */
+        .quiz-result {
+            display: none;
+            padding: 45px 25px;
+            text-align: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .result-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: rgba(39, 217, 244, 0.1);
+            color: #27d9f4;
+            font-size: 36px;
+        }
+
+        .quiz-result h2 {
+            margin: 0 0 8px;
+            font-family: "Manrope", sans-serif;
+        }
+
+        .quiz-result p {
+            color: #94a3b8;
+        }
+
+        .result-score {
+            margin: 22px 0;
+            font-family: "Manrope", sans-serif;
+            font-size: 44px;
+            font-weight: 800;
+            color: #27d9f4;
+        }
+
+        .result-details {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .result-detail {
+            min-width: 110px;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .result-detail strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .result-detail span {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .quiz-error {
+            padding: 45px 25px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .quiz-error i {
+            color: #ef4444;
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-error h2 {
+            margin-bottom: 8px;
+        }
+
+        .quiz-error p {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 1000px) {
+
+            .quiz-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-navigation {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .quiz-header-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quiz-timer {
+                width: 100%;
+            }
+
+            .quiz-question-card {
+                padding: 20px;
+            }
+
+            .question-actions {
+                flex-direction: column;
+            }
+
+            .question-actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+        <!-- Dynamic Student -->
+        <div class="student-mini-profile">
+
+            <div class="avatar" id="sidebarAvatar">
+                ST
+            </div>
+
+            <div>
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarProgram">
+                    Program
+                </span>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a href="courses.html#add-drop" class="nav-link">
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link active">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="../login.html"
+                class="nav-link logout-link"
+                id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search...">
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="icon-btn">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                </button>
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topAvatar">
+
+                        ST
+
+                    </div>
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="page-content">
+
+            <!-- =====================================
+                 ERROR STATE
+            ====================================== -->
+
+            <section
+                id="quizError"
+                class="quiz-error"
+                style="display:none;">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <h2>Quiz Not Available</h2>
+
+                <p id="quizErrorText">
+                    This quiz is not available for your account.
+                </p>
+
+                <br>
+
+                <a
+                    href="quizzes.html"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Quizzes
+
+                </a>
+
+            </section>
+
+            <!-- =====================================
+                 QUIZ AREA
+            ====================================== -->
+
+            <div id="quizArea">
+
+                <!-- QUIZ HEADER -->
+
+                <section class="quiz-header-card">
+
+                    <div class="quiz-header-left">
+
+                        <a
+                            href="quizzes.html"
+                            class="back-link">
+
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Back to Quizzes
+
+                        </a>
+
+                        <span
+                            class="course-label"
+                            id="courseLabel">
+
+                            Course
+
+                        </span>
+
+                        <h1 id="quizTitle">
+                            Quiz
+                        </h1>
+
+                        <p id="quizDescription">
+                            Complete this assessment.
+                        </p>
+
+                    </div>
+
+                    <div class="quiz-timer" id="timerBox">
+
+                        <span>
+
+                            <i class="fa-regular fa-clock"></i>
+                            TIME REMAINING
+
+                        </span>
+
+                        <strong id="quizTimer">
+                            20:00
+                        </strong>
+
+                    </div>
+
+                </section>
+
+                <!-- PROGRESS -->
+
+                <section class="quiz-progress-card">
+
+                    <div class="quiz-progress-top">
+
+                        <div>
+
+                            <strong id="questionProgress">
+                                Question 1 of 5
+                            </strong>
+
+                            <span id="percentageProgress">
+                                20% completed
+                            </span>
+
+                        </div>
+
+                        <span id="questionCounter">
+                            1 / 5
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-progress-bar">
+
+                        <span id="progressFill"></span>
+
+                    </div>
+
+                </section>
+
+                <!-- QUIZ -->
+
+                <div class="quiz-layout">
+
+                    <!-- QUESTION -->
+
+                    <section class="quiz-question-card">
+
+                        <div
+                            class="question-number"
+                            id="questionNumber">
+
+                            QUESTION 01
+
+                        </div>
+
+                        <h2 id="questionText">
+                            Question
+                        </h2>
+
+                        <p class="question-instruction">
+                            Select the best answer.
+                        </p>
+
+                        <div
+                            class="answer-options"
+                            id="answerOptions">
+
+                        </div>
+
+                        <div class="question-actions">
+
+                            <button
+                                class="secondary-btn"
+                                id="previousBtn">
+
+                                <i class="fa-solid fa-arrow-left"></i>
+
+                                Previous
+
+                            </button>
+
+                            <button
+                                class="primary-btn"
+                                id="nextBtn">
+
+                                Save & Next
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                    <!-- NAVIGATION -->
+
+                    <aside class="quiz-navigation">
+
+                        <div class="quiz-nav-header">
+
+                            <div>
+
+                                <h3>
+                                    Questions
+                                </h3>
+
+                                <span id="totalQuestionsText">
+                                    0 total
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="question-legend">
+
+                            <span>
+
+                                <i class="fa-solid fa-circle"></i>
+                                Answered
+
+                            </span>
+
+                            <span>
+
+                                <i class="fa-regular fa-circle"></i>
+                                Unanswered
+
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="question-grid"
+                            id="questionGrid">
+
+                        </div>
+
+                        <div class="quiz-submit-box">
+
+                            <p>
+                                Make sure you have reviewed your
+                                answers before submitting.
+                            </p>
+
+                            <button
+                                class="danger-btn"
+                                id="submitQuizBtn">
+
+                                <i class="fa-solid fa-paper-plane"></i>
+
+                                Submit Quiz
+
+                            </button>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+                <!-- NOTICE -->
+
+                <div class="quiz-notice">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+
+                        <strong>
+                            Quiz Guidelines
+                        </strong>
+
+                        <p>
+                            Do not refresh the page during the quiz.
+                            Your answers are saved while you progress.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- =====================================
+                 RESULT
+            ====================================== -->
+
+            <section
+                id="quizResult"
+                class="quiz-result">
+
+                <div class="result-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <h2>
+                    Quiz Submitted Successfully
+                </h2>
+
+                <p>
+                    Your quiz result has been saved to your account.
+                </p>
+
+                <div
+                    class="result-score"
+                    id="resultScore">
+
+                    0%
+
+                </div>
+
+                <div class="result-details">
+
+                    <div class="result-detail">
+
+                        <strong id="correctAnswers">
+                            0
+                        </strong>
+
+                        <span>
+                            Correct
+                        </span>
+
+                    </div>
+
+                    <div class="result-detail">
+
+                        <strong id="wrongAnswers">
+                            0
+                        </strong>
+
+                        <span>
+                            Incorrect
+                        </span>
+
+                    </div>
+
+                    <div class="result-detail">
+
+                        <strong id="resultTotal">
+                            0
+                        </strong>
+
+                        <span>
+                            Total
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="quizzes.html"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Quizzes
+
+                </a>
+
+            </section>
+
+        </div>
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="../../js/student.js"></script>
+
+<script>
+/* =========================================================
+   LEARNORA LMS
+   ACCOUNT-BASED QUIZ SYSTEM
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       1. LOGIN USER
+    ===================================================== */
+
+    const storedUser =
+        localStorage.getItem("learnora_current_user");
+
+    if (!storedUser) {
+
+        window.location.href = "../login.html";
+        return;
+
+    }
+
+    let currentUser;
+
+    try {
+
+        currentUser = JSON.parse(storedUser);
+
+    } catch (error) {
+
+        localStorage.removeItem(
+            "learnora_current_user"
+        );
+
+        window.location.href = "../login.html";
+        return;
+
+    }
+
+    /* =====================================================
+       2. STUDENT ONLY
+    ===================================================== */
+
+    if (
+        currentUser.role &&
+        currentUser.role !== "student"
+    ) {
+
+        window.location.href = "../login.html";
+        return;
+
+    }
+
+    /* =====================================================
+       3. USER DATA
+    ===================================================== */
+
+    const studentName =
+        currentUser.name ||
+        currentUser.firstName ||
+        "Student";
+
+    const program =
+        currentUser.program ||
+        "Student";
+
+    const courses =
+        Array.isArray(currentUser.courses)
+            ? currentUser.courses
+            : [];
+
+    /* =====================================================
+       4. HELPERS
+    ===================================================== */
+
+    function normalize(value) {
+
+        return String(value || "")
+            .toLowerCase()
+            .trim();
+
+    }
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+    function getInitials(name) {
+
+        return String(name)
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(word =>
+                word.charAt(0).toUpperCase()
+            )
+            .join("");
+
+    }
+
+    /* =====================================================
+       5. DYNAMIC PROFILE
+    ===================================================== */
+
+    const initials =
+        currentUser.avatar ||
+        getInitials(studentName);
+
+    document.getElementById(
+        "sidebarAvatar"
+    ).textContent = initials;
+
+    document.getElementById(
+        "topAvatar"
+    ).textContent = initials;
+
+    document.getElementById(
+        "sidebarStudentName"
+    ).textContent = studentName;
+
+    document.getElementById(
+        "topStudentName"
+    ).textContent = studentName;
+
+    document.getElementById(
+        "sidebarProgram"
+    ).textContent = program;
+
+    /* =====================================================
+       6. GET COURSE FROM URL
+       
+       Example:
+       quiz.html?course=CS-401
+    ===================================================== */
+
+    const urlParams =
+        new URLSearchParams(window.location.search);
+
+    const requestedCourse =
+        urlParams.get("course");
+
+    /* =====================================================
+       7. QUIZ DATABASE
+       
+       Access is still controlled by currentUser.courses.
+    ===================================================== */
+
+    const quizDatabase = {
+
+        "CS-401": {
+
+            courseCode: "CS-401",
+
+            courseName: "Software Engineering",
+
+            title: "Software Testing Quiz",
+
+            description:
+                "Test your understanding of software testing strategies and quality assurance.",
+
+            duration: 20,
+
+            questions: [
+
+                {
+                    question:
+                        "Which type of testing verifies that individual components or functions work correctly in isolation?",
+
+                    options: [
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Tests individual software components independently.",
+                            value: "a"
+                        },
+                        {
+                            answer: "System Testing",
+                            description:
+                                "Tests the complete integrated application.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Acceptance Testing",
+                            description:
+                                "Determines whether the system meets user requirements.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Performance Testing",
+                            description:
+                                "Measures responsiveness and system performance.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which testing level focuses on verifying the interaction between integrated modules?",
+
+                    options: [
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Tests an individual component.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Integration Testing",
+                            description:
+                                "Tests interactions between combined modules.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Acceptance Testing",
+                            description:
+                                "Validates user requirements.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Regression Testing",
+                            description:
+                                "Checks that changes have not broken existing functionality.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "What is the main purpose of regression testing?",
+
+                    options: [
+                        {
+                            answer: "Measure server speed",
+                            description:
+                                "Focuses mainly on system performance.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Verify new hardware",
+                            description:
+                                "Focuses on hardware compatibility.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Ensure existing functionality still works",
+                            description:
+                                "Checks that recent changes did not introduce new defects.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Create user documentation",
+                            description:
+                                "Documents application usage.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "c"
+                },
+
+                {
+                    question:
+                        "Which testing verifies whether the complete software system works according to its specified requirements?",
+
+                    options: [
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Focuses on individual components.",
+                            value: "a"
+                        },
+                        {
+                            answer: "System Testing",
+                            description:
+                                "Tests the complete integrated system.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Code Review",
+                            description:
+                                "Reviews source code quality.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Static Analysis",
+                            description:
+                                "Analyzes code without executing it.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "Which testing determines whether a system meets the needs and expectations of its users?",
+
+                    options: [
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Tests individual components.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Integration Testing",
+                            description:
+                                "Tests module interactions.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Acceptance Testing",
+                            description:
+                                "Validates the system against user requirements.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Load Testing",
+                            description:
+                                "Tests system behavior under load.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "c"
+                }
+
+            ]
+
+        },
+
+        "CS-403": {
+
+            courseCode: "CS-403",
+
+            courseName: "Database Systems",
+
+            title: "Database Systems Quiz",
+
+            description:
+                "Test your understanding of relational databases, SQL and database design.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which SQL command is used to retrieve data from a database?",
+
+                    options: [
+                        {
+                            answer: "SELECT",
+                            description:
+                                "Retrieves data from database tables.",
+                            value: "a"
+                        },
+                        {
+                            answer: "INSERT",
+                            description:
+                                "Adds new records.",
+                            value: "b"
+                        },
+                        {
+                            answer: "UPDATE",
+                            description:
+                                "Modifies existing records.",
+                            value: "c"
+                        },
+                        {
+                            answer: "DELETE",
+                            description:
+                                "Removes records.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which key uniquely identifies a record in a relational table?",
+
+                    options: [
+                        {
+                            answer: "Foreign Key",
+                            description:
+                                "References another table.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Primary Key",
+                            description:
+                                "Uniquely identifies a table record.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Candidate Value",
+                            description:
+                                "Represents a possible key.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Index Key",
+                            description:
+                                "Supports efficient searching.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "Which SQL clause is commonly used to filter rows?",
+
+                    options: [
+                        {
+                            answer: "ORDER BY",
+                            description:
+                                "Sorts query results.",
+                            value: "a"
+                        },
+                        {
+                            answer: "GROUP BY",
+                            description:
+                                "Groups rows.",
+                            value: "b"
+                        },
+                        {
+                            answer: "WHERE",
+                            description:
+                                "Filters records based on conditions.",
+                            value: "c"
+                        },
+                        {
+                            answer: "JOIN",
+                            description:
+                                "Combines related tables.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "c"
+                },
+
+                {
+                    question:
+                        "Which normal form removes repeating groups and ensures atomic values?",
+
+                    options: [
+                        {
+                            answer: "First Normal Form",
+                            description:
+                                "Requires atomic values and no repeating groups.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Second Normal Form",
+                            description:
+                                "Addresses partial dependencies.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Third Normal Form",
+                            description:
+                                "Addresses transitive dependencies.",
+                            value: "c"
+                        },
+                        {
+                            answer: "BCNF",
+                            description:
+                                "A stronger normal form.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which SQL operation combines rows from related tables?",
+
+                    options: [
+                        {
+                            answer: "JOIN",
+                            description:
+                                "Combines related rows across tables.",
+                            value: "a"
+                        },
+                        {
+                            answer: "SORT",
+                            description:
+                                "Orders records.",
+                            value: "b"
+                        },
+                        {
+                            answer: "FILTER",
+                            description:
+                                "Restricts records.",
+                            value: "c"
+                        },
+                        {
+                            answer: "GROUP",
+                            description:
+                                "Groups records.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "DS-301": {
+
+            courseCode: "DS-301",
+
+            courseName: "Data Analytics",
+
+            title: "Data Analytics Quiz",
+
+            description:
+                "Test your understanding of data cleaning, analysis and visualization.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which Python library is commonly used for data manipulation and analysis?",
+
+                    options: [
+                        {
+                            answer: "Pandas",
+                            description:
+                                "Provides data structures and analysis tools.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Flask",
+                            description:
+                                "A Python web framework.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Django",
+                            description:
+                                "A Python web framework.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Tkinter",
+                            description:
+                                "A Python GUI toolkit.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is data cleaning primarily used for?",
+
+                    options: [
+                        {
+                            answer: "Creating hardware",
+                            description:
+                                "Does not describe data cleaning.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Improving data quality",
+                            description:
+                                "Handles missing, duplicate and inconsistent data.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Building networks",
+                            description:
+                                "Not a data cleaning task.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Installing software",
+                            description:
+                                "Not related to data cleaning.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "Which chart is commonly used to visualize the distribution of numerical data?",
+
+                    options: [
+                        {
+                            answer: "Histogram",
+                            description:
+                                "Shows frequency distribution.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Logo",
+                            description:
+                                "Not a data visualization.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Icon",
+                            description:
+                                "Not a statistical chart.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Paragraph",
+                            description:
+                                "Not a chart.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does a missing value represent in a dataset?",
+
+                    options: [
+                        {
+                            answer: "A duplicated record",
+                            description:
+                                "A duplicate is a repeated record.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Unavailable or absent data",
+                            description:
+                                "A missing value means the expected value is not present.",
+                            value: "b"
+                        },
+                        {
+                            answer: "A calculated result",
+                            description:
+                                "A calculated result is not necessarily missing.",
+                            value: "c"
+                        },
+                        {
+                            answer: "A chart",
+                            description:
+                                "Not related to missing values.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "What is the main purpose of data visualization?",
+
+                    options: [
+                        {
+                            answer: "Hide data",
+                            description:
+                                "Visualization is not intended to hide information.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Communicate patterns and insights",
+                            description:
+                                "Visuals make patterns and trends easier to understand.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Delete records",
+                            description:
+                                "Visualization does not delete records.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Encrypt databases",
+                            description:
+                                "Visualization is not encryption.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                }
+
+            ]
+
+        },
+
+        "CS-405": {
+
+            courseCode: "CS-405",
+
+            courseName: "Web Engineering",
+
+            title: "Web Engineering Quiz",
+
+            description:
+                "Test your understanding of modern web development and engineering concepts.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which HTML element is used to create a hyperlink?",
+
+                    options: [
+                        {
+                            answer: "<a>",
+                            description:
+                                "Creates a hyperlink.",
+                            value: "a"
+                        },
+                        {
+                            answer: "<p>",
+                            description:
+                                "Creates a paragraph.",
+                            value: "b"
+                        },
+                        {
+                            answer: "<img>",
+                            description:
+                                "Embeds an image.",
+                            value: "c"
+                        },
+                        {
+                            answer: "<table>",
+                            description:
+                                "Creates a table.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which technology is primarily responsible for styling HTML pages?",
+
+                    options: [
+                        {
+                            answer: "CSS",
+                            description:
+                                "Controls presentation and styling.",
+                            value: "a"
+                        },
+                        {
+                            answer: "SQL",
+                            description:
+                                "Used for database queries.",
+                            value: "b"
+                        },
+                        {
+                            answer: "JSON",
+                            description:
+                                "A data interchange format.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Git",
+                            description:
+                                "Version control system.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which language is primarily used to add interactivity to web pages?",
+
+                    options: [
+                        {
+                            answer: "JavaScript",
+                            description:
+                                "Adds client-side behavior and interactivity.",
+                            value: "a"
+                        },
+                        {
+                            answer: "HTML",
+                            description:
+                                "Defines page structure.",
+                            value: "b"
+                        },
+                        {
+                            answer: "CSS",
+                            description:
+                                "Controls presentation.",
+                            value: "c"
+                        },
+                        {
+                            answer: "SQL",
+                            description:
+                                "Works with relational databases.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is responsive web design?",
+
+                    options: [
+                        {
+                            answer: "Design for one screen size",
+                            description:
+                                "Does not adapt to different devices.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Design that adapts to different screen sizes",
+                            description:
+                                "Allows interfaces to work across devices.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Database design",
+                            description:
+                                "Not responsive web design.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Server configuration",
+                            description:
+                                "Not responsive web design.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "b"
+                },
+
+                {
+                    question:
+                        "Which browser technology allows JavaScript to access and modify HTML elements?",
+
+                    options: [
+                        {
+                            answer: "DOM",
+                            description:
+                                "Represents the document structure and allows manipulation.",
+                            value: "a"
+                        },
+                        {
+                            answer: "SQL",
+                            description:
+                                "Used for database queries.",
+                            value: "b"
+                        },
+                        {
+                            answer: "FTP",
+                            description:
+                                "Used for file transfer.",
+                            value: "c"
+                        },
+                        {
+                            answer: "SMTP",
+                            description:
+                                "Used for email transfer.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "SE-410": {
+
+            courseCode: "SE-410",
+
+            courseName: "Software Project Management",
+
+            title: "Software Project Management Quiz",
+
+            description:
+                "Test your understanding of project planning, estimation and risk management.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is the primary purpose of project planning?",
+
+                    options: [
+                        {
+                            answer: "Define how the project will be executed",
+                            description:
+                                "Planning establishes scope, activities, resources and schedules.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Delete project data",
+                            description:
+                                "Not a project planning activity.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Replace all team members",
+                            description:
+                                "Not the main purpose of planning.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Remove requirements",
+                            description:
+                                "Planning does not remove requirements.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is project risk management concerned with?",
+
+                    options: [
+                        {
+                            answer: "Identifying and managing potential risks",
+                            description:
+                                "Risk management identifies, analyzes and responds to risks.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Writing source code only",
+                            description:
+                                "Not the purpose of risk management.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Designing logos",
+                            description:
+                                "Not a project risk activity.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Deleting project schedules",
+                            description:
+                                "Not risk management.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does project scope describe?",
+
+                    options: [
+                        {
+                            answer: "The boundaries and work included in a project",
+                            description:
+                                "Scope defines what is and is not included.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only the project budget",
+                            description:
+                                "Budget is a separate project concern.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only employee salaries",
+                            description:
+                                "Not project scope.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Only software testing",
+                            description:
+                                "Scope covers the overall project work.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Why is project scheduling important?",
+
+                    options: [
+                        {
+                            answer: "It organizes project activities over time",
+                            description:
+                                "Scheduling helps manage activities, dependencies and deadlines.",
+                            value: "a"
+                        },
+                        {
+                            answer: "It removes all project risks",
+                            description:
+                                "Scheduling cannot remove all risks.",
+                            value: "b"
+                        },
+                        {
+                            answer: "It replaces requirements",
+                            description:
+                                "Requirements remain part of project planning.",
+                            value: "c"
+                        },
+                        {
+                            answer: "It creates database tables",
+                            description:
+                                "Not its primary purpose.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is project estimation used for?",
+
+                    options: [
+                        {
+                            answer: "Estimating resources, effort and time",
+                            description:
+                                "Estimation supports planning and decision-making.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Deleting requirements",
+                            description:
+                                "Not project estimation.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Changing programming languages",
+                            description:
+                                "Not the primary purpose.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Removing stakeholders",
+                            description:
+                                "Not project estimation.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "AI-310": {
+
+            courseCode: "AI-310",
+
+            courseName: "Artificial Intelligence",
+
+            title: "Artificial Intelligence Quiz",
+
+            description:
+                "Test your understanding of artificial intelligence fundamentals.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is the primary goal of artificial intelligence?",
+
+                    options: [
+                        {
+                            answer: "Enable machines to perform intelligent tasks",
+                            description:
+                                "AI aims to perform tasks associated with intelligent behavior.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only store files",
+                            description:
+                                "File storage is not the main goal of AI.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only design websites",
+                            description:
+                                "Web design is not the primary goal.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Replace databases",
+                            description:
+                                "AI does not replace databases.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which area of AI focuses on learning patterns from data?",
+
+                    options: [
+                        {
+                            answer: "Machine Learning",
+                            description:
+                                "Machine learning enables systems to learn from data.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Networking",
+                            description:
+                                "Networking connects systems.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Database Administration",
+                            description:
+                                "Database administration manages databases.",
+                            value: "c"
+                        },
+                        {
+                            answer: "UI Design",
+                            description:
+                                "UI design focuses on interfaces.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is an algorithm?",
+
+                    options: [
+                        {
+                            answer: "A step-by-step procedure for solving a problem",
+                            description:
+                                "Algorithms define steps used to solve problems.",
+                            value: "a"
+                        },
+                        {
+                            answer: "A database table",
+                            description:
+                                "A table stores data.",
+                            value: "b"
+                        },
+                        {
+                            answer: "A computer monitor",
+                            description:
+                                "A monitor is hardware.",
+                            value: "c"
+                        },
+                        {
+                            answer: "A network cable",
+                            description:
+                                "A cable connects devices.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which AI field deals with understanding human language?",
+
+                    options: [
+                        {
+                            answer: "Natural Language Processing",
+                            description:
+                                "NLP works with human language.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Computer Hardware",
+                            description:
+                                "Hardware is physical equipment.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Database Design",
+                            description:
+                                "Database design structures data storage.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Web Hosting",
+                            description:
+                                "Hosting serves web applications.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is a model in machine learning?",
+
+                    options: [
+                        {
+                            answer: "A learned representation used to make predictions",
+                            description:
+                                "A trained model captures patterns from data.",
+                            value: "a"
+                        },
+                        {
+                            answer: "A physical computer",
+                            description:
+                                "A model is not necessarily hardware.",
+                            value: "b"
+                        },
+                        {
+                            answer: "A database server",
+                            description:
+                                "A database server stores and manages data.",
+                            value: "c"
+                        },
+                        {
+                            answer: "A web browser",
+                            description:
+                                "A browser displays web content.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "DS-303": {
+
+            courseCode: "DS-303",
+
+            courseName: "Machine Learning",
+
+            title: "Machine Learning Quiz",
+
+            description:
+                "Test your understanding of machine learning concepts and model evaluation.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which type of learning uses labeled training data?",
+
+                    options: [
+                        {
+                            answer: "Supervised Learning",
+                            description:
+                                "Uses labeled examples to learn mappings.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Unsupervised Learning",
+                            description:
+                                "Works without labeled target values.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Random Learning",
+                            description:
+                                "Not a standard learning category.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Manual Learning",
+                            description:
+                                "Not a standard machine learning category.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which metric is commonly used for classification accuracy?",
+
+                    options: [
+                        {
+                            answer: "Accuracy",
+                            description:
+                                "Measures the proportion of correct predictions.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Mean",
+                            description:
+                                "A statistical average.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Median",
+                            description:
+                                "A measure of central tendency.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Variance",
+                            description:
+                                "Measures dispersion.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is overfitting?",
+
+                    options: [
+                        {
+                            answer: "When a model performs very well on training data but poorly on unseen data",
+                            description:
+                                "The model captures training-specific patterns too closely.",
+                            value: "a"
+                        },
+                        {
+                            answer: "When there is no data",
+                            description:
+                                "Not overfitting.",
+                            value: "b"
+                        },
+                        {
+                            answer: "When a model is never trained",
+                            description:
+                                "Not overfitting.",
+                            value: "c"
+                        },
+                        {
+                            answer: "When all features are removed",
+                            description:
+                                "Not necessarily overfitting.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Why is a test dataset used?",
+
+                    options: [
+                        {
+                            answer: "To evaluate performance on unseen data",
+                            description:
+                                "The test set estimates generalization performance.",
+                            value: "a"
+                        },
+                        {
+                            answer: "To replace training data",
+                            description:
+                                "Test data is not a replacement for training data.",
+                            value: "b"
+                        },
+                        {
+                            answer: "To delete features",
+                            description:
+                                "Not its purpose.",
+                            value: "c"
+                        },
+                        {
+                            answer: "To create labels manually",
+                            description:
+                                "Not its primary purpose.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does classification predict?",
+
+                    options: [
+                        {
+                            answer: "A category or class",
+                            description:
+                                "Classification predicts discrete classes.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only continuous values",
+                            description:
+                                "Continuous predictions are typically regression.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only images",
+                            description:
+                                "Classification can use many data types.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Only database rows",
+                            description:
+                                "Not limited to database rows.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "STAT-301": {
+
+            courseCode: "STAT-301",
+
+            courseName: "Statistics",
+
+            title: "Statistics Quiz",
+
+            description:
+                "Test your understanding of basic statistical concepts.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is the arithmetic average of a set of values called?",
+
+                    options: [
+                        {
+                            answer: "Mean",
+                            description:
+                                "The mean is calculated by summing values and dividing by their count.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Mode",
+                            description:
+                                "The most frequent value.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Range",
+                            description:
+                                "Difference between maximum and minimum.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Variance",
+                            description:
+                                "Measures dispersion.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which measure represents the middle value in an ordered dataset?",
+
+                    options: [
+                        {
+                            answer: "Median",
+                            description:
+                                "The median is the middle value after ordering.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Mean",
+                            description:
+                                "The arithmetic average.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Range",
+                            description:
+                                "Difference between maximum and minimum.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Variance",
+                            description:
+                                "Measures spread.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does standard deviation measure?",
+
+                    options: [
+                        {
+                            answer: "Spread of data",
+                            description:
+                                "It measures how dispersed values are around the mean.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Number of records only",
+                            description:
+                                "It does not simply count records.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Database size",
+                            description:
+                                "Not a statistical dispersion measure.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Column names",
+                            description:
+                                "Not related to standard deviation.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is probability used to represent?",
+
+                    options: [
+                        {
+                            answer: "Likelihood of an event",
+                            description:
+                                "Probability describes how likely an event is.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Database structure",
+                            description:
+                                "Not the definition of probability.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Website layout",
+                            description:
+                                "Not related to probability.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Programming syntax",
+                            description:
+                                "Not the purpose of probability.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does correlation describe?",
+
+                    options: [
+                        {
+                            answer: "Relationship between variables",
+                            description:
+                                "Correlation measures association between variables.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Database storage",
+                            description:
+                                "Not correlation.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Web page design",
+                            description:
+                                "Not correlation.",
+                            value: "c"
+                        },
+                        {
+                            answer: "File compression",
+                            description:
+                                "Not correlation.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "CS-305": {
+
+            courseCode: "CS-305",
+
+            courseName: "Python Programming",
+
+            title: "Python Programming Quiz",
+
+            description:
+                "Test your understanding of Python programming fundamentals.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which keyword is used to define a function in Python?",
+
+                    options: [
+                        {
+                            answer: "def",
+                            description:
+                                "Defines a function.",
+                            value: "a"
+                        },
+                        {
+                            answer: "function",
+                            description:
+                                "Not the Python function keyword.",
+                            value: "b"
+                        },
+                        {
+                            answer: "func",
+                            description:
+                                "Not a Python keyword.",
+                            value: "c"
+                        },
+                        {
+                            answer: "define",
+                            description:
+                                "Not a Python keyword.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which data type stores an ordered collection of items that can be changed?",
+
+                    options: [
+                        {
+                            answer: "List",
+                            description:
+                                "Python lists are ordered and mutable.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Tuple",
+                            description:
+                                "Tuples are immutable.",
+                            value: "b"
+                        },
+                        {
+                            answer: "String",
+                            description:
+                                "Strings are immutable sequences.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Integer",
+                            description:
+                                "Stores whole numbers.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which symbol is used to start a comment in Python?",
+
+                    options: [
+                        {
+                            answer: "#",
+                            description:
+                                "Starts a single-line comment.",
+                            value: "a"
+                        },
+                        {
+                            answer: "//",
+                            description:
+                                "Commonly used for comments in other languages.",
+                            value: "b"
+                        },
+                        {
+                            answer: "<!--",
+                            description:
+                                "Used for HTML comments.",
+                            value: "c"
+                        },
+                        {
+                            answer: "--",
+                            description:
+                                "Not the standard Python single-line comment.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which function is commonly used to display output in Python?",
+
+                    options: [
+                        {
+                            answer: "print()",
+                            description:
+                                "Displays output.",
+                            value: "a"
+                        },
+                        {
+                            answer: "displayText()",
+                            description:
+                                "Not the standard Python output function.",
+                            value: "b"
+                        },
+                        {
+                            answer: "show()",
+                            description:
+                                "Not the standard Python output function.",
+                            value: "c"
+                        },
+                        {
+                            answer: "output()",
+                            description:
+                                "Not the standard Python output function.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which keyword is used to create a loop over a sequence?",
+
+                    options: [
+                        {
+                            answer: "for",
+                            description:
+                                "Used to iterate over an iterable.",
+                            value: "a"
+                        },
+                        {
+                            answer: "loop",
+                            description:
+                                "Not a Python keyword.",
+                            value: "b"
+                        },
+                        {
+                            answer: "repeat",
+                            description:
+                                "Not a Python keyword.",
+                            value: "c"
+                        },
+                        {
+                            answer: "iterate",
+                            description:
+                                "Not a Python keyword.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "SE-301": {
+
+            courseCode: "SE-301",
+
+            courseName: "Software Design",
+
+            title: "Software Design Quiz",
+
+            description:
+                "Test your understanding of software design principles.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is the purpose of software design?",
+
+                    options: [
+                        {
+                            answer: "Define the structure and behavior of a software solution",
+                            description:
+                                "Design translates requirements into a solution structure.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only write test cases",
+                            description:
+                                "Testing is a separate activity.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only create documentation",
+                            description:
+                                "Documentation is not the only purpose.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Delete source code",
+                            description:
+                                "Not software design.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does modular design encourage?",
+
+                    options: [
+                        {
+                            answer: "Breaking a system into manageable components",
+                            description:
+                                "Modules make complex systems easier to understand and maintain.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Putting everything into one function",
+                            description:
+                                "That reduces modularity.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Removing all interfaces",
+                            description:
+                                "Interfaces are important in modular systems.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Deleting requirements",
+                            description:
+                                "Not related to modular design.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is an interface in software design?",
+
+                    options: [
+                        {
+                            answer: "A defined way for components to interact",
+                            description:
+                                "Interfaces specify how components communicate.",
+                            value: "a"
+                        },
+                        {
+                            answer: "A database backup",
+                            description:
+                                "Not a software interface.",
+                            value: "b"
+                        },
+                        {
+                            answer: "A project schedule",
+                            description:
+                                "Not an interface.",
+                            value: "c"
+                        },
+                        {
+                            answer: "A source code comment",
+                            description:
+                                "Not an interface.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Why is low coupling desirable?",
+
+                    options: [
+                        {
+                            answer: "It reduces dependencies between components",
+                            description:
+                                "Lower coupling can make systems easier to change and maintain.",
+                            value: "a"
+                        },
+                        {
+                            answer: "It removes all components",
+                            description:
+                                "Not its purpose.",
+                            value: "b"
+                        },
+                        {
+                            answer: "It eliminates testing",
+                            description:
+                                "Testing is still needed.",
+                            value: "c"
+                        },
+                        {
+                            answer: "It prevents documentation",
+                            description:
+                                "Not related to coupling.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does high cohesion generally mean?",
+
+                    options: [
+                        {
+                            answer: "A component's responsibilities are closely related",
+                            description:
+                                "High cohesion means a component focuses on related responsibilities.",
+                            value: "a"
+                        },
+                        {
+                            answer: "A component has unrelated responsibilities",
+                            description:
+                                "That represents low cohesion.",
+                            value: "b"
+                        },
+                        {
+                            answer: "There are no components",
+                            description:
+                                "Not cohesion.",
+                            value: "c"
+                        },
+                        {
+                            answer: "All data is duplicated",
+                            description:
+                                "Not the definition of cohesion.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "CS-303": {
+
+            courseCode: "CS-303",
+
+            courseName: "Database Systems",
+
+            title: "Database Systems Quiz",
+
+            description:
+                "Test your understanding of database concepts and relational design.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is a database?",
+
+                    options: [
+                        {
+                            answer: "An organized collection of data",
+                            description:
+                                "A database stores structured information.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only a web page",
+                            description:
+                                "A database is not a web page.",
+                            value: "b"
+                        },
+                        {
+                            answer: "A programming language",
+                            description:
+                                "A database is not a programming language.",
+                            value: "c"
+                        },
+                        {
+                            answer: "A computer monitor",
+                            description:
+                                "A monitor is hardware.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does SQL stand for?",
+
+                    options: [
+                        {
+                            answer: "Structured Query Language",
+                            description:
+                                "SQL is used to work with relational databases.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Simple Question Language",
+                            description:
+                                "Not the meaning of SQL.",
+                            value: "b"
+                        },
+                        {
+                            answer: "System Query Logic",
+                            description:
+                                "Not the standard expansion.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Software Quality Language",
+                            description:
+                                "Not the standard expansion.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which command adds new rows to a table?",
+
+                    options: [
+                        {
+                            answer: "INSERT",
+                            description:
+                                "INSERT adds records to a table.",
+                            value: "a"
+                        },
+                        {
+                            answer: "SELECT",
+                            description:
+                                "SELECT retrieves records.",
+                            value: "b"
+                        },
+                        {
+                            answer: "DELETE",
+                            description:
+                                "DELETE removes records.",
+                            value: "c"
+                        },
+                        {
+                            answer: "UPDATE",
+                            description:
+                                "UPDATE modifies existing records.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which key is used to establish a relationship between tables?",
+
+                    options: [
+                        {
+                            answer: "Foreign Key",
+                            description:
+                                "A foreign key references a key in another table.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Random Key",
+                            description:
+                                "Not a standard relational key.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Display Key",
+                            description:
+                                "Not a relational database concept.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Screen Key",
+                            description:
+                                "Not a relational database concept.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which command modifies existing records?",
+
+                    options: [
+                        {
+                            answer: "UPDATE",
+                            description:
+                                "UPDATE modifies existing rows.",
+                            value: "a"
+                        },
+                        {
+                            answer: "INSERT",
+                            description:
+                                "INSERT adds rows.",
+                            value: "b"
+                        },
+                        {
+                            answer: "SELECT",
+                            description:
+                                "SELECT retrieves rows.",
+                            value: "c"
+                        },
+                        {
+                            answer: "CREATE",
+                            description:
+                                "CREATE defines database objects.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "WEB-302": {
+
+            courseCode: "WEB-302",
+
+            courseName: "Web Development",
+
+            title: "Web Development Quiz",
+
+            description:
+                "Test your understanding of HTML, CSS and JavaScript web development.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "Which language defines the structure of a web page?",
+
+                    options: [
+                        {
+                            answer: "HTML",
+                            description:
+                                "HTML defines document structure.",
+                            value: "a"
+                        },
+                        {
+                            answer: "CSS",
+                            description:
+                                "CSS controls styling.",
+                            value: "b"
+                        },
+                        {
+                            answer: "SQL",
+                            description:
+                                "SQL works with databases.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Python",
+                            description:
+                                "Python is a general-purpose programming language.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which CSS property changes text color?",
+
+                    options: [
+                        {
+                            answer: "color",
+                            description:
+                                "Sets the foreground text color.",
+                            value: "a"
+                        },
+                        {
+                            answer: "font",
+                            description:
+                                "Not the standard property for text color.",
+                            value: "b"
+                        },
+                        {
+                            answer: "text-style",
+                            description:
+                                "Not a standard CSS property.",
+                            value: "c"
+                        },
+                        {
+                            answer: "foreground",
+                            description:
+                                "Not the standard CSS property.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which JavaScript keyword declares a block-scoped variable?",
+
+                    options: [
+                        {
+                            answer: "let",
+                            description:
+                                "Declares a block-scoped variable.",
+                            value: "a"
+                        },
+                        {
+                            answer: "varname",
+                            description:
+                                "Not a JavaScript keyword.",
+                            value: "b"
+                        },
+                        {
+                            answer: "variable",
+                            description:
+                                "Not a JavaScript keyword.",
+                            value: "c"
+                        },
+                        {
+                            answer: "define",
+                            description:
+                                "Not a JavaScript keyword.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does CSS primarily control?",
+
+                    options: [
+                        {
+                            answer: "Presentation and styling",
+                            description:
+                                "CSS controls layout, colors, typography and visual presentation.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Database storage",
+                            description:
+                                "CSS does not store database records.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Server hardware",
+                            description:
+                                "CSS does not manage hardware.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Email delivery",
+                            description:
+                                "CSS is not an email delivery protocol.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which concept allows a website to adapt to different screen sizes?",
+
+                    options: [
+                        {
+                            answer: "Responsive Design",
+                            description:
+                                "Responsive design adapts layouts to different devices.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Database Normalization",
+                            description:
+                                "A database design concept.",
+                            value: "b"
+                        },
+                        {
+                            answer: "File Compression",
+                            description:
+                                "Reduces file size.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Encryption",
+                            description:
+                                "Protects information.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        },
+
+        "SE-305": {
+
+            courseCode: "SE-305",
+
+            courseName: "Software Testing",
+
+            title: "Software Testing Quiz",
+
+            description:
+                "Test your understanding of software testing concepts and quality assurance.",
+
+            duration: 15,
+
+            questions: [
+
+                {
+                    question:
+                        "What is the primary purpose of software testing?",
+
+                    options: [
+                        {
+                            answer: "Find defects and verify software behavior",
+                            description:
+                                "Testing helps identify defects and verify requirements.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only design interfaces",
+                            description:
+                                "UI design is a different activity.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only write documentation",
+                            description:
+                                "Documentation is not the sole purpose.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Replace development",
+                            description:
+                                "Testing does not replace development.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which testing checks individual software units?",
+
+                    options: [
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Tests individual components or units.",
+                            value: "a"
+                        },
+                        {
+                            answer: "System Testing",
+                            description:
+                                "Tests the integrated system.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Acceptance Testing",
+                            description:
+                                "Checks user requirements.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Load Testing",
+                            description:
+                                "Checks behavior under load.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What does a test case normally contain?",
+
+                    options: [
+                        {
+                            answer: "Conditions, inputs and expected results",
+                            description:
+                                "Test cases define how a test should be executed and verified.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only a logo",
+                            description:
+                                "Not a test case.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only source code",
+                            description:
+                                "Not a complete test case.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Only database tables",
+                            description:
+                                "Not a test case.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "What is regression testing?",
+
+                    options: [
+                        {
+                            answer: "Testing after changes to ensure existing functionality still works",
+                            description:
+                                "Regression testing checks for unintended effects of changes.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Only performance testing",
+                            description:
+                                "Regression testing is broader than performance.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Only UI testing",
+                            description:
+                                "It can cover many types of functionality.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Only security testing",
+                            description:
+                                "It is not limited to security.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                },
+
+                {
+                    question:
+                        "Which testing focuses on system behavior under expected workload?",
+
+                    options: [
+                        {
+                            answer: "Performance Testing",
+                            description:
+                                "Evaluates responsiveness and behavior under workload.",
+                            value: "a"
+                        },
+                        {
+                            answer: "Unit Testing",
+                            description:
+                                "Tests individual units.",
+                            value: "b"
+                        },
+                        {
+                            answer: "Code Review",
+                            description:
+                                "Reviews source code.",
+                            value: "c"
+                        },
+                        {
+                            answer: "Documentation Testing",
+                            description:
+                                "Not the standard term for workload testing.",
+                            value: "d"
+                        }
+                    ],
+
+                    correct: "a"
+                }
+
+            ]
+
+        }
+
+    };
+
+    /* =====================================================
+       8. FIND SELECTED COURSE
+    ===================================================== */
+
+    let selectedCourse = null;
+
+    if (requestedCourse) {
+
+        selectedCourse =
+            courses.find(course =>
+                normalize(course.code) ===
+                normalize(requestedCourse)
+            );
+
+    } else if (courses.length > 0) {
+
+        selectedCourse = courses[0];
+
+    }
+
+    /* =====================================================
+       9. CHECK COURSE ACCESS
+    ===================================================== */
+
+    if (!selectedCourse) {
+
+        document.getElementById(
+            "quizArea"
+        ).style.display = "none";
+
+        document.getElementById(
+            "quizError"
+        ).style.display = "block";
+
+        document.getElementById(
+            "quizErrorText"
+        ).textContent =
+            "This course is not included in your enrolled courses.";
+
+        return;
+
+    }
+
+    const courseCode =
+        selectedCourse.code;
+
+    const quiz =
+        quizDatabase[courseCode];
+
+    /* =====================================================
+       10. CHECK QUIZ EXISTS
+    ===================================================== */
+
+    if (!quiz) {
+
+        document.getElementById(
+            "quizArea"
+        ).style.display = "none";
+
+        document.getElementById(
+            "quizError"
+        ).style.display = "block";
+
+        document.getElementById(
+            "quizErrorText"
+        ).textContent =
+            `No quiz has been configured yet for ${courseCode} — ${selectedCourse.name}.`;
+
+        return;
+
+    }
+
+    /* =====================================================
+       11. INITIALIZE QUIZ
+    ===================================================== */
+
+    const questions =
+        quiz.questions;
+
+    let currentQuestion = 0;
+
+    let answers =
+        new Array(questions.length).fill(null);
+
+    let secondsRemaining =
+        quiz.duration * 60;
+
+    let timerInterval = null;
+
+    let quizSubmitted = false;
+
+    /* =====================================================
+       12. LOCAL STORAGE KEY
+       
+       Each student gets separate quiz progress.
+    ===================================================== */
+
+    const progressKey =
+        `learnora_quiz_progress_${currentUser.id}_${quiz.courseCode}`;
+
+    const resultKey =
+        `learnora_quiz_result_${currentUser.id}_${quiz.courseCode}`;
+
+    /* =====================================================
+       13. RESTORE SAVED ANSWERS
+    ===================================================== */
+
+    try {
+
+        const saved =
+            localStorage.getItem(progressKey);
+
+        if (saved) {
+
+            const parsed =
+                JSON.parse(saved);
+
+            if (
+                Array.isArray(parsed.answers) &&
+                parsed.answers.length === questions.length
+            ) {
+
+                answers =
+                    parsed.answers;
+
+            }
+
+            if (
+                typeof parsed.currentQuestion === "number" &&
+                parsed.currentQuestion >= 0 &&
+                parsed.currentQuestion < questions.length
+            ) {
+
+                currentQuestion =
+                    parsed.currentQuestion;
+
+            }
+
+            if (
+                typeof parsed.secondsRemaining === "number" &&
+                parsed.secondsRemaining > 0
+            ) {
+
+                secondsRemaining =
+                    parsed.secondsRemaining;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Could not restore quiz progress."
+        );
+
+    }
+
+    /* =====================================================
+       14. PAGE DATA
+    ===================================================== */
+
+    document.getElementById(
+        "courseLabel"
+    ).textContent =
+        `${quiz.courseCode} · ${quiz.courseName}`;
+
+    document.getElementById(
+        "quizTitle"
+    ).textContent =
+        quiz.title;
+
+    document.getElementById(
+        "quizDescription"
+    ).textContent =
+        quiz.description;
+
+    document.getElementById(
+        "totalQuestionsText"
+    ).textContent =
+        `${questions.length} total`;
+
+    /* =====================================================
+       15. RENDER QUESTION
+    ===================================================== */
+
+    function renderQuestion() {
+
+        const question =
+            questions[currentQuestion];
+
+        const questionNumber =
+            currentQuestion + 1;
+
+        const percentage =
+            Math.round(
+                (questionNumber / questions.length) * 100
+            );
+
+        document.getElementById(
+            "questionNumber"
+        ).textContent =
+            `QUESTION ${String(questionNumber).padStart(2, "0")}`;
+
+        document.getElementById(
+            "questionText"
+        ).textContent =
+            question.question;
+
+        document.getElementById(
+            "questionProgress"
+        ).textContent =
+            `Question ${questionNumber} of ${questions.length}`;
+
+        document.getElementById(
+            "percentageProgress"
+        ).textContent =
+            `${percentage}% completed`;
+
+        document.getElementById(
+            "questionCounter"
+        ).textContent =
+            `${questionNumber} / ${questions.length}`;
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            `${percentage}%`;
+
+        const answerOptions =
+            document.getElementById(
+                "answerOptions"
+            );
+
+        answerOptions.innerHTML =
+            question.options.map(
+                (option, index) => {
+
+                    const letter =
+                        String.fromCharCode(
+                            65 + index
+                        );
+
+                    const selected =
+                        answers[currentQuestion] ===
+                        option.value;
+
+                    return `
+                        <label
+                            class="answer-option ${selected ? "selected" : ""}">
+
+                            <input
+                                type="radio"
+                                name="question_${currentQuestion}"
+                                value="${escapeHTML(option.value)}"
+                                ${selected ? "checked" : ""}>
+
+                            <span class="option-letter">
+                                ${letter}
+                            </span>
+
+                            <span class="option-content">
+
+                                <strong>
+                                    ${escapeHTML(option.answer)}
+                                </strong>
+
+                                <small>
+                                    ${escapeHTML(option.description)}
+                                </small>
+
+                            </span>
+
+                            <span class="option-check">
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </span>
+
+                        </label>
+                    `;
+
+                }
+            ).join("");
+
+        document
+            .querySelectorAll(".answer-option")
+            .forEach(option => {
+
+                option.addEventListener(
+                    "click",
+                    function () {
+
+                        const radio =
+                            this.querySelector(
+                                "input"
+                            );
+
+                        answers[currentQuestion] =
+                            radio.value;
+
+                        document
+                            .querySelectorAll(
+                                ".answer-option"
+                            )
+                            .forEach(item =>
+                                item.classList.remove(
+                                    "selected"
+                                )
+                            );
+
+                        this.classList.add(
+                            "selected"
+                        );
+
+                        saveProgress();
+
+                        renderQuestionGrid();
+
+                    }
+                );
+
+            });
+
+        document.getElementById(
+            "previousBtn"
+        ).disabled =
+            currentQuestion === 0;
+
+        document.getElementById(
+            "nextBtn"
+        ).innerHTML =
+            currentQuestion === questions.length - 1
+                ? `Finish <i class="fa-solid fa-check"></i>`
+                : `Save & Next <i class="fa-solid fa-arrow-right"></i>`;
+
+        renderQuestionGrid();
+
+    }
+
+    /* =====================================================
+       16. QUESTION NAVIGATION
+    ===================================================== */
+
+    function renderQuestionGrid() {
+
+        const grid =
+            document.getElementById(
+                "questionGrid"
+            );
+
+        grid.innerHTML =
+            questions.map(
+                (_, index) => {
+
+                    const answered =
+                        answers[index] !== null;
+
+                    const current =
+                        index === currentQuestion;
+
+                    return `
+                        <button
+                            class="question-number-btn
+                                ${answered ? "answered" : ""}
+                                ${current ? "current" : ""}"
+                            data-question="${index}">
+
+                            ${index + 1}
+
+                        </button>
+                    `;
+
+                }
+            ).join("");
+
+        document
+            .querySelectorAll(
+                ".question-number-btn"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        currentQuestion =
+                            Number(
+                                this.dataset.question
+                            );
+
+                        saveProgress();
+
+                        renderQuestion();
+
+                    }
+                );
+
+            });
+
+    }
+
+    /* =====================================================
+       17. SAVE PROGRESS
+    ===================================================== */
+
+    function saveProgress() {
+
+        try {
+
+            localStorage.setItem(
+                progressKey,
+                JSON.stringify({
+
+                    answers:
+                        answers,
+
+                    currentQuestion:
+                        currentQuestion,
+
+                    secondsRemaining:
+                        secondsRemaining
+
+                })
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to save quiz progress."
+            );
+
+        }
+
+    }
+
+    /* =====================================================
+       18. PREVIOUS
+    ===================================================== */
+
+    document
+        .getElementById("previousBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                if (currentQuestion > 0) {
+
+                    currentQuestion--;
+
+                    saveProgress();
+
+                    renderQuestion();
+
+                }
+
+            }
+        );
+
+    /* =====================================================
+       19. NEXT
+    ===================================================== */
+
+    document
+        .getElementById("nextBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                if (
+                    currentQuestion <
+                    questions.length - 1
+                ) {
+
+                    currentQuestion++;
+
+                    saveProgress();
+
+                    renderQuestion();
+
+                } else {
+
+                    submitQuiz();
+
+                }
+
+            }
+        );
+
+    /* =====================================================
+       20. TIMER FORMAT
+    ===================================================== */
+
+    function formatTime(totalSeconds) {
+
+        const minutes =
+            Math.floor(
+                totalSeconds / 60
+            );
+
+        const seconds =
+            totalSeconds % 60;
+
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+    }
+
+    /* =====================================================
+       21. TIMER
+    ===================================================== */
+
+    function updateTimer() {
+
+        const timer =
+            document.getElementById(
+                "quizTimer"
+            );
+
+        const timerBox =
+            document.getElementById(
+                "timerBox"
+            );
+
+        timer.textContent =
+            formatTime(
+                secondsRemaining
+            );
+
+        timerBox.classList.remove(
+            "warning",
+            "danger"
+        );
+
+        if (secondsRemaining <= 300) {
+
+            timerBox.classList.add(
+                "warning"
+            );
+
+        }
+
+        if (secondsRemaining <= 60) {
+
+            timerBox.classList.remove(
+                "warning"
+            );
+
+            timerBox.classList.add(
+                "danger"
+            );
+
+        }
+
+        if (secondsRemaining <= 0) {
+
+            clearInterval(
+                timerInterval
+            );
+
+            submitQuiz(true);
+
+        }
+
+    }
+
+    timerInterval =
+        setInterval(
+            function () {
+
+                if (quizSubmitted) {
+                    return;
+                }
+
+                secondsRemaining--;
+
+                saveProgress();
+
+                updateTimer();
+
+            },
+            1000
+        );
+
+    updateTimer();
+
+    /* =====================================================
+       22. CALCULATE RESULT
+    ===================================================== */
+
+    function calculateResult() {
+
+        let correct = 0;
+
+        questions.forEach(
+            (question, index) => {
+
+                if (
+                    answers[index] ===
+                    question.correct
+                ) {
+
+                    correct++;
+
+                }
+
+            }
+        );
+
+        const total =
+            questions.length;
+
+        const wrong =
+            total - correct;
+
+        const percentage =
+            Math.round(
+                (correct / total) * 100
+            );
+
+        return {
+            correct,
+            wrong,
+            total,
+            percentage
+        };
+
+    }
+
+    /* =====================================================
+       23. SUBMIT QUIZ
+    ===================================================== */
+
+    function submitQuiz(autoSubmit = false) {
+
+        if (quizSubmitted) {
+            return;
+        }
+
+        const unanswered =
+            answers.filter(
+                answer => answer === null
+            ).length;
+
+        if (
+            !autoSubmit &&
+            unanswered > 0
+        ) {
+
+            const confirmSubmit =
+                confirm(
+                    `You have ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}.\n\nDo you want to submit the quiz anyway?`
+                );
+
+            if (!confirmSubmit) {
+                return;
+            }
+
+        }
+
+        quizSubmitted = true;
+
+        clearInterval(
+            timerInterval
+        );
+
+        const result =
+            calculateResult();
+
+        /* Save result for current student */
+
+        const resultData = {
+
+            studentId:
+                currentUser.id,
+
+            studentName:
+                studentName,
+
+            courseCode:
+                quiz.courseCode,
+
+            courseName:
+                quiz.courseName,
+
+            quizTitle:
+                quiz.title,
+
+            correct:
+                result.correct,
+
+            wrong:
+                result.wrong,
+
+            total:
+                result.total,
+
+            percentage:
+                result.percentage,
+
+            submittedAt:
+                new Date().toISOString()
+
+        };
+
+        localStorage.setItem(
+            resultKey,
+            JSON.stringify(
+                resultData
+            )
+        );
+
+        /* Also maintain a student result collection */
+
+        const allResultsKey =
+            `learnora_quiz_results_${currentUser.id}`;
+
+        let allResults = [];
+
+        try {
+
+            const storedResults =
+                localStorage.getItem(
+                    allResultsKey
+                );
+
+            if (storedResults) {
+
+                allResults =
+                    JSON.parse(
+                        storedResults
+                    );
+
+            }
+
+            if (!Array.isArray(allResults)) {
+                allResults = [];
+            }
+
+        } catch (error) {
+
+            allResults = [];
+
+        }
+
+        allResults.push(
+            resultData
+        );
+
+        localStorage.setItem(
+            allResultsKey,
+            JSON.stringify(
+                allResults
+            )
+        );
+
+        /* Remove active progress */
+
+        localStorage.removeItem(
+            progressKey
+        );
+
+        /* Hide quiz */
+
+        document.getElementById(
+            "quizArea"
+        ).style.display = "none";
+
+        /* Show result */
+
+        document.getElementById(
+            "quizResult"
+        ).classList.add("show");
+
+        document.getElementById(
+            "resultScore"
+        ).textContent =
+            `${result.percentage}%`;
+
+        document.getElementById(
+            "correctAnswers"
+        ).textContent =
+            result.correct;
+
+        document.getElementById(
+            "wrongAnswers"
+        ).textContent =
+            result.wrong;
+
+        document.getElementById(
+            "resultTotal"
+        ).textContent =
+            result.total;
+
+    }
+
+    /* =====================================================
+       24. SUBMIT BUTTON
+    ===================================================== */
+
+    document
+        .getElementById("submitQuizBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                const confirmation =
+                    confirm(
+                        "Are you sure you want to submit this quiz?"
+                    );
+
+                if (confirmation) {
+
+                    submitQuiz();
+
+                }
+
+            }
+        );
+
+    /* =====================================================
+       25. LOGOUT
+    ===================================================== */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "learnora_current_user"
+                );
+
+                localStorage.removeItem(
+                    "learnora_logged_in"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_role"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_email"
+                );
+
+                localStorage.removeItem(
+                    "learnora_user_id"
+                );
+
+                localStorage.removeItem(
+                    "learnora_student_name"
+                );
+
+            }
+        );
+
+    /* =====================================================
+       26. INITIAL RENDER
+    ===================================================== */
+
+    renderQuestion();
+
+});
+</script>
+
+</body>
+</html>

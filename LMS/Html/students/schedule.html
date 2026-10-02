@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Schedule — View classes, lectures and academic activities.">
+
+    <title>Schedule — Learnora LMS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../Css/student.css">
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+
+        <!-- DYNAMIC LOGGED-IN STUDENT -->
+
+        <div class="student-mini-profile">
+
+            <div class="avatar" id="sidebarAvatar">
+                SA
+            </div>
+
+            <div>
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarStudentProgram">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a href="courses.html#add-drop" class="nav-link">
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link active">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                COMMUNICATION
+            </div>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <a href="messages.html" class="nav-link">
+                <i class="fa-solid fa-message"></i>
+                <span>Messages</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="../login.html"
+                class="nav-link logout-link">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================================
+             TOPBAR
+             ===================================================== -->
+
+        <header class="topbar">
+
+            <button
+                type="button"
+                class="mobile-menu-btn"
+                id="mobileMenuBtn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="scheduleSearch"
+                    placeholder="Search schedule...">
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-btn notification-btn"
+                    type="button">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topbarAvatar">
+
+                        SA
+
+                    </div>
+
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+             ===================================================== -->
+
+        <div class="page-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+                 ================================================= -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        ACADEMIC CALENDAR
+
+                    </span>
+
+
+                    <h1>
+                        My Schedule
+                    </h1>
+
+
+                    <p>
+                        View your weekly classes, lectures and academic activities.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="secondary-btn"
+                    id="exportScheduleBtn"
+                    type="button">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Export Schedule
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 WEEKLY SCHEDULE
+                 ================================================= -->
+
+            <section class="content-card">
+
+                <div class="schedule-toolbar">
+
+                    <button
+                        class="secondary-btn"
+                        id="previousWeekBtn"
+                        type="button">
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <div class="schedule-date">
+
+                        <strong id="scheduleDate">
+                            September 28 – October 04, 2026
+                        </strong>
+
+                        <span>
+                            Current Week
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="secondary-btn"
+                        id="nextWeekBtn"
+                        type="button">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+
+                    <button
+                        class="primary-btn"
+                        id="todayBtn"
+                        type="button">
+
+                        Today
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="weekly-schedule"
+                    id="weeklySchedule">
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 UPCOMING ACTIVITIES
+                 ================================================= -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Upcoming Activities
+                        </h2>
+
+                        <p>
+                            Important academic events for this week.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="activity-list"
+                    id="activityList">
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =====================================================
+             FOOTER
+             ===================================================== -->
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           1. GET LOGGED-IN USER
+           ===================================================== */
+
+        let currentUser = null;
+
+
+        try {
+
+            const localUser =
+                localStorage.getItem(
+                    "learnora_current_user"
+                );
+
+
+            const sessionUser =
+                sessionStorage.getItem(
+                    "learnora_current_user"
+                );
+
+
+            const savedUser =
+                localUser || sessionUser;
+
+
+            if (savedUser) {
+
+                currentUser =
+                    JSON.parse(savedUser);
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read logged-in student:",
+                error
+            );
+
+        }
+
+
+        /* =====================================================
+           2. STUDENT INFORMATION
+           ===================================================== */
+
+        const studentName =
+
+            currentUser?.name ||
+
+            currentUser?.fullName ||
+
+            currentUser?.username ||
+
+            "Student";
+
+
+        const studentProgram =
+
+            currentUser?.program ||
+
+            currentUser?.degree ||
+
+            currentUser?.department ||
+
+            "Student";
+
+
+        const studentEmail =
+
+            currentUser?.email ||
+
+            "";
+
+
+        /* =====================================================
+           3. INITIALS
+           ===================================================== */
+
+        function getInitials(name) {
+
+            if (!name) {
+
+                return "ST";
+
+            }
+
+
+            return name
+
+                .trim()
+
+                .split(/\s+/)
+
+                .slice(0, 2)
+
+                .map(
+                    word =>
+                        word
+                            .charAt(0)
+                            .toUpperCase()
+                )
+
+                .join("");
+
+        }
+
+
+        const initials =
+            getInitials(
+                studentName
+            );
+
+
+        /* =====================================================
+           4. UPDATE STUDENT PROFILE
+           ===================================================== */
+
+        const sidebarAvatar =
+            document.getElementById(
+                "sidebarAvatar"
+            );
+
+
+        const sidebarName =
+            document.getElementById(
+                "sidebarStudentName"
+            );
+
+
+        const sidebarProgram =
+            document.getElementById(
+                "sidebarStudentProgram"
+            );
+
+
+        const topbarAvatar =
+            document.getElementById(
+                "topbarAvatar"
+            );
+
+
+        const topbarName =
+            document.getElementById(
+                "topbarStudentName"
+            );
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (sidebarName) {
+
+            sidebarName.textContent =
+                studentName;
+
+        }
+
+
+        if (sidebarProgram) {
+
+            sidebarProgram.textContent =
+                studentProgram;
+
+        }
+
+
+        if (topbarAvatar) {
+
+            topbarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (topbarName) {
+
+            topbarName.textContent =
+                studentName;
+
+        }
+
+
+        /* =====================================================
+           5. DEFAULT SCHEDULE
+           
+           Sirf fallback ke liye.
+           Agar logged-in student ke object mein
+           schedule available hai to woh use hoga.
+           ===================================================== */
+
+        const defaultSchedule = [
+
+            {
+                day: "MON",
+                date: "28",
+                color: "blue-event",
+                time: "09:00 – 10:30",
+                course: "Software Engineering",
+                code: "CS-401",
+                location: "Room 204",
+                teacher: "Dr. Ahmed Khan"
+            },
+
+            {
+                day: "MON",
+                date: "28",
+                color: "cyan-event",
+                time: "02:00 – 03:30",
+                course: "Database Systems",
+                code: "CS-403",
+                location: "Lab 03",
+                teacher: "Prof. Sarah Ahmed"
+            },
+
+            {
+                day: "TUE",
+                date: "29",
+                color: "purple-event",
+                time: "10:00 – 11:30",
+                course: "Data Analytics",
+                code: "DS-301",
+                location: "Room 305",
+                teacher: "Dr. Muhammad Ali"
+            },
+
+            {
+                day: "TUE",
+                date: "29",
+                color: "green-event",
+                time: "01:00 – 02:30",
+                course: "Mobile App Development",
+                code: "SE-405",
+                location: "Lab 02",
+                teacher: "Mr. Hamza Raza"
+            },
+
+            {
+                day: "WED",
+                date: "30",
+                color: "blue-event",
+                time: "09:00 – 10:30",
+                course: "Software Engineering",
+                code: "CS-401",
+                location: "Room 204",
+                teacher: "Dr. Ahmed Khan"
+            },
+
+            {
+                day: "WED",
+                date: "30",
+                color: "orange-event",
+                time: "03:00 – 04:30",
+                course: "Information Security",
+                code: "CS-407",
+                location: "Room 208",
+                teacher: "Dr. Usman Shah"
+            },
+
+            {
+                day: "THU",
+                date: "01",
+                color: "cyan-event",
+                time: "02:00 – 03:30",
+                course: "Database Systems",
+                code: "CS-403",
+                location: "Lab 03",
+                teacher: "Prof. Sarah Ahmed"
+            },
+
+            {
+                day: "FRI",
+                date: "02",
+                color: "purple-event",
+                time: "10:00 – 11:30",
+                course: "Data Analytics",
+                code: "DS-301",
+                location: "Room 305",
+                teacher: "Dr. Muhammad Ali"
+            },
+
+            {
+                day: "FRI",
+                date: "02",
+                color: "green-event",
+                time: "01:00 – 02:30",
+                course: "Mobile App Development",
+                code: "SE-405",
+                location: "Lab 02",
+                teacher: "Mr. Hamza Raza"
+            }
+
+        ];
+
+
+        /* =====================================================
+           6. GET STUDENT SCHEDULE
+           ===================================================== */
+
+        function getStudentSchedule(user) {
+
+            if (!user) {
+
+                return defaultSchedule;
+
+            }
+
+
+            /*
+             * Direct schedule
+             */
+
+            if (
+                Array.isArray(
+                    user.schedule
+                )
+            ) {
+
+                return user.schedule;
+
+            }
+
+
+            /*
+             * Academic data schedule
+             */
+
+            if (
+                user.academicData &&
+
+                Array.isArray(
+                    user.academicData.schedule
+                )
+            ) {
+
+                return user.academicData.schedule;
+
+            }
+
+
+            /*
+             * If user has courses,
+             * filter default schedule according
+             * to enrolled courses.
+             */
+
+            if (
+                Array.isArray(
+                    user.courses
+                )
+            ) {
+
+                const enrolledCourses =
+                    user.courses.map(
+                        function (course) {
+
+                            return String(
+
+                                course.name ||
+
+                                course.title ||
+
+                                course.courseName ||
+
+                                ""
+
+                            )
+                            .trim()
+                            .toLowerCase();
+
+                        }
+                    );
+
+
+                const filtered =
+                    defaultSchedule.filter(
+                        function (item) {
+
+                            return enrolledCourses.some(
+                                function (courseName) {
+
+                                    return (
+
+                                        courseName.includes(
+                                            item.course.toLowerCase()
+                                        ) ||
+
+                                        item.course
+                                            .toLowerCase()
+                                            .includes(courseName)
+
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                /*
+                 * Agar matching schedule mil gaya
+                 */
+
+                if (filtered.length) {
+
+                    return filtered;
+
+                }
+
+
+                /*
+                 * Agar courses available hain
+                 * lekin names match nahi karte,
+                 * to blank schedule nahi dikhana.
+                 */
+
+                return [];
+
+            }
+
+
+            return defaultSchedule;
+
+        }
+
+
+        const studentSchedule =
+            getStudentSchedule(
+                currentUser
+            );
+
+
+        /* =====================================================
+           7. DAYS
+           ===================================================== */
+
+        const days = [
+
+            {
+                name: "MON",
+                date: "28"
+            },
+
+            {
+                name: "TUE",
+                date: "29"
+            },
+
+            {
+                name: "WED",
+                date: "30"
+            },
+
+            {
+                name: "THU",
+                date: "01"
+            },
+
+            {
+                name: "FRI",
+                date: "02"
+            },
+
+            {
+                name: "SAT",
+                date: "03",
+                weekend: true
+            },
+
+            {
+                name: "SUN",
+                date: "04",
+                weekend: true
+            }
+
+        ];
+
+
+        /* =====================================================
+           8. RENDER WEEKLY SCHEDULE
+           ===================================================== */
+
+        const weeklySchedule =
+            document.getElementById(
+                "weeklySchedule"
+            );
+
+
+        function renderSchedule(
+            scheduleData
+        ) {
+
+            weeklySchedule.innerHTML = "";
+
+
+            days.forEach(
+                function (day, index) {
+
+                    const dayColumn =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    dayColumn.className =
+                        "schedule-day";
+
+
+                    const header =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    header.className =
+                        "day-header" +
+
+                        (
+                            index === 0
+                                ? " active-day"
+                                : ""
+                        ) +
+
+                        (
+                            day.weekend
+                                ? " weekend"
+                                : ""
+                        );
+
+
+                    header.innerHTML = `
+
+                        <span>
+                            ${day.name}
+                        </span>
+
+                        <strong>
+                            ${day.date}
+                        </strong>
+
+                    `;
+
+
+                    dayColumn.appendChild(
+                        header
+                    );
+
+
+                    const dayEvents =
+                        scheduleData.filter(
+                            function (item) {
+
+                                return (
+
+                                    String(
+                                        item.day || ""
+                                    ).toUpperCase()
+
+                                    === day.name
+
+                                );
+
+                            }
+                        );
+
+
+                    if (!dayEvents.length) {
+
+                        const empty =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        empty.className =
+                            "empty-schedule";
+
+
+                        empty.innerHTML = day.weekend
+
+                            ? `
+
+                                <i class="fa-solid fa-mug-hot"></i>
+
+                                <span>
+                                    Day Off
+                                </span>
+
+                              `
+
+                            : `
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    No Classes
+                                </span>
+
+                              `;
+
+
+                        dayColumn.appendChild(
+                            empty
+                        );
+
+                    } else {
+
+                        dayEvents.forEach(
+                            function (event) {
+
+                                const eventBox =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                eventBox.className =
+
+                                    `schedule-event ${
+                                        event.color ||
+                                        "blue-event"
+                                    }`;
+
+
+                                eventBox.innerHTML = `
+
+                                    <span class="event-time">
+
+                                        ${
+                                            event.time ||
+                                            "Time not specified"
+                                        }
+
+                                    </span>
+
+
+                                    <strong>
+
+                                        ${
+                                            event.course ||
+                                            event.name ||
+                                            "Course"
+                                        }
+
+                                    </strong>
+
+
+                                    <span>
+
+                                        ${
+                                            event.location ||
+                                            "Location TBA"
+                                        }
+
+                                        ·
+
+                                        ${
+                                            event.teacher ||
+                                            "Instructor TBA"
+                                        }
+
+                                    </span>
+
+                                `;
+
+
+                                dayColumn.appendChild(
+                                    eventBox
+                                );
+
+                            }
+                        );
+
+                    }
+
+
+                    weeklySchedule.appendChild(
+                        dayColumn
+                    );
+
+                }
+            );
+
+        }
+
+
+        renderSchedule(
+            studentSchedule
+        );
+
+
+        /* =====================================================
+           9. UPCOMING ACTIVITIES
+           ===================================================== */
+
+        const defaultActivities = [
+
+            {
+                type: "assignment",
+                icon: "fa-file-pen",
+                color: "orange",
+                title: "Software Testing Assignment",
+                course: "CS-401",
+                date: "Due Sep 30, 2026",
+                status: "2 Days",
+                statusClass: "pending"
+            },
+
+            {
+                type: "quiz",
+                icon: "fa-clipboard-question",
+                color: "blue",
+                title: "SQL & Normalization Test",
+                course: "CS-403",
+                date: "Oct 03, 2026",
+                status: "5 Days",
+                statusClass: "progress"
+            },
+
+            {
+                type: "lecture",
+                icon: "fa-video",
+                color: "purple",
+                title: "Data Analytics Lecture",
+                course: "DS-301",
+                date: "Oct 02, 2026 · 10:00 AM",
+                status: "Scheduled",
+                statusClass: "completed"
+            }
+
+        ];
+
+
+        function getStudentActivities(user) {
+
+            if (!user) {
+
+                return defaultActivities;
+
+            }
+
+
+            /*
+             * Direct activities
+             */
+
+            if (
+                Array.isArray(
+                    user.activities
+                )
+            ) {
+
+                return user.activities;
+
+            }
+
+
+            /*
+             * Academic data activities
+             */
+
+            if (
+                user.academicData &&
+
+                Array.isArray(
+                    user.academicData.activities
+                )
+            ) {
+
+                return user.academicData.activities;
+
+            }
+
+
+            /*
+             * If enrolled courses exist,
+             * show only activities related
+             * to those courses.
+             */
+
+            if (
+                Array.isArray(
+                    user.courses
+                )
+            ) {
+
+                const enrolled =
+                    user.courses.map(
+                        function (course) {
+
+                            return String(
+
+                                course.name ||
+
+                                course.title ||
+
+                                course.courseName ||
+
+                                course.code ||
+
+                                ""
+
+                            )
+                            .toLowerCase();
+
+                        }
+                    );
+
+
+                return defaultActivities.filter(
+                    function (activity) {
+
+                        return enrolled.some(
+                            function (course) {
+
+                                return (
+
+                                    course.includes(
+                                        activity.title
+                                            .toLowerCase()
+                                    ) ||
+
+                                    course.includes(
+                                        activity.course
+                                            .toLowerCase()
+                                    ) ||
+
+                                    activity.title
+                                        .toLowerCase()
+                                        .includes(course)
+
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+
+
+            return defaultActivities;
+
+        }
+
+
+        const studentActivities =
+            getStudentActivities(
+                currentUser
+            );
+
+
+        const activityList =
+            document.getElementById(
+                "activityList"
+            );
+
+
+        function renderActivities(
+            activities
+        ) {
+
+            activityList.innerHTML = "";
+
+
+            if (!activities.length) {
+
+                activityList.innerHTML = `
+
+                    <div class="empty-schedule">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <span>
+                            No upcoming activities for your enrolled courses.
+                        </span>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            activities.forEach(
+                function (activity) {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "activity-item";
+
+
+                    item.innerHTML = `
+
+                        <div class="activity-icon ${
+                            activity.color || "blue"
+                        }">
+
+                            <i class="fa-solid ${
+                                activity.icon ||
+                                "fa-calendar"
+                            }"></i>
+
+                        </div>
+
+
+                        <div class="activity-info">
+
+                            <strong>
+
+                                ${
+                                    activity.title ||
+                                    activity.name ||
+                                    "Academic Activity"
+                                }
+
+                            </strong>
+
+
+                            <span>
+
+                                ${
+                                    activity.course ||
+                                    "Course"
+                                }
+
+                                ·
+
+                                ${
+                                    activity.date ||
+                                    "Date not specified"
+                                }
+
+                            </span>
+
+                        </div>
+
+
+                        <span class="status-badge ${
+                            activity.statusClass ||
+                            "progress"
+                        }">
+
+                            ${
+                                activity.status ||
+                                "Scheduled"
+                            }
+
+                        </span>
+
+                    `;
+
+
+                    activityList.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+        }
+
+
+        renderActivities(
+            studentActivities
+        );
+
+
+        /* =====================================================
+           10. SEARCH
+           ===================================================== */
+
+        const searchInput =
+            document.getElementById(
+                "scheduleSearch"
+            );
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                function () {
+
+                    const query =
+
+                        this.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    const allScheduleItems =
+                        document.querySelectorAll(
+                            ".schedule-event"
+                        );
+
+
+                    allScheduleItems.forEach(
+                        function (item) {
+
+                            const text =
+                                item.textContent
+                                    .toLowerCase();
+
+
+                            item.style.display =
+
+                                text.includes(query)
+
+                                    ? ""
+
+                                    : "none";
+
+                        }
+                    );
+
+
+                    const allActivities =
+                        document.querySelectorAll(
+                            ".activity-item"
+                        );
+
+
+                    allActivities.forEach(
+                        function (item) {
+
+                            const text =
+                                item.textContent
+                                    .toLowerCase();
+
+
+                            item.style.display =
+
+                                text.includes(query)
+
+                                    ? ""
+
+                                    : "none";
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           11. EXPORT SCHEDULE
+           ===================================================== */
+
+        const exportButton =
+            document.getElementById(
+                "exportScheduleBtn"
+            );
+
+
+        if (exportButton) {
+
+            exportButton.addEventListener(
+                "click",
+                function () {
+
+                    const lines = [];
+
+
+                    lines.push(
+                        "LEARNORA LMS - STUDENT SCHEDULE"
+                    );
+
+
+                    lines.push(
+                        "================================"
+                    );
+
+
+                    lines.push(
+                        `Student: ${studentName}`
+                    );
+
+
+                    if (studentEmail) {
+
+                        lines.push(
+                            `Email: ${studentEmail}`
+                        );
+
+                    }
+
+
+                    lines.push(
+                        `Program: ${studentProgram}`
+                    );
+
+
+                    lines.push("");
+
+
+                    lines.push(
+                        "WEEKLY SCHEDULE"
+                    );
+
+
+                    lines.push(
+                        "================================"
+                    );
+
+
+                    studentSchedule.forEach(
+                        function (item) {
+
+                            lines.push(
+
+                                `${item.day} | ` +
+
+                                `${item.time} | ` +
+
+                                `${item.course || item.name} | ` +
+
+                                `${item.location || "TBA"} | ` +
+
+                                `${item.teacher || "TBA"}`
+
+                            );
+
+                        }
+                    );
+
+
+                    lines.push("");
+
+
+                    lines.push(
+                        "UPCOMING ACTIVITIES"
+                    );
+
+
+                    lines.push(
+                        "================================"
+                    );
+
+
+                    studentActivities.forEach(
+                        function (activity) {
+
+                            lines.push(
+
+                                `${activity.title || activity.name} | ` +
+
+                                `${activity.course || "Course"} | ` +
+
+                                `${activity.date || "TBA"} | ` +
+
+                                `${activity.status || "Scheduled"}`
+
+                            );
+
+                        }
+                    );
+
+
+                    const blob =
+                        new Blob(
+                            [
+                                lines.join("\n")
+                            ],
+                            {
+                                type: "text/plain"
+                            }
+                        );
+
+
+                    const url =
+                        URL.createObjectURL(
+                            blob
+                        );
+
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.href = url;
+
+
+                    link.download =
+
+                        `${studentName
+                            .replace(/\s+/g, "_")
+                        }_Schedule.txt`;
+
+
+                    document.body.appendChild(
+                        link
+                    );
+
+
+                    link.click();
+
+
+                    link.remove();
+
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           12. TODAY BUTTON
+           ===================================================== */
+
+        const todayButton =
+            document.getElementById(
+                "todayBtn"
+            );
+
+
+        if (todayButton) {
+
+            todayButton.addEventListener(
+                "click",
+                function () {
+
+                    const today =
+                        new Date();
+
+
+                    const dayIndex =
+                        today.getDay();
+
+
+                    /*
+                     * JS:
+                     * Sunday = 0
+                     * Monday = 1
+                     */
+
+                    const adjustedIndex =
+                        dayIndex === 0
+                            ? 6
+                            : dayIndex - 1;
+
+
+                    const dayColumns =
+                        document.querySelectorAll(
+                            ".schedule-day"
+                        );
+
+
+                    dayColumns.forEach(
+                        function (
+                            column,
+                            index
+                        ) {
+
+                            const header =
+                                column.querySelector(
+                                    ".day-header"
+                                );
+
+
+                            if (header) {
+
+                                header.classList.toggle(
+                                    "active-day",
+                                    index === adjustedIndex
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           13. LOGOUT
+           ===================================================== */
+
+        const logoutLink =
+            document.querySelector(
+                ".logout-link"
+            );
+
+
+        if (logoutLink) {
+
+            logoutLink.addEventListener(
+                "click",
+                function () {
+
+                    localStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+
+                    sessionStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+                }
+            );
+
+        }
+
+    });
+
+</script>
+
+
+<!-- =============================================================
+     EXISTING SIDEBAR LOGIC
+     
+     IMPORTANT:
+     Sidebar open/close functionality isi file se nahi,
+     student.js se aa rahi hai.
+     Isliye exactly existing behavior maintain rahega.
+     ============================================================= -->
+
+<script src="../../js/student.js"></script>
+
+
+</body>
+
+</html>

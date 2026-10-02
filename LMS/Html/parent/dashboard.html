@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Parent Dashboard — Monitor your child's academic progress, attendance, results, exams, assignments and quizzes.">
+
+    <title>Parent Dashboard — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Parent CSS -->
+    <link rel="stylesheet" href="../../Css/parent.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="logo-text">
+                <h2>Learnora</h2>
+                <span>LMS</span>
+            </div>
+
+        </div>
+
+
+        <!-- Parent Profile -->
+        <div class="sidebar-profile">
+
+            <div class="profile-avatar" id="sidebarParentAvatar">
+                P
+            </div>
+
+            <div class="profile-info">
+
+                <h4 id="sidebarParentName">
+                    Parent
+                </h4>
+
+                <span>
+                    <i class="fa-solid fa-user-group"></i>
+                    Parent
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Child Mini Info -->
+        <div class="sidebar-child">
+
+            <div class="child-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div class="child-info">
+
+                <small>Child</small>
+
+                <strong id="sidebarChildName">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link active">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Results & Grades</span>
+            </a>
+
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-regular fa-calendar-days"></i>
+                <span>Exam Schedule</span>
+            </a>
+
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+
+            <a href="assignments.html" class="nav-link">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Quizzes</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+
+            <a href="./announcements.html" class="nav-link">
+                <i class="fa-regular fa-bell"></i>
+                <span>Announcements</span>
+
+                <span class="nav-badge" id="announcementCount">
+                    0
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Sidebar Bottom -->
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn" id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="main-content" id="mainContent">
+
+
+        <!-- =====================================================
+             TOPBAR
+        ====================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-toggle" id="menuToggle">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div>
+
+                    <span class="page-label">
+                        Parent Portal
+                    </span>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <!-- Notification -->
+                <a href="./announcements.html" class="topbar-icon">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"
+                        id="notificationDot"></span>
+
+                </a>
+
+
+                <!-- Parent -->
+                <div class="topbar-profile">
+
+                    <div class="topbar-avatar" id="topbarParentAvatar">
+                        P
+                    </div>
+
+                    <div class="topbar-user">
+
+                        <strong id="topbarParentName">
+                            Parent
+                        </strong>
+
+                        <span>
+                            Parent
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+        ====================================================== -->
+
+        <section class="dashboard-container">
+
+
+            <!-- =================================================
+                 WELCOME BANNER
+            ================================================== -->
+
+            <section class="welcome-banner">
+
+                <div class="welcome-content">
+
+                    <span class="welcome-label">
+                        <i class="fa-solid fa-sparkles"></i>
+                        Parent Overview
+                    </span>
+
+                    <h2>
+                        Good morning,
+                        <span id="welcomeParentName">
+                            Parent
+                        </span>
+                    </h2>
+
+                    <p>
+                        Here's an overview of
+                        <strong id="welcomeChildName">
+                            your child's
+                        </strong>
+                        academic progress.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-child">
+
+                    <div class="welcome-child-avatar"
+                        id="welcomeChildAvatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Monitoring
+                        </small>
+
+                        <strong id="welcomeChildNameCard">
+                            Loading...
+                        </strong>
+
+                        <span id="welcomeChildProgram">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHILD PROFILE SUMMARY
+            ================================================== -->
+
+            <section class="child-summary-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            STUDENT PROFILE
+                        </span>
+
+                        <h3>
+                            Child Information
+                        </h3>
+
+                    </div>
+
+                    <a href="profile.html" class="view-link">
+                        View Profile
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="child-summary-grid">
+
+
+                    <!-- Child -->
+                    <div class="child-main-info">
+
+                        <div class="large-child-avatar"
+                            id="childLargeAvatar">
+                            S
+                        </div>
+
+                        <div>
+
+                            <h2 id="childName">
+                                Loading...
+                            </h2>
+
+                            <p id="childEmail">
+                                Loading...
+                            </p>
+
+                            <span class="student-status">
+                                <i class="fa-solid fa-circle"></i>
+                                Active Student
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Academic Details -->
+                    <div class="academic-info">
+
+                        <div class="academic-item">
+
+                            <span>
+                                Program
+                            </span>
+
+                            <strong id="childProgram">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="academic-item">
+
+                            <span>
+                                Semester
+                            </span>
+
+                            <strong id="childSemester">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="academic-item">
+
+                            <span>
+                                Student ID
+                            </span>
+
+                            <strong id="childStudentId">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="stats-grid">
+
+
+                <!-- CGPA -->
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Current CGPA
+                        </span>
+
+                        <h3 id="cgpaValue">
+                            —
+                        </h3>
+
+                        <small id="cgpaStatus">
+                            Academic Performance
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Attendance -->
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Attendance
+                        </span>
+
+                        <h3 id="attendanceValue">
+                            —
+                        </h3>
+
+                        <small id="attendanceStatus">
+                            Overall Attendance
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Courses -->
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Enrolled Courses
+                        </span>
+
+                        <h3 id="coursesValue">
+                            0
+                        </h3>
+
+                        <small>
+                            Current Semester
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pending -->
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Pending Tasks
+                        </span>
+
+                        <h3 id="pendingValue">
+                            0
+                        </h3>
+
+                        <small>
+                            Assignments & Quizzes
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MAIN TWO COLUMN
+            ================================================== -->
+
+            <section class="dashboard-columns">
+
+
+                <!-- =================================================
+                     LEFT COLUMN
+                ================================================== -->
+
+                <div class="dashboard-left">
+
+
+                    <!-- ==============================
+                         UPCOMING EXAMS
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    ACADEMIC CALENDAR
+                                </span>
+
+                                <h3>
+                                    Upcoming Exams
+                                </h3>
+
+                            </div>
+
+                            <a href="schedule.html" class="view-link">
+                                View Schedule
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+
+                        <div class="exam-list"
+                            id="upcomingExams">
+
+                            <!-- Dynamic exams -->
+
+                            <div class="empty-state">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <p>
+                                    Loading exam schedule...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ==============================
+                         RECENT RESULTS
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    ACADEMIC PERFORMANCE
+                                </span>
+
+                                <h3>
+                                    Recent Results
+                                </h3>
+
+                            </div>
+
+                            <a href="results.html" class="view-link">
+                                View Results
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+
+                        <div class="results-table-wrapper">
+
+                            <table class="results-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Course
+                                        </th>
+
+                                        <th>
+                                            Code
+                                        </th>
+
+                                        <th>
+                                            Marks
+                                        </th>
+
+                                        <th>
+                                            Grade
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="recentResults">
+
+                                    <tr>
+
+                                        <td colspan="4"
+                                            class="table-loading">
+
+                                            Loading results...
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ==============================
+                         ASSIGNMENTS
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    COURSE WORK
+                                </span>
+
+                                <h3>
+                                    Assignments
+                                </h3>
+
+                            </div>
+
+                            <a href="assignments.html"
+                                class="view-link">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="assignment-list"
+                            id="assignmentList">
+
+                            <div class="empty-state">
+
+                                <i class="fa-solid fa-file-pen"></i>
+
+                                <p>
+                                    Loading assignments...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =================================================
+                     RIGHT COLUMN
+                ================================================== -->
+
+                <div class="dashboard-right">
+
+
+                    <!-- ==============================
+                         ATTENDANCE
+                    =============================== -->
+
+                    <section class="dashboard-card attendance-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    ATTENDANCE
+                                </span>
+
+                                <h3>
+                                    Attendance Overview
+                                </h3>
+
+                            </div>
+
+                            <a href="attendance.html"
+                                class="view-link">
+
+                                Details
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="attendance-circle-wrapper">
+
+                            <div class="attendance-circle"
+                                id="attendanceCircle">
+
+                                <div>
+
+                                    <strong id="attendanceCircleValue">
+                                        —
+                                    </strong>
+
+                                    <span>
+                                        Attendance
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="attendance-info">
+
+                            <div>
+
+                                <span>
+                                    Present
+                                </span>
+
+                                <strong id="presentCount">
+                                    —
+                                </strong>
+
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Absent
+                                </span>
+
+                                <strong id="absentCount">
+                                    —
+                                </strong>
+
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Leave
+                                </span>
+
+                                <strong id="leaveCount">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ==============================
+                         QUIZZES
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    ASSESSMENTS
+                                </span>
+
+                                <h3>
+                                    Recent Quizzes
+                                </h3>
+
+                            </div>
+
+                            <a href="quizzes.html"
+                                class="view-link">
+
+                                View All
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="quiz-list"
+                            id="quizList">
+
+                            <div class="empty-state">
+
+                                <i class="fa-solid fa-circle-question"></i>
+
+                                <p>
+                                    Loading quizzes...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ==============================
+                         COURSES
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    CURRENT SEMESTER
+                                </span>
+
+                                <h3>
+                                    Courses
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-list"
+                            id="courseList">
+
+                            <div class="empty-state">
+
+                                <i class="fa-solid fa-book"></i>
+
+                                <p>
+                                    Loading courses...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ==============================
+                         ANNOUNCEMENTS
+                    =============================== -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    UPDATES
+                                </span>
+
+                                <h3>
+                                    Announcements
+                                </h3>
+
+                            </div>
+
+                            <a href="./announcements.html"
+                                class="view-link">
+
+                                View All
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="announcement-list"
+                            id="announcementList">
+
+                            <div class="empty-state">
+
+                                <i class="fa-regular fa-bell"></i>
+
+                                <p>
+                                    Loading announcements...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="dashboard-footer">
+
+                <p>
+                    © 2026 Learnora LMS. All rights reserved.
+                </p>
+
+                <span>
+                    Parent Portal
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         OVERLAY
+    ========================================================== -->
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <!-- Authentication -->
+    <script src="../../js/auth.js"></script>
+
+    <!-- Parent Dashboard -->
+    <script src="../../js/parent.js"></script>
+
+
+    <!-- =========================================================
+         DASHBOARD UI SCRIPT
+    ========================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /*
+             * Sidebar functionality
+             * Agar parent.js mein already sidebar functionality hai
+             * to ye duplicate functionality nahi karegi.
+             */
+
+            const menuToggle = document.getElementById("menuToggle");
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+
+            if (menuToggle && sidebar) {
+
+                menuToggle.addEventListener("click", function () {
+
+                    sidebar.classList.toggle("open");
+
+                    if (overlay) {
+                        overlay.classList.toggle("active");
+                    }
+
+                });
+
+            }
+
+
+            if (overlay) {
+
+                overlay.addEventListener("click", function () {
+
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("active");
+
+                });
+
+            }
+
+
+            /*
+             * Logout
+             */
+
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            if (logoutBtn) {
+
+                logoutBtn.addEventListener("click", function () {
+
+                    if (typeof logout === "function") {
+
+                        logout();
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        sessionStorage.removeItem(
+                            "learnora_current_user"
+                        );
+
+                        window.location.href = "../login.html";
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

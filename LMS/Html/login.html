@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS — Premium Learning Management System for Students, Teachers and Parents.">
+
+    <title>Login — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+<link rel="stylesheet" href="../Css/login.css">
+<body>
+
+    <!-- Background -->
+    <div class="background">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+        <div class="grid"></div>
+    </div>
+
+    <main class="login-page">
+
+        <!-- LEFT SIDE -->
+        <section class="brand-section">
+
+            <div class="brand-content">
+
+                <div class="brand-logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <h1>Learnora</h1>
+                        <span>Learning Management System</span>
+                    </div>
+                </div>
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        <i class="fa-solid fa-sparkles"></i>
+                        Smart Learning Platform
+                    </span>
+
+                    <h2>
+                        Learn.
+                        <span>Grow.</span>
+                        Succeed.
+                    </h2>
+
+                    <p>
+                        One powerful learning platform designed for
+                        students, teachers and parents.
+                    </p>
+
+                </div>
+
+                <!-- Features -->
+                <div class="features">
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+                            <strong>Track Progress</strong>
+                            <small>Monitor learning performance easily.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+                            <strong>Connected Learning</strong>
+                            <small>Teachers, students and parents together.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <div>
+                            <strong>Secure Access</strong>
+                            <small>Role-based access for every account.</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © 2026 Learnora LMS. All rights reserved.
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <!-- Mobile Logo -->
+                <div class="mobile-logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <h1>Learnora</h1>
+                        <span>LMS</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="login-header">
+
+                    <span class="welcome-badge">
+                        Welcome back
+                    </span>
+
+                    <h2>Sign in to your account</h2>
+
+                    <p>
+                        Choose your role and enter your credentials
+                        to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- ROLE SELECTOR -->
+                <div class="role-selector">
+
+                    <button
+                        type="button"
+                        class="role-option active"
+                        data-role="student">
+
+                        <span class="role-icon">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </span>
+
+                        <span class="role-text">
+                            <strong>Student</strong>
+                            <small>Learn & grow</small>
+                        </span>
+
+                        <i class="fa-solid fa-check role-check"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="role-option"
+                        data-role="teacher">
+
+                        <span class="role-icon">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </span>
+
+                        <span class="role-text">
+                            <strong>Teacher</strong>
+                            <small>Teach & manage</small>
+                        </span>
+
+                        <i class="fa-solid fa-check role-check"></i>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="role-option"
+                        data-role="parent">
+
+                        <span class="role-icon">
+                            <i class="fa-solid fa-people-roof"></i>
+                        </span>
+
+                        <span class="role-text">
+                            <strong>Parent</strong>
+                            <small>Track & support</small>
+                        </span>
+
+                        <i class="fa-solid fa-check role-check"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" novalidate>
+
+                    <!-- Username -->
+                    <div class="form-group">
+
+                        <label for="username">
+                            Email or Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-user input-icon"></i>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your email or username"
+                                autocomplete="username"
+                                required>
+
+                        </div>
+
+                        <span class="field-error" id="usernameError"></span>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <button
+                                type="button"
+                                class="forgot-btn"
+                                id="forgotPassword">
+                                Forgot password?
+                            </button>
+
+                        </div>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock input-icon"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password">
+
+                                <i class="fa-regular fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                        <span class="field-error" id="passwordError"></span>
+
+                    </div>
+
+
+                    <!-- Remember -->
+                    <div class="form-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe">
+
+                            <span class="custom-checkbox">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- General Error -->
+                    <div
+                        class="login-message error-message"
+                        id="loginError">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        <span>
+                            Invalid credentials. Please try again.
+                        </span>
+
+                    </div>
+
+
+                    <!-- Success -->
+                    <div
+                        class="login-message success-message"
+                        id="loginSuccess">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+                            Login successful. Redirecting...
+                        </span>
+
+                    </div>
+
+
+                    <!-- Login -->
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton">
+
+                        <span class="button-content">
+
+                            <span>Sign In</span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </span>
+
+                        <span class="loading-content">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i>
+                            Signing in...
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- Demo Credentials -->
+                <div class="demo-section">
+
+                    <div class="demo-header">
+
+                        <span>
+                            <i class="fa-solid fa-flask"></i>
+                            Demo Access
+                        </span>
+
+                        <button
+                            type="button"
+                            id="demoToggle">
+
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div class="demo-content" id="demoContent">
+
+                        <p class="demo-note">
+                            Use any of these accounts to test the LMS.
+                        </p>
+
+                        <div class="demo-account">
+
+                            <div class="demo-role student-demo">
+                                <i class="fa-solid fa-user-graduate"></i>
+                                Student
+                            </div>
+
+                            <div class="demo-login">
+                                <span>student@learnora.com</span>
+                                <span>Student@123</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="use-demo"
+                                data-email="student@learnora.com"
+                                data-password="Student@123"
+                                data-role="student">
+                                Use
+                            </button>
+
+                        </div>
+
+
+                        <div class="demo-account">
+
+                            <div class="demo-role teacher-demo">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                                Teacher
+                            </div>
+
+                            <div class="demo-login">
+                                <span>teacher@learnora.com</span>
+                                <span>Teacher@123</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="use-demo"
+                                data-email="teacher@learnora.com"
+                                data-password="Teacher@123"
+                                data-role="teacher">
+                                Use
+                            </button>
+
+                        </div>
+
+
+                        <div class="demo-account">
+
+                            <div class="demo-role parent-demo">
+                                <i class="fa-solid fa-people-roof"></i>
+                                Parent
+                            </div>
+
+                            <div class="demo-login">
+                                <span>parent@learnora.com</span>
+                                <span>Parent@123</span>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="use-demo"
+                                data-email="parent@learnora.com"
+                                data-password="Parent@123"
+                                data-role="parent">
+                                Use
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Your login credentials are securely handled.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotModal">
+
+        <div class="modal">
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                type="button">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+            <div class="modal-icon">
+                <i class="fa-solid fa-key"></i>
+            </div>
+
+            <h3>Forgot your password?</h3>
+
+            <p>
+                Enter your email address and we'll help you
+                recover your account.
+            </p>
+
+            <form id="forgotForm">
+
+                <div class="input-wrapper">
+
+                    <i class="fa-regular fa-envelope input-icon"></i>
+
+                    <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="reset-button">
+
+                    Send Reset Link
+
+                </button>
+
+            </form>
+
+            <div
+                class="reset-message"
+                id="resetMessage">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+<script src="../js/login.js"></script>
+</body>
+
+</html>
+

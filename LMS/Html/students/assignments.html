@@ -1,0 +1,3436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Assignments — View, submit and track assignments.">
+
+    <title>Assignments — Learnora LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" href="../../Css/student.css">
+
+
+    <style>
+
+        /* =========================================================
+           ASSIGNMENTS PAGE
+        ========================================================= */
+
+        .assignment-search {
+            min-width: 220px;
+        }
+
+        .assignment-filter-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .assignment-course-filter {
+            min-width: 180px;
+        }
+
+        .assignment-empty {
+            display: none;
+            text-align: center;
+            padding: 60px 25px;
+        }
+
+        .assignment-empty.show {
+            display: block;
+        }
+
+        .assignment-empty-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(39, 217, 244, .08);
+            border: 1px solid rgba(39, 217, 244, .15);
+            color: #27d9f4;
+            font-size: 27px;
+        }
+
+        .assignment-empty h3 {
+            margin: 0 0 8px;
+        }
+
+        .assignment-empty p {
+            margin: 0;
+            color: #7d8da5;
+        }
+
+        .assignment-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(2, 7, 15, .78);
+            backdrop-filter: blur(8px);
+        }
+
+        .assignment-modal.show {
+            display: flex;
+        }
+
+        .assignment-modal-card {
+            width: min(680px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+            background: #0b1422;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .5);
+        }
+
+        .assignment-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .assignment-modal-close {
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .assignment-modal-close:hover {
+            background: rgba(255, 255, 255, .11);
+        }
+
+        .assignment-modal-title {
+            margin: 18px 0 10px;
+            font-size: 26px;
+            line-height: 1.3;
+        }
+
+        .assignment-modal-description {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .assignment-modal-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .assignment-modal-meta-item {
+            padding: 13px 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .assignment-modal-meta-item span {
+            display: block;
+            font-size: 11px;
+            color: #718096;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .assignment-modal-meta-item strong {
+            color: #eef4ff;
+            font-size: 14px;
+        }
+
+        .assignment-modal-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .account-context {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 8px;
+            padding: 7px 12px;
+            border-radius: 8px;
+            background: rgba(40, 120, 255, .08);
+            border: 1px solid rgba(40, 120, 255, .12);
+            color: #7fa9ff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .course-code-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 7px;
+            background: rgba(39, 217, 244, .07);
+            border: 1px solid rgba(39, 217, 244, .12);
+            color: #8eeaf5;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .due-soon-text {
+            color: #ff9d4d !important;
+        }
+
+        .overdue-text {
+            color: #ff6464 !important;
+        }
+
+        .success-text {
+            color: #57df9b !important;
+        }
+
+        .assignment-description {
+            display: block;
+            max-width: 500px;
+            color: #8190a6;
+            line-height: 1.5;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 900px) {
+
+            .assignment-modal-meta {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .assignment-search {
+                min-width: 100%;
+            }
+
+            .assignment-filter-row {
+                width: 100%;
+            }
+
+            .assignment-course-filter {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>Learnora</h2>
+                <span>Student Portal</span>
+            </div>
+
+        </div>
+
+
+        <!-- DYNAMIC STUDENT PROFILE -->
+
+        <div class="student-mini-profile">
+
+            <div
+                class="avatar"
+                id="sidebarAvatar"
+            >
+                ST
+            </div>
+
+            <div>
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span id="sidebarStudentProgram">
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             NAVIGATION
+        ====================================================== -->
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a href="dashboard.html" class="nav-link">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="courses.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>My Courses</span>
+            </a>
+
+            <a
+                href="courses.html#add-drop"
+                class="nav-link"
+            >
+                <i class="fa-solid fa-plus-minus"></i>
+                <span>Add / Drop Course</span>
+            </a>
+
+            <a href="lectures.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard"></i>
+                <span>Lectures</span>
+            </a>
+
+            <a href="recordings.html" class="nav-link">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Recordings</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACADEMICS
+            </div>
+
+            <a
+                href="assignments.html"
+                class="nav-link active"
+            >
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="quizzes.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quizzes & Tests</span>
+            </a>
+
+            <a href="results.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Results & Grades</span>
+            </a>
+
+            <a href="attendance.html" class="nav-link">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="schedule.html" class="nav-link">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Schedule</span>
+            </a>
+
+            <a href="materials.html" class="nav-link">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Study Materials</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                COMMUNICATION
+            </div>
+
+            <a href="announcements.html" class="nav-link">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <a href="messages.html" class="nav-link">
+                <i class="fa-solid fa-message"></i>
+                <span>Messages</span>
+            </a>
+
+
+            <div class="nav-section-title">
+                ACCOUNT
+            </div>
+
+            <a href="profile.html" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a
+                href="../login.html"
+                class="nav-link logout-link"
+                id="logoutLink"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="topbar-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="assignmentSearch"
+                    placeholder="Search assignments..."
+                >
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-btn notification-btn"
+                    id="notificationButton"
+                    type="button"
+                    aria-label="Notifications"
+                >
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot"
+                    ></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="avatar small"
+                        id="topbarAvatar"
+                    >
+                        ST
+                    </div>
+
+
+                    <div class="topbar-profile-info">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================================================
+             PAGE CONTENT
+        ========================================================== -->
+
+        <div class="page-content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+
+                        <i class="fa-solid fa-file-pen"></i>
+
+                        ACADEMIC WORK
+
+                    </span>
+
+
+                    <h1>
+                        Assignments
+                    </h1>
+
+
+                    <p>
+                        Track your assignments, deadlines and submissions.
+                    </p>
+
+
+                    <div class="account-context">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <span id="assignmentAccount">
+                            Loading account...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="assignment-filter-row">
+
+                    <select
+                        class="form-select assignment-course-filter"
+                        id="courseFilter"
+                    >
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 STATS
+            ====================================================== -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Assignments
+                        </span>
+
+                        <strong id="totalAssignments">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Submitted
+                        </span>
+
+                        <strong id="submittedAssignments">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="pendingAssignments">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Due Soon
+                        </span>
+
+                        <strong id="dueSoonAssignments">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 UPCOMING
+            ====================================================== -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Upcoming Assignments
+                        </h2>
+
+                        <p id="upcomingDescription">
+                            Assignments that require your attention.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="data-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Assignment
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Due Date
+                                </th>
+
+                                <th>
+                                    Points
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="upcomingAssignmentsBody"
+                        ></tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    class="assignment-empty"
+                    id="upcomingEmpty"
+                >
+
+                    <div class="assignment-empty-icon">
+
+                        <i class="fa-regular fa-folder-open"></i>
+
+                    </div>
+
+                    <h3>
+                        No upcoming assignments
+                    </h3>
+
+                    <p>
+                        You currently have no pending assignments.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 SUBMITTED
+            ====================================================== -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Submitted Assignments
+                        </h2>
+
+                        <p>
+                            Review your previous submissions and grades.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="data-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Assignment
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Submitted
+                                </th>
+
+                                <th>
+                                    Score
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="submittedAssignmentsBody"
+                        ></tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    class="assignment-empty"
+                    id="submittedEmpty"
+                >
+
+                    <div class="assignment-empty-icon">
+
+                        <i class="fa-regular fa-file"></i>
+
+                    </div>
+
+                    <h3>
+                        No submitted assignments
+                    </h3>
+
+                    <p>
+                        Your submitted assignments will appear here.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="main-footer">
+
+            <span>
+                © 2026 Learnora LMS
+            </span>
+
+            <span>
+                Learn smarter. Grow faster.
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     ASSIGNMENT DETAIL MODAL
+========================================================= -->
+
+<div
+    class="assignment-modal"
+    id="assignmentModal"
+    aria-hidden="true"
+>
+
+    <div class="assignment-modal-card">
+
+
+        <div class="assignment-modal-header">
+
+            <span
+                class="course-code-badge"
+                id="modalCourse"
+            >
+                COURSE
+            </span>
+
+
+            <button
+                type="button"
+                class="assignment-modal-close"
+                id="assignmentModalClose"
+                aria-label="Close"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <h2
+            class="assignment-modal-title"
+            id="modalTitle"
+        >
+            Assignment
+        </h2>
+
+
+        <p
+            class="assignment-modal-description"
+            id="modalDescription"
+        >
+            Assignment details.
+        </p>
+
+
+        <div class="assignment-modal-meta">
+
+
+            <div class="assignment-modal-meta-item">
+
+                <span>
+                    Due Date
+                </span>
+
+                <strong id="modalDueDate">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="assignment-modal-meta-item">
+
+                <span>
+                    Points
+                </span>
+
+                <strong id="modalPoints">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="assignment-modal-meta-item">
+
+                <span>
+                    Status
+                </span>
+
+                <strong id="modalStatus">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="assignment-modal-meta-item">
+
+                <span>
+                    Instructor
+                </span>
+
+                <strong id="modalInstructor">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="assignment-modal-actions">
+
+            <button
+                class="primary-btn"
+                id="modalPrimaryAction"
+                type="button"
+            >
+                Open Assignment
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                id="modalSecondaryAction"
+                type="button"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- STUDENT JS -->
+
+<script src="../../js/student.js"></script>
+
+
+<!-- =========================================================
+     ACCOUNT BASED ASSIGNMENT LOGIC
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           1. GET CURRENT USER
+        ====================================================== */
+
+        let currentUser = null;
+
+
+        try {
+
+            const storedUser =
+                localStorage.getItem(
+                    "learnora_current_user"
+                );
+
+
+            if (storedUser) {
+
+                currentUser =
+                    JSON.parse(storedUser);
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read current user:",
+                error
+            );
+
+        }
+
+
+        /* =====================================================
+           2. LOGIN PROTECTION
+        ====================================================== */
+
+        if (!currentUser) {
+
+            window.location.href =
+                "../login.html";
+
+            return;
+
+        }
+
+
+        const currentRole =
+            String(
+                currentUser.role || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        if (
+            currentRole !==
+            "student"
+        ) {
+
+            if (
+                currentRole ===
+                "teacher"
+            ) {
+
+                window.location.href =
+                    "../teacher/dashboard.html";
+
+            }
+
+            else if (
+                currentRole ===
+                "parent"
+            ) {
+
+                window.location.href =
+                    "../parent/dashboard.html";
+
+            }
+
+            else {
+
+                window.location.href =
+                    "../login.html";
+
+            }
+
+            return;
+
+        }
+
+
+        /* =====================================================
+           3. ACCOUNT INFORMATION
+        ====================================================== */
+
+        const studentName =
+            currentUser.name ||
+            currentUser.fullName ||
+            currentUser.username ||
+            "Student";
+
+
+        const studentEmail =
+            String(
+                currentUser.email || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const studentProgram =
+            currentUser.program ||
+            currentUser.department ||
+            currentUser.degree ||
+            "Student";
+
+
+        const studentId =
+            currentUser.studentId ||
+            currentUser.id ||
+            "Student";
+
+
+        /* =====================================================
+           4. COURSES
+        ====================================================== */
+
+        let studentCourses = [];
+
+
+        if (
+            Array.isArray(
+                currentUser.courses
+            )
+        ) {
+
+            studentCourses =
+                currentUser.courses
+                    .map(
+                        function (course) {
+
+                            if (
+                                typeof course ===
+                                "string"
+                            ) {
+
+                                return course
+                                    .trim()
+                                    .toUpperCase();
+
+                            }
+
+
+                            return String(
+                                course.code ||
+                                course.courseCode ||
+                                course.course_id ||
+                                course.id ||
+                                ""
+                            )
+                            .trim()
+                            .toUpperCase();
+
+                        }
+                    )
+                    .filter(Boolean);
+
+        }
+
+
+        /* =====================================================
+           SUPPORT courseCodes ARRAY
+        ====================================================== */
+
+        if (
+            Array.isArray(
+                currentUser.courseCodes
+            )
+        ) {
+
+            currentUser.courseCodes.forEach(
+                function (courseCode) {
+
+                    const code =
+                        String(courseCode)
+                        .trim()
+                        .toUpperCase();
+
+
+                    if (
+                        code &&
+                        !studentCourses.includes(
+                            code
+                        )
+                    ) {
+
+                        studentCourses.push(
+                            code
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        console.log(
+            "Current Student:",
+            currentUser
+        );
+
+        console.log(
+            "Student Courses:",
+            studentCourses
+        );
+
+
+        /* =====================================================
+           5. INITIALS
+        ====================================================== */
+
+        function getInitials(name) {
+
+            const cleanName =
+                String(name || "")
+                .trim();
+
+
+            if (!cleanName) {
+
+                return "ST";
+
+            }
+
+
+            const parts =
+                cleanName.split(/\s+/);
+
+
+            if (
+                parts.length ===
+                1
+            ) {
+
+                return parts[0]
+                    .substring(0, 2)
+                    .toUpperCase();
+
+            }
+
+
+            return (
+                parts[0][0] +
+                parts[parts.length - 1][0]
+            ).toUpperCase();
+
+        }
+
+
+        const initials =
+            getInitials(
+                studentName
+            );
+
+
+        /* =====================================================
+           6. DOM HELPER
+        ====================================================== */
+
+        function setText(
+            id,
+            value
+        ) {
+
+            const element =
+                document.getElementById(
+                    id
+                );
+
+
+            if (element) {
+
+                element.textContent =
+                    value;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           7. UPDATE ACCOUNT UI
+        ====================================================== */
+
+        setText(
+            "sidebarStudentName",
+            studentName
+        );
+
+
+        setText(
+            "sidebarStudentProgram",
+            studentProgram
+        );
+
+
+        setText(
+            "topbarStudentName",
+            studentName
+        );
+
+
+        setText(
+            "sidebarAvatar",
+            initials
+        );
+
+
+        setText(
+            "topbarAvatar",
+            initials
+        );
+
+
+        setText(
+            "assignmentAccount",
+            studentName +
+            " · " +
+            studentProgram
+        );
+
+
+        /* =====================================================
+           8. ASSIGNMENTS DATABASE
+           
+           NOTE:
+           This database contains assignments for different
+           courses. The page only shows assignments where the
+           logged-in student's course matches.
+        ====================================================== */
+
+        const assignments = [
+
+            /* =================================================
+               SHEHERYAR / CS-401
+            ================================================== */
+
+            {
+                id:
+                    "ASG-001",
+
+                title:
+                    "Software Requirements Document",
+
+                number:
+                    "Assignment #01",
+
+                course:
+                    "CS-401",
+
+                courseName:
+                    "Software Engineering",
+
+                description:
+                    "Prepare a complete Software Requirements Specification document for the assigned project.",
+
+                due:
+                    "September 30, 2026",
+
+                dueISO:
+                    "2026-09-30",
+
+                points:
+                    20,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Ahmed Khan",
+
+                icon:
+                    "fa-code",
+
+                color:
+                    "blue"
+
+            },
+
+
+            {
+                id:
+                    "ASG-002",
+
+                title:
+                    "Requirements Analysis",
+
+                number:
+                    "Assignment #02",
+
+                course:
+                    "CS-401",
+
+                courseName:
+                    "Software Engineering",
+
+                description:
+                    "Analyze the project requirements and prepare a structured requirements analysis report.",
+
+                due:
+                    "September 18, 2026",
+
+                dueISO:
+                    "2026-09-18",
+
+                points:
+                    20,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 18, 2026",
+
+                score:
+                    "18/20",
+
+                instructor:
+                    "Dr. Ahmed Khan",
+
+                icon:
+                    "fa-file-code",
+
+                color:
+                    "green"
+
+            },
+
+
+            /* =================================================
+               CS-403
+            ================================================== */
+
+            {
+                id:
+                    "ASG-003",
+
+                title:
+                    "Database Normalization",
+
+                number:
+                    "Assignment #04",
+
+                course:
+                    "CS-403",
+
+                courseName:
+                    "Database Systems",
+
+                description:
+                    "Normalize the provided database schema up to Third Normal Form and explain each step.",
+
+                due:
+                    "October 2, 2026",
+
+                dueISO:
+                    "2026-10-02",
+
+                points:
+                    25,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Prof. Sarah Malik",
+
+                icon:
+                    "fa-database",
+
+                color:
+                    "cyan"
+
+            },
+
+
+            {
+                id:
+                    "ASG-004",
+
+                title:
+                    "SQL Query Practice",
+
+                number:
+                    "Assignment #03",
+
+                course:
+                    "CS-403",
+
+                courseName:
+                    "Database Systems",
+
+                description:
+                    "Complete the SQL query exercises using joins, aggregation and nested queries.",
+
+                due:
+                    "September 15, 2026",
+
+                dueISO:
+                    "2026-09-15",
+
+                points:
+                    25,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 15, 2026",
+
+                score:
+                    "22/25",
+
+                instructor:
+                    "Prof. Sarah Malik",
+
+                icon:
+                    "fa-table",
+
+                color:
+                    "green"
+
+            },
+
+
+            /* =================================================
+               DS-301
+            ================================================== */
+
+            {
+                id:
+                    "ASG-005",
+
+                title:
+                    "Data Cleaning Report",
+
+                number:
+                    "Assignment #01",
+
+                course:
+                    "DS-301",
+
+                courseName:
+                    "Data Analytics",
+
+                description:
+                    "Clean the provided dataset and prepare a short report explaining missing values, duplicates and transformations.",
+
+                due:
+                    "September 20, 2026",
+
+                dueISO:
+                    "2026-09-20",
+
+                points:
+                    20,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 20, 2026",
+
+                score:
+                    "19/20",
+
+                instructor:
+                    "Dr. Hamza Ali",
+
+                icon:
+                    "fa-chart-line",
+
+                color:
+                    "green"
+
+            },
+
+
+            {
+                id:
+                    "ASG-006",
+
+                title:
+                    "Exploratory Data Analysis",
+
+                number:
+                    "Assignment #02",
+
+                course:
+                    "DS-301",
+
+                courseName:
+                    "Data Analytics",
+
+                description:
+                    "Perform exploratory data analysis and identify important patterns, trends and relationships in the dataset.",
+
+                due:
+                    "October 5, 2026",
+
+                dueISO:
+                    "2026-10-05",
+
+                points:
+                    20,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Hamza Ali",
+
+                icon:
+                    "fa-chart-line",
+
+                color:
+                    "purple"
+
+            },
+
+
+            /* =================================================
+               CS-405
+            ================================================== */
+
+            {
+                id:
+                    "ASG-007",
+
+                title:
+                    "Responsive Web Application",
+
+                number:
+                    "Assignment #03",
+
+                course:
+                    "CS-405",
+
+                courseName:
+                    "Web Engineering",
+
+                description:
+                    "Build a responsive multi-page web interface using HTML, CSS and JavaScript.",
+
+                due:
+                    "October 8, 2026",
+
+                dueISO:
+                    "2026-10-08",
+
+                points:
+                    30,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Mr. Bilal Ahmed",
+
+                icon:
+                    "fa-globe",
+
+                color:
+                    "blue"
+
+            },
+
+
+            /* =================================================
+               SE-410
+            ================================================== */
+
+            {
+                id:
+                    "ASG-008",
+
+                title:
+                    "Project Management Plan",
+
+                number:
+                    "Assignment #02",
+
+                course:
+                    "SE-410",
+
+                courseName:
+                    "Software Project Management",
+
+                description:
+                    "Prepare a project management plan covering scope, timeline, resources, risks and deliverables.",
+
+                due:
+                    "October 10, 2026",
+
+                dueISO:
+                    "2026-10-10",
+
+                points:
+                    25,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 25, 2026",
+
+                score:
+                    "23/25",
+
+                instructor:
+                    "Dr. Fatima Noor",
+
+                icon:
+                    "fa-diagram-project",
+
+                color:
+                    "green"
+
+            },
+
+
+            /* =================================================
+               ALI — AI-310
+            ================================================== */
+
+            {
+                id:
+                    "ASG-009",
+
+                title:
+                    "AI Research Paper",
+
+                number:
+                    "Assignment #01",
+
+                course:
+                    "AI-310",
+
+                courseName:
+                    "Artificial Intelligence",
+
+                description:
+                    "Prepare a research paper covering a selected Artificial Intelligence topic and its real-world applications.",
+
+                due:
+                    "September 29, 2026",
+
+                dueISO:
+                    "2026-09-29",
+
+                points:
+                    30,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Usman Raza",
+
+                icon:
+                    "fa-robot",
+
+                color:
+                    "purple"
+
+            },
+
+
+            /* =================================================
+               SARA — SE-301
+            ================================================== */
+
+            {
+                id:
+                    "ASG-010",
+
+                title:
+                    "Software Design Case Study",
+
+                number:
+                    "Assignment #02",
+
+                course:
+                    "SE-301",
+
+                courseName:
+                    "Software Design",
+
+                description:
+                    "Analyze the given software system and prepare a design document with architecture and component diagrams.",
+
+                due:
+                    "October 4, 2026",
+
+                dueISO:
+                    "2026-10-04",
+
+                points:
+                    25,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Ahmed Khan",
+
+                icon:
+                    "fa-diagram-project",
+
+                color:
+                    "blue"
+
+            },
+
+
+            {
+                id:
+                    "ASG-011",
+
+                title:
+                    "Web Development Project",
+
+                number:
+                    "Assignment #03",
+
+                course:
+                    "WEB-302",
+
+                courseName:
+                    "Web Development",
+
+                description:
+                    "Develop a responsive web project demonstrating modern HTML, CSS and JavaScript techniques.",
+
+                due:
+                    "September 24, 2026",
+
+                dueISO:
+                    "2026-09-24",
+
+                points:
+                    30,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 24, 2026",
+
+                score:
+                    "27/30",
+
+                instructor:
+                    "Mr. Bilal Ahmed",
+
+                icon:
+                    "fa-globe",
+
+                color:
+                    "green"
+
+            },
+
+
+            /* =================================================
+               HAMZA — DS-303
+            ================================================== */
+
+            {
+                id:
+                    "ASG-012",
+
+                title:
+                    "Machine Learning Model",
+
+                number:
+                    "Assignment #01",
+
+                course:
+                    "DS-303",
+
+                courseName:
+                    "Machine Learning",
+
+                description:
+                    "Train and evaluate a machine learning model and submit the analysis with performance metrics.",
+
+                due:
+                    "October 1, 2026",
+
+                dueISO:
+                    "2026-10-01",
+
+                points:
+                    30,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Usman Raza",
+
+                icon:
+                    "fa-brain",
+
+                color:
+                    "purple"
+
+            },
+
+
+            {
+                id:
+                    "ASG-013",
+
+                title:
+                    "Statistics Analysis",
+
+                number:
+                    "Assignment #02",
+
+                course:
+                    "STAT-301",
+
+                courseName:
+                    "Statistics",
+
+                description:
+                    "Analyze the provided dataset using descriptive statistics and explain the findings.",
+
+                due:
+                    "October 4, 2026",
+
+                dueISO:
+                    "2026-10-04",
+
+                points:
+                    20,
+
+                status:
+                    "pending",
+
+                submittedDate:
+                    "",
+
+                score:
+                    null,
+
+                instructor:
+                    "Dr. Ayesha Noor",
+
+                icon:
+                    "fa-square-root-variable",
+
+                color:
+                    "orange"
+
+            },
+
+
+            {
+                id:
+                    "ASG-014",
+
+                title:
+                    "Python Data Analysis",
+
+                number:
+                    "Assignment #03",
+
+                course:
+                    "CS-305",
+
+                courseName:
+                    "Python Programming",
+
+                description:
+                    "Use Python to clean, analyze and visualize the provided dataset.",
+
+                due:
+                    "September 25, 2026",
+
+                dueISO:
+                    "2026-09-25",
+
+                points:
+                    25,
+
+                status:
+                    "submitted",
+
+                submittedDate:
+                    "September 25, 2026",
+
+                score:
+                    "22/25",
+
+                instructor:
+                    "Mr. Bilal Ahmed",
+
+                icon:
+                    "fa-python",
+
+                color:
+                    "green"
+
+            }
+
+        ];
+
+
+        /* =====================================================
+           9. USER-SPECIFIC ASSIGNMENTS
+        ====================================================== */
+
+        /*
+         * Only assignments belonging to the student's
+         * enrolled courses are displayed.
+         */
+
+        let userAssignments =
+            assignments.filter(
+                function (assignment) {
+
+                    return studentCourses.includes(
+                        assignment.course
+                            .toUpperCase()
+                    );
+
+                }
+            );
+
+
+        console.log(
+            "Assignments for current account:",
+            userAssignments
+        );
+
+
+        /* =====================================================
+           10. COURSE FILTER
+        ====================================================== */
+
+        const courseFilter =
+            document.getElementById(
+                "courseFilter"
+            );
+
+
+        studentCourses.forEach(
+            function (courseCode) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    courseCode;
+
+
+                option.textContent =
+                    courseCode;
+
+
+                courseFilter.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           11. DATE HELPERS
+        ====================================================== */
+
+        function parseAssignmentDate(
+            assignment
+        ) {
+
+            if (
+                assignment.dueISO
+            ) {
+
+                return new Date(
+                    assignment.dueISO +
+                    "T23:59:59"
+                );
+
+            }
+
+
+            return new Date(
+                assignment.due
+            );
+
+        }
+
+
+        function getDaysDifference(
+            assignment
+        ) {
+
+            const dueDate =
+                parseAssignmentDate(
+                    assignment
+                );
+
+
+            if (
+                Number.isNaN(
+                    dueDate.getTime()
+                )
+            ) {
+
+                return null;
+
+            }
+
+
+            const today =
+                new Date();
+
+
+            today.setHours(
+                0,
+                0,
+                0,
+                0
+            );
+
+
+            dueDate.setHours(
+                0,
+                0,
+                0,
+                0
+            );
+
+
+            const difference =
+                dueDate.getTime() -
+                today.getTime();
+
+
+            return Math.ceil(
+                difference /
+                (1000 * 60 * 60 * 24)
+            );
+
+        }
+
+
+        function getDueText(
+            assignment
+        ) {
+
+            const days =
+                getDaysDifference(
+                    assignment
+                );
+
+
+            if (
+                days === null
+            ) {
+
+                return "";
+
+            }
+
+
+            if (
+                assignment.status ===
+                "submitted"
+            ) {
+
+                return "Submitted";
+
+            }
+
+
+            if (
+                days < 0
+            ) {
+
+                return (
+                    Math.abs(days) +
+                    " day" +
+                    (
+                        Math.abs(days) !== 1
+                            ? "s"
+                            : ""
+                    ) +
+                    " overdue"
+                );
+
+            }
+
+
+            if (
+                days === 0
+            ) {
+
+                return "Due today";
+
+            }
+
+
+            return (
+                days +
+                " day" +
+                (
+                    days !== 1
+                        ? "s"
+                        : ""
+                ) +
+                " left"
+            );
+
+        }
+
+
+        function getDueClass(
+            assignment
+        ) {
+
+            if (
+                assignment.status ===
+                "submitted"
+            ) {
+
+                return "success-text";
+
+            }
+
+
+            const days =
+                getDaysDifference(
+                    assignment
+                );
+
+
+            if (
+                days !== null &&
+                days < 0
+            ) {
+
+                return "overdue-text";
+
+            }
+
+
+            if (
+                days !== null &&
+                days <= 2
+            ) {
+
+                return "due-soon-text";
+
+            }
+
+
+            return "";
+
+        }
+
+
+        /* =====================================================
+           12. STATUS HTML
+        ====================================================== */
+
+        function getStatusHTML(
+            status
+        ) {
+
+            if (
+                status ===
+                "submitted"
+            ) {
+
+                return `
+                    <span class="status-badge completed">
+                        Submitted
+                    </span>
+                `;
+
+            }
+
+
+            if (
+                status ===
+                "in-progress"
+            ) {
+
+                return `
+                    <span class="status-badge progress">
+                        In Progress
+                    </span>
+                `;
+
+            }
+
+
+            return `
+                <span class="status-badge pending">
+                    Pending
+                </span>
+            `;
+
+        }
+
+
+        /* =====================================================
+           13. ACTION TEXT
+        ====================================================== */
+
+        function getActionText(
+            assignment
+        ) {
+
+            if (
+                assignment.status ===
+                "submitted"
+            ) {
+
+                return "View";
+
+            }
+
+
+            if (
+                assignment.status ===
+                "in-progress"
+            ) {
+
+                return "Continue";
+
+            }
+
+
+            return "Open";
+
+        }
+
+
+        /* =====================================================
+           14. MODAL
+        ====================================================== */
+
+        const modal =
+            document.getElementById(
+                "assignmentModal"
+            );
+
+
+        const modalClose =
+            document.getElementById(
+                "assignmentModalClose"
+            );
+
+
+        const modalPrimary =
+            document.getElementById(
+                "modalPrimaryAction"
+            );
+
+
+        const modalSecondary =
+            document.getElementById(
+                "modalSecondaryAction"
+            );
+
+
+        let activeAssignment =
+            null;
+
+
+        function openAssignment(
+            assignment
+        ) {
+
+            activeAssignment =
+                assignment;
+
+
+            setText(
+                "modalCourse",
+                assignment.course +
+                " · " +
+                assignment.courseName
+            );
+
+
+            setText(
+                "modalTitle",
+                assignment.title
+            );
+
+
+            setText(
+                "modalDescription",
+                assignment.description
+            );
+
+
+            setText(
+                "modalDueDate",
+                assignment.due
+            );
+
+
+            setText(
+                "modalPoints",
+                assignment.points +
+                " Points"
+            );
+
+
+            setText(
+                "modalStatus",
+                assignment.status ===
+                "submitted"
+                    ? "Submitted"
+                    : assignment.status ===
+                      "in-progress"
+                        ? "In Progress"
+                        : "Pending"
+            );
+
+
+            setText(
+                "modalInstructor",
+                assignment.instructor
+            );
+
+
+            if (
+                assignment.status ===
+                "submitted"
+            ) {
+
+                modalPrimary.textContent =
+                    "View Submission";
+
+            }
+
+            else if (
+                assignment.status ===
+                "in-progress"
+            ) {
+
+                modalPrimary.textContent =
+                    "Continue Assignment";
+
+            }
+
+            else {
+
+                modalPrimary.textContent =
+                    "Open Assignment";
+
+            }
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeAssignment() {
+
+            modal.classList.remove(
+                "show"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+
+            activeAssignment =
+                null;
+
+        }
+
+
+        modalClose.addEventListener(
+            "click",
+            closeAssignment
+        );
+
+
+        modalSecondary.addEventListener(
+            "click",
+            closeAssignment
+        );
+
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    modal
+                ) {
+
+                    closeAssignment();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeAssignment();
+
+                }
+
+            }
+        );
+
+
+        modalPrimary.addEventListener(
+            "click",
+            function () {
+
+                if (!activeAssignment) {
+                    return;
+                }
+
+
+                /*
+                 * Front-end demo:
+                 * Keep the interaction functional.
+                 *
+                 * Later this button can navigate to:
+                 * assignment-details.html?id=ASG-001
+                 */
+
+                if (
+                    activeAssignment.status ===
+                    "submitted"
+                ) {
+
+                    alert(
+                        "Submission details for " +
+                        activeAssignment.title +
+                        " will open here."
+                    );
+
+                }
+
+                else {
+
+                    alert(
+                        "Assignment workspace for " +
+                        activeAssignment.title +
+                        " will open here."
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           15. RENDER UPCOMING
+        ====================================================== */
+
+        function renderUpcoming(
+            list
+        ) {
+
+            const tbody =
+                document.getElementById(
+                    "upcomingAssignmentsBody"
+                );
+
+
+            const empty =
+                document.getElementById(
+                    "upcomingEmpty"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                list.length === 0
+            ) {
+
+                empty.classList.add(
+                    "show"
+                );
+
+                return;
+
+            }
+
+
+            empty.classList.remove(
+                "show"
+            );
+
+
+            list.forEach(
+                function (assignment) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const dueText =
+                        getDueText(
+                            assignment
+                        );
+
+
+                    const dueClass =
+                        getDueClass(
+                            assignment
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div class="table-title">
+
+                                <div class="table-icon ${assignment.color}">
+
+                                    <i class="fa-solid ${assignment.icon}"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${assignment.title}
+                                    </strong>
+
+                                    <span>
+                                        ${assignment.number}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-code-badge">
+                                ${assignment.course}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${assignment.due}
+                            </strong>
+
+                            <small class="${dueClass}">
+                                ${dueText}
+                            </small>
+
+                        </td>
+
+
+                        <td>
+                            ${assignment.points}
+                        </td>
+
+
+                        <td>
+                            ${getStatusHTML(
+                                assignment.status
+                            )}
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="primary-btn small-btn assignment-action-btn"
+                                type="button"
+                            >
+                                ${getActionText(
+                                    assignment
+                                )}
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    const button =
+                        row.querySelector(
+                            ".assignment-action-btn"
+                        );
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            openAssignment(
+                                assignment
+                            );
+
+                        }
+                    );
+
+
+                    tbody.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           16. RENDER SUBMITTED
+        ====================================================== */
+
+        function renderSubmitted(
+            list
+        ) {
+
+            const tbody =
+                document.getElementById(
+                    "submittedAssignmentsBody"
+                );
+
+
+            const empty =
+                document.getElementById(
+                    "submittedEmpty"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                list.length === 0
+            ) {
+
+                empty.classList.add(
+                    "show"
+                );
+
+                return;
+
+            }
+
+
+            empty.classList.remove(
+                "show"
+            );
+
+
+            list.forEach(
+                function (assignment) {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div class="table-title">
+
+                                <div class="table-icon green">
+
+                                    <i class="fa-solid ${assignment.icon}"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${assignment.title}
+                                    </strong>
+
+                                    <span>
+                                        ${assignment.number}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-code-badge">
+                                ${assignment.course}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            ${assignment.submittedDate || "--"}
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${assignment.score || "--"}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge completed">
+                                Graded
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="secondary-btn small-btn submitted-view-btn"
+                                type="button"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    const button =
+                        row.querySelector(
+                            ".submitted-view-btn"
+                        );
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            openAssignment(
+                                assignment
+                            );
+
+                        }
+                    );
+
+
+                    tbody.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           17. RENDER STATS
+        ====================================================== */
+
+        function renderStats(
+            list
+        ) {
+
+            const total =
+                list.length;
+
+
+            const submitted =
+                list.filter(
+                    assignment =>
+                        assignment.status ===
+                        "submitted"
+                ).length;
+
+
+            const pending =
+                list.filter(
+                    assignment =>
+                        assignment.status !==
+                        "submitted"
+                ).length;
+
+
+            const dueSoon =
+                list.filter(
+                    assignment => {
+
+                        if (
+                            assignment.status ===
+                            "submitted"
+                        ) {
+
+                            return false;
+
+                        }
+
+
+                        const days =
+                            getDaysDifference(
+                                assignment
+                            );
+
+
+                        return (
+                            days !== null &&
+                            days >= 0 &&
+                            days <= 2
+                        );
+
+                    }
+                ).length;
+
+
+            setText(
+                "totalAssignments",
+                total
+            );
+
+
+            setText(
+                "submittedAssignments",
+                submitted
+            );
+
+
+            setText(
+                "pendingAssignments",
+                pending
+            );
+
+
+            setText(
+                "dueSoonAssignments",
+                dueSoon
+            );
+
+        }
+
+
+        /* =====================================================
+           18. MAIN RENDER
+        ====================================================== */
+
+        function renderAssignments() {
+
+            const searchInput =
+                document.getElementById(
+                    "assignmentSearch"
+                );
+
+
+            const search =
+                searchInput
+                    ? searchInput.value
+                        .toLowerCase()
+                        .trim()
+                    : "";
+
+
+            const selectedCourse =
+                courseFilter.value;
+
+
+            const filtered =
+                userAssignments.filter(
+                    function (assignment) {
+
+
+                        const courseMatch =
+                            selectedCourse ===
+                            "all" ||
+                            assignment.course ===
+                            selectedCourse;
+
+
+                        const searchText =
+                            (
+                                assignment.title +
+                                " " +
+                                assignment.number +
+                                " " +
+                                assignment.course +
+                                " " +
+                                assignment.courseName +
+                                " " +
+                                assignment.description +
+                                " " +
+                                assignment.instructor
+                            )
+                            .toLowerCase();
+
+
+                        const searchMatch =
+                            !search ||
+                            searchText.includes(
+                                search
+                            );
+
+
+                        return (
+                            courseMatch &&
+                            searchMatch
+                        );
+
+                    }
+                );
+
+
+            const upcoming =
+                filtered.filter(
+                    assignment =>
+                        assignment.status !==
+                        "submitted"
+                );
+
+
+            const submitted =
+                filtered.filter(
+                    assignment =>
+                        assignment.status ===
+                        "submitted"
+                );
+
+
+            renderUpcoming(
+                upcoming
+            );
+
+
+            renderSubmitted(
+                submitted
+            );
+
+
+            renderStats(
+                filtered
+            );
+
+
+            setText(
+                "upcomingDescription",
+                upcoming.length +
+                " assignment" +
+                (
+                    upcoming.length !== 1
+                        ? "s"
+                        : ""
+                ) +
+                " requiring your attention."
+            );
+
+        }
+
+
+        /* =====================================================
+           19. SEARCH
+        ====================================================== */
+
+        const assignmentSearch =
+            document.getElementById(
+                "assignmentSearch"
+            );
+
+
+        if (assignmentSearch) {
+
+            assignmentSearch.addEventListener(
+                "input",
+                renderAssignments
+            );
+
+        }
+
+
+        /* =====================================================
+           20. COURSE FILTER
+        ====================================================== */
+
+        courseFilter.addEventListener(
+            "change",
+            renderAssignments
+        );
+
+
+        /* =====================================================
+           21. NOTIFICATION
+        ====================================================== */
+
+        const notificationButton =
+            document.getElementById(
+                "notificationButton"
+            );
+
+
+        const notificationDot =
+            document.getElementById(
+                "notificationDot"
+            );
+
+
+        const pendingCount =
+            userAssignments.filter(
+                assignment =>
+                    assignment.status !==
+                    "submitted"
+            ).length;
+
+
+        if (
+            notificationDot
+        ) {
+
+            notificationDot.style.display =
+                pendingCount > 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        if (
+            notificationButton
+        ) {
+
+            notificationButton.addEventListener(
+                "click",
+                function () {
+
+                    const upcomingSection =
+                        document.getElementById(
+                            "upcomingAssignmentsBody"
+                        );
+
+
+                    if (
+                        upcomingSection
+                    ) {
+
+                        upcomingSection.closest(
+                            ".content-card"
+                        ).scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           22. LOGOUT
+        ====================================================== */
+
+        const logoutLink =
+            document.getElementById(
+                "logoutLink"
+            );
+
+
+        if (
+            logoutLink
+        ) {
+
+            logoutLink.addEventListener(
+                "click",
+                function () {
+
+                    localStorage.removeItem(
+                        "learnora_current_user"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_logged_in"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_user_role"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_user_email"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_user_id"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_student_name"
+                    );
+
+                    localStorage.removeItem(
+                        "learnora_remember"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           23. INITIAL LOAD
+        ====================================================== */
+
+        renderAssignments();
+
+
+        /* =====================================================
+           24. DEBUG
+        ====================================================== */
+
+        console.log(
+            "========================================"
+        );
+
+        console.log(
+            "LEARNORA ASSIGNMENTS SYSTEM READY"
+        );
+
+        console.log(
+            "Student:",
+            studentName
+        );
+
+        console.log(
+            "Email:",
+            studentEmail
+        );
+
+        console.log(
+            "Program:",
+            studentProgram
+        );
+
+        console.log(
+            "Student ID:",
+            studentId
+        );
+
+        console.log(
+            "Courses:",
+            studentCourses
+        );
+
+        console.log(
+            "User Assignments:",
+            userAssignments.length
+        );
+
+        console.log(
+            "========================================"
+        );
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>

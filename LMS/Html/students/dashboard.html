@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Learnora LMS Student Dashboard — Manage courses, lectures, assignments, quizzes, attendance and academic progress.">
+
+    <title>Student Dashboard — Learnora LMS</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =====================================================
+         STUDENT CSS
+    ====================================================== -->
+
+    <link rel="stylesheet" href="../../Css/student.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APP
+    ====================================================== -->
+
+    <div class="app">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+
+            <!-- BRAND -->
+
+            <div class="sidebar-brand">
+
+                <a href="dashboard.html" class="brand-logo">
+
+                    <span class="brand-icon">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </span>
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Learnora
+                        </strong>
+
+                        <small>
+                            Student Portal
+                        </small>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- STUDENT PROFILE -->
+
+            <div class="sidebar-profile">
+
+                <div class="profile-avatar" data-user-avatar>
+                    SA
+                </div>
+
+                <div class="profile-info">
+
+                    <strong data-user-name>
+                        Student
+                    </strong>
+
+                    <span data-user-program>
+                        Student Program
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="sidebar-nav">
+
+
+                <!-- MAIN -->
+
+                <div class="nav-section">
+
+                    <p class="nav-title">
+                        MAIN
+                    </p>
+
+                    <a
+                        href="dashboard.html"
+                        class="nav-link active">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-house"></i>
+
+                        </span>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ACADEMICS -->
+
+                <div class="nav-section">
+
+                    <p class="nav-title">
+                        ACADEMICS
+                    </p>
+
+
+                    <a
+                        href="courses.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-book-open"></i>
+
+                        </span>
+
+                        <span>
+                            My Courses
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="courses.html#add-drop"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-plus-minus"></i>
+
+                        </span>
+
+                        <span>
+                            Add / Drop Course
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="lectures.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-chalkboard-user"></i>
+
+                        </span>
+
+                        <span>
+                            Lectures
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="recordings.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-circle-play"></i>
+
+                        </span>
+
+                        <span>
+                            Recordings
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="assignments.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-file-lines"></i>
+
+                        </span>
+
+                        <span>
+                            Assignments
+                        </span>
+
+                        <span
+                            class="nav-badge"
+                            id="assignmentNavBadge">
+
+                            0
+
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="quizzes.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-clipboard-question"></i>
+
+                        </span>
+
+                        <span>
+                            Quizzes & Tests
+                        </span>
+
+                        <span class="nav-badge warning">
+                            2
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="results.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-chart-column"></i>
+
+                        </span>
+
+                        <span>
+                            Results & Grades
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- MY LEARNING -->
+
+                <div class="nav-section">
+
+                    <p class="nav-title">
+                        MY LEARNING
+                    </p>
+
+
+                    <a
+                        href="attendance.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                        </span>
+
+                        <span>
+                            Attendance
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="schedule.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                        </span>
+
+                        <span>
+                            Schedule
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="materials.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-folder-open"></i>
+
+                        </span>
+
+                        <span>
+                            Study Materials
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="announcements.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                        </span>
+
+                        <span>
+                            Announcements
+                        </span>
+
+                        <span class="nav-badge">
+                            4
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="messages.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </span>
+
+                        <span>
+                            Messages
+                        </span>
+
+                        <span class="nav-badge danger">
+                            2
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ACCOUNT -->
+
+                <div class="nav-section">
+
+                    <p class="nav-title">
+                        ACCOUNT
+                    </p>
+
+
+                    <a
+                        href="profile.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </span>
+
+                        <span>
+                            My Profile
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="settings.html"
+                        class="nav-link">
+
+                        <span class="nav-icon">
+
+                            <i class="fa-solid fa-gear"></i>
+
+                        </span>
+
+                        <span>
+                            Settings
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </nav>
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="../login.html"
+                    class="logout-link"
+                    id="logoutBtn">
+
+                    <span class="nav-icon">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                    </span>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+                    class="mobile-menu-btn"
+                    id="mobileMenuBtn"
+                    aria-label="Open menu">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <!-- PAGE TITLE -->
+
+                <div class="topbar-title">
+
+                    <span class="page-label">
+                        Student Portal
+                    </span>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                </div>
+
+
+                <!-- TOPBAR ACTIONS -->
+
+                <div class="topbar-actions">
+
+
+                    <!-- SEARCH -->
+
+                    <button
+                        class="topbar-icon"
+                        aria-label="Search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </button>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <button
+                        class="topbar-icon notification-btn"
+                        aria-label="Notifications">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+
+                    <!-- PROFILE -->
+
+                    <a
+                        href="profile.html"
+                        class="topbar-profile">
+
+                        <div
+                            class="topbar-avatar"
+                            data-user-avatar>
+
+                            SA
+
+                        </div>
+
+                        <div class="topbar-user">
+
+                            <strong data-user-name>
+                                Student
+                            </strong>
+
+                            <span>
+                                Student
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD CONTAINER
+            ================================================== -->
+
+            <div class="dashboard-container">
+
+
+                <!-- =================================================
+                     WELCOME
+                ================================================== -->
+
+                <section class="welcome-card">
+
+
+                    <div class="welcome-content">
+
+
+                        <span class="welcome-tag">
+
+                            <i class="fa-solid fa-sparkles"></i>
+
+                            Good Morning
+
+                        </span>
+
+
+                        <h2>
+
+                            Welcome back,
+
+                            <span data-user-first-name>
+                                Student!
+                            </span>
+
+                        </h2>
+
+
+                        <p>
+
+                            Keep learning, stay consistent and
+                            make progress toward your academic goals.
+
+                        </p>
+
+
+                        <div class="welcome-actions">
+
+
+                            <a
+                                href="courses.html"
+                                class="primary-btn">
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                                View My Courses
+
+                            </a>
+
+
+                            <a
+                                href="schedule.html"
+                                class="secondary-btn">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                View Schedule
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ILLUSTRATION -->
+
+                    <div class="welcome-illustration">
+
+                        <div class="illustration-glow"></div>
+
+
+                        <div class="floating-card card-one">
+
+                            <i class="fa-solid fa-book-open"></i>
+
+                            <span>
+
+                                <strong data-user-courses>
+                                    0
+                                </strong>
+
+                                Courses
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="floating-card card-two">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                            <span>
+
+                                <strong data-user-progress>
+                                    0%
+                                </strong>
+
+                                Progress
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="graduation-icon">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     STATS
+                ================================================== -->
+
+                <section class="stats-grid">
+
+
+                    <!-- COURSES -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+
+                            <i class="fa-solid fa-book-open"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Enrolled Courses
+                            </span>
+
+                            <strong data-user-courses>
+                                0
+                            </strong>
+
+                            <small class="positive">
+
+                                <i class="fa-solid fa-book"></i>
+
+                                Current semester
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon cyan">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Overall Progress
+                            </span>
+
+                            <strong data-user-progress>
+                                0%
+                            </strong>
+
+                            <small class="positive">
+
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+
+                                Academic progress
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ATTENDANCE -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Attendance
+                            </span>
+
+                            <strong data-user-attendance>
+                                0%
+                            </strong>
+
+                            <small class="positive">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                Current attendance
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GPA -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+
+                            <i class="fa-solid fa-award"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Current GPA
+                            </span>
+
+                            <strong data-user-gpa>
+                                0.00
+                            </strong>
+
+                            <small class="positive">
+
+                                <i class="fa-solid fa-graduation-cap"></i>
+
+                                Current academic record
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     MAIN GRID
+                ================================================== -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- =================================================
+                         COURSES
+                    ================================================== -->
+
+                    <section class="dashboard-card courses-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    LEARNING
+                                </span>
+
+                                <h3>
+                                    Continue Learning
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="courses.html"
+                                class="view-all">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div id="dashboardCourses">
+
+                            <!-- Dynamic courses -->
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         SCHEDULE
+                    ================================================== -->
+
+                    <section class="dashboard-card schedule-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    TODAY
+                                </span>
+
+                                <h3>
+                                    My Schedule
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="schedule.html"
+                                class="icon-link">
+
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="schedule-date">
+
+
+                            <div
+                                class="date-number"
+                                id="todayDateNumber">
+
+                                --
+
+                            </div>
+
+
+                            <div>
+
+                                <strong id="todayDay">
+                                    Today
+                                </strong>
+
+                                <span id="todayMonthYear">
+                                    --
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CLASS 1 -->
+
+                        <div class="schedule-item">
+
+                            <div class="time">
+
+                                <strong>
+                                    09:00
+                                </strong>
+
+                                <span>
+                                    AM
+                                </span>
+
+                            </div>
+
+
+                            <div class="schedule-line"></div>
+
+
+                            <div class="class-info">
+
+                                <strong id="scheduleCourse1">
+                                    Class
+                                </strong>
+
+                                <span id="scheduleCode1">
+                                    Course
+                                </span>
+
+                            </div>
+
+
+                            <span class="class-status">
+                                Now
+                            </span>
+
+                        </div>
+
+
+                        <!-- CLASS 2 -->
+
+                        <div class="schedule-item">
+
+                            <div class="time">
+
+                                <strong>
+                                    11:00
+                                </strong>
+
+                                <span>
+                                    AM
+                                </span>
+
+                            </div>
+
+
+                            <div class="schedule-line"></div>
+
+
+                            <div class="class-info">
+
+                                <strong id="scheduleCourse2">
+                                    Class
+                                </strong>
+
+                                <span id="scheduleCode2">
+                                    Course
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CLASS 3 -->
+
+                        <div class="schedule-item">
+
+                            <div class="time">
+
+                                <strong>
+                                    02:00
+                                </strong>
+
+                                <span>
+                                    PM
+                                </span>
+
+                            </div>
+
+
+                            <div class="schedule-line"></div>
+
+
+                            <div class="class-info">
+
+                                <strong id="scheduleCourse3">
+                                    Class
+                                </strong>
+
+                                <span id="scheduleCode3">
+                                    Course
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         ASSIGNMENTS
+                    ================================================== -->
+
+                    <section class="dashboard-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    TASKS
+                                </span>
+
+                                <h3>
+                                    Upcoming Assignments
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="assignments.html"
+                                class="view-all">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div id="dashboardAssignments">
+
+                            <!-- Dynamic assignments -->
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         UPCOMING TESTS
+                    ================================================== -->
+
+                    <section class="dashboard-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    ASSESSMENTS
+                                </span>
+
+                                <h3>
+                                    Upcoming Tests
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="quizzes.html"
+                                class="view-all">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="test-item">
+
+
+                            <div class="test-date">
+
+                                <strong>
+                                    30
+                                </strong>
+
+                                <span>
+                                    SEP
+                                </span>
+
+                            </div>
+
+
+                            <div class="test-info">
+
+                                <strong>
+                                    Database Quiz #2
+                                </strong>
+
+                                <span>
+                                    20 Questions · 30 Minutes
+                                </span>
+
+                            </div>
+
+
+                            <a
+                                href="quiz.html"
+                                class="test-action">
+
+                                Start
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="test-item">
+
+
+                            <div class="test-date purple">
+
+                                <strong>
+                                    04
+                                </strong>
+
+                                <span>
+                                    OCT
+                                </span>
+
+                            </div>
+
+
+                            <div class="test-info">
+
+                                <strong>
+                                    Software Engineering Quiz
+                                </strong>
+
+                                <span>
+                                    25 Questions · 40 Minutes
+                                </span>
+
+                            </div>
+
+
+                            <a
+                                href="quiz.html"
+                                class="test-action">
+
+                                Details
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         ATTENDANCE
+                    ================================================== -->
+
+                    <section class="dashboard-card attendance-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    ATTENDANCE
+                                </span>
+
+                                <h3>
+                                    Attendance Overview
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="attendance.html"
+                                class="view-all">
+
+                                Details
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="attendance-main">
+
+
+                            <div class="attendance-circle">
+
+                                <div class="attendance-inner">
+
+                                    <strong data-user-attendance>
+                                        0%
+                                    </strong>
+
+                                    <span>
+                                        Overall
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="attendance-info">
+
+
+                                <div class="attendance-status">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    <span id="attendanceMessage">
+                                        You're doing well!
+                                    </span>
+
+                                </div>
+
+
+                                <p id="attendanceDescription">
+
+                                    Your attendance is above the
+                                    minimum requirement of 75%.
+
+                                </p>
+
+
+                                <div class="attendance-legend">
+
+
+                                    <span>
+
+                                        <i class="present"></i>
+
+                                        Present
+
+                                        <strong data-user-attendance>
+                                            0%
+                                        </strong>
+
+                                    </span>
+
+
+                                    <span>
+
+                                        <i class="absent"></i>
+
+                                        Absent
+
+                                        <strong id="absentPercentage">
+                                            0%
+                                        </strong>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENTS
+                    ================================================== -->
+
+                    <section class="dashboard-card announcements-card">
+
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-eyebrow">
+                                    UPDATES
+                                </span>
+
+                                <h3>
+                                    Latest Announcements
+                                </h3>
+
+                            </div>
+
+
+                            <a
+                                href="announcements.html"
+                                class="view-all">
+
+                                View All
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="announcement-item">
+
+
+                            <div class="announcement-icon blue">
+
+                                <i class="fa-solid fa-bullhorn"></i>
+
+                            </div>
+
+
+                            <div class="announcement-content">
+
+                                <strong>
+                                    Midterm Examination Schedule
+                                </strong>
+
+                                <p>
+                                    The midterm examination schedule
+                                    has been published.
+                                </p>
+
+                                <span>
+                                    2 hours ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-item">
+
+
+                            <div class="announcement-icon green">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </div>
+
+
+                            <div class="announcement-content">
+
+                                <strong>
+                                    Course Registration Confirmed
+                                </strong>
+
+                                <p>
+                                    Your current semester courses
+                                    have been successfully registered.
+                                </p>
+
+                                <span>
+                                    Yesterday
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-item">
+
+
+                            <div class="announcement-icon purple">
+
+                                <i class="fa-solid fa-calendar"></i>
+
+                            </div>
+
+
+                            <div class="announcement-content">
+
+                                <strong>
+                                    Semester Project Guidelines
+                                </strong>
+
+                                <p>
+                                    New guidelines for the semester
+                                    project are now available.
+                                </p>
+
+                                <span>
+                                    2 days ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =================================================
+                     QUICK ACTIONS
+                ================================================== -->
+
+                <section class="quick-actions-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="card-eyebrow">
+                                QUICK ACCESS
+                            </span>
+
+                            <h3>
+                                What would you like to do?
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions-grid">
+
+
+                        <!-- RECORDINGS -->
+
+                        <a
+                            href="recordings.html"
+                            class="quick-action">
+
+                            <div class="quick-action-icon blue">
+
+                                <i class="fa-solid fa-play"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Watch Recordings
+                                </strong>
+
+                                <span>
+                                    Continue your lectures
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <!-- ASSIGNMENT -->
+
+                        <a
+                            href="assignments.html"
+                            class="quick-action">
+
+                            <div class="quick-action-icon orange">
+
+                                <i class="fa-solid fa-file-lines"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Submit Assignment
+                                </strong>
+
+                                <span id="quickAssignmentText">
+                                    View your assignments
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <!-- QUIZ -->
+
+                        <a
+                            href="quizzes.html"
+                            class="quick-action">
+
+                            <div class="quick-action-icon purple">
+
+                                <i class="fa-solid fa-clipboard-question"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Take a Test
+                                </strong>
+
+                                <span>
+                                    2 upcoming assessments
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <!-- MATERIALS -->
+
+                        <a
+                            href="materials.html"
+                            class="quick-action">
+
+                            <div class="quick-action-icon green">
+
+                                <i class="fa-solid fa-folder-open"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Study Materials
+                                </strong>
+
+                                <span>
+                                    Notes, PDFs and resources
+                                </span>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <footer class="dashboard-footer">
+
+                    <span>
+                        © 2026 Learnora LMS
+                    </span>
+
+                    <span>
+                        Smart Learning Management System
+                    </span>
+
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay">
+    </div>
+
+
+    <!-- =====================================================
+         STUDENT JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../../js/student.js"></script>
+
+
+    <!-- =====================================================
+         DASHBOARD DYNAMIC JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                /* =================================================
+                   GET CURRENT USER
+                ================================================= */
+
+                let user = null;
+
+
+                try {
+
+                    const savedUser =
+                        localStorage.getItem(
+                            "learnora_current_user"
+                        );
+
+
+                    if (savedUser) {
+
+                        user =
+                            JSON.parse(savedUser);
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Unable to read Learnora user:",
+                        error
+                    );
+
+                }
+
+
+                /* =================================================
+                   LOGIN PROTECTION
+                ================================================= */
+
+                const loggedIn =
+                    localStorage.getItem(
+                        "learnora_logged_in"
+                    );
+
+
+                const role =
+                    localStorage.getItem(
+                        "learnora_user_role"
+                    );
+
+
+                if (
+                    loggedIn !== "true" ||
+                    !user ||
+                    role !== "student"
+                ) {
+
+                    window.location.href =
+                        "../login.html";
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   SAFE HTML
+                ================================================= */
+
+                function escapeHTML(value) {
+
+                    if (
+                        value === null ||
+                        value === undefined
+                    ) {
+
+                        return "";
+
+                    }
+
+
+                    return String(value)
+
+                        .replace(
+                            /&/g,
+                            "&amp;"
+                        )
+
+                        .replace(
+                            /</g,
+                            "&lt;"
+                        )
+
+                        .replace(
+                            />/g,
+                            "&gt;"
+                        )
+
+                        .replace(
+                            /"/g,
+                            "&quot;"
+                        )
+
+                        .replace(
+                            /'/g,
+                            "&#039;"
+                        );
+
+                }
+
+
+                /* =================================================
+                   SET TEXT
+                ================================================= */
+
+                function setText(
+                    selector,
+                    value
+                ) {
+
+                    document
+                        .querySelectorAll(selector)
+                        .forEach(
+                            function (element) {
+
+                                element.textContent =
+                                    value ?? "";
+
+                            }
+                        );
+
+                }
+
+
+                /* =================================================
+                   USER INFORMATION
+                ================================================= */
+
+                const fullName =
+                    user.name ||
+                    "Student";
+
+
+                const firstName =
+                    user.firstName ||
+                    fullName.trim().split(" ")[0] ||
+                    "Student";
+
+
+                const avatar =
+                    user.avatar ||
+                    fullName
+                        .split(" ")
+                        .map(
+                            function (name) {
+
+                                return name.charAt(0);
+
+                            }
+                        )
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase();
+
+
+                setText(
+                    "[data-user-name]",
+                    fullName
+                );
+
+
+                setText(
+                    "[data-user-first-name]",
+                    firstName + "!"
+                );
+
+
+                setText(
+                    "[data-user-program]",
+                    user.program ||
+                    "Student Program"
+                );
+
+
+                setText(
+                    "[data-user-semester]",
+                    user.semester ||
+                    ""
+                );
+
+
+                setText(
+                    "[data-user-avatar]",
+                    avatar
+                );
+
+
+                /* =================================================
+                   GPA
+
+                   login.js uses:
+
+                   gpa: "3.42"
+
+                   NOT:
+
+                   GPA: "3.42"
+                ================================================= */
+
+                const currentGPA =
+                    Number(
+                        user.gpa || 0
+                    );
+
+
+                setText(
+                    "[data-user-gpa]",
+                    currentGPA.toFixed(2)
+                );
+
+
+                /* =================================================
+                   ATTENDANCE
+                ================================================= */
+
+                const attendance =
+                    Number(
+                        user.attendance || 0
+                    );
+
+
+                setText(
+                    "[data-user-attendance]",
+                    attendance + "%"
+                );
+
+
+                /* =================================================
+                   OVERALL PROGRESS
+                ================================================= */
+
+                const overallProgress =
+                    Number(
+                        user.overallProgress || 0
+                    );
+
+
+                setText(
+                    "[data-user-progress]",
+                    overallProgress + "%"
+                );
+
+
+                /* =================================================
+                   COURSES
+                ================================================= */
+
+                const courses =
+                    Array.isArray(user.courses)
+                        ? user.courses
+                        : [];
+
+
+                const courseCount =
+                    Number(
+                        user.coursesCount ||
+                        courses.length
+                    );
+
+
+                setText(
+                    "[data-user-courses]",
+                    courseCount
+                );
+
+
+                /* =================================================
+                   ATTENDANCE CALCULATIONS
+                ================================================= */
+
+                const absent =
+                    Math.max(
+                        0,
+                        100 - attendance
+                    );
+
+
+                const absentElement =
+                    document.getElementById(
+                        "absentPercentage"
+                    );
+
+
+                if (absentElement) {
+
+                    absentElement.textContent =
+                        absent + "%";
+
+                }
+
+
+                const attendanceMessage =
+                    document.getElementById(
+                        "attendanceMessage"
+                    );
+
+
+                const attendanceDescription =
+                    document.getElementById(
+                        "attendanceDescription"
+                    );
+
+
+                if (attendanceMessage) {
+
+                    if (attendance >= 90) {
+
+                        attendanceMessage.textContent =
+                            "Excellent attendance!";
+
+                    }
+
+                    else if (attendance >= 85) {
+
+                        attendanceMessage.textContent =
+                            "You're doing well!";
+
+                    }
+
+                    else if (attendance >= 75) {
+
+                        attendanceMessage.textContent =
+                            "Keep maintaining your attendance.";
+
+                    }
+
+                    else {
+
+                        attendanceMessage.textContent =
+                            "Attendance needs improvement.";
+
+                    }
+
+                }
+
+
+                if (attendanceDescription) {
+
+                    if (attendance >= 75) {
+
+                        attendanceDescription.textContent =
+                            "Your attendance is above the minimum requirement of 75%.";
+
+                    }
+
+                    else {
+
+                        attendanceDescription.textContent =
+                            "Your attendance is below the minimum requirement of 75%.";
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   DYNAMIC COURSES
+                ================================================= */
+
+                const coursesContainer =
+                    document.getElementById(
+                        "dashboardCourses"
+                    );
+
+
+                if (coursesContainer) {
+
+                    if (courses.length === 0) {
+
+                        coursesContainer.innerHTML = `
+
+                            <div class="empty-state">
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                                <p>
+                                    No courses enrolled yet.
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+
+                    else {
+
+                        const visibleCourses =
+                            courses.slice(0, 3);
+
+
+                        coursesContainer.innerHTML =
+                            visibleCourses
+                                .map(
+                                    function (
+                                        course,
+                                        index
+                                    ) {
+
+
+                                        const colors = [
+
+                                            "blue-bg",
+                                            "cyan-bg",
+                                            "purple-bg"
+
+                                        ];
+
+
+                                        const icons = [
+
+                                            "fa-code",
+                                            "fa-database",
+                                            "fa-chart-simple"
+
+                                        ];
+
+
+                                        const color =
+                                            colors[
+                                                index %
+                                                colors.length
+                                            ];
+
+
+                                        const icon =
+                                            icons[
+                                                index %
+                                                icons.length
+                                            ];
+
+
+                                        const percentage =
+                                            Number(
+                                                course.progress ||
+                                                course.percentage ||
+                                                course.score ||
+                                                0
+                                            );
+
+
+                                        const safePercentage =
+                                            Math.min(
+                                                Math.max(
+                                                    percentage,
+                                                    0
+                                                ),
+                                                100
+                                            );
+
+
+                                        return `
+
+                                            <div
+                                                class="course-item"
+                                                data-course-code="${escapeHTML(
+                                                    course.code ||
+                                                    ""
+                                                )}">
+
+                                                <div
+                                                    class="course-icon ${color}">
+
+                                                    <i
+                                                        class="fa-solid ${icon}">
+                                                    </i>
+
+                                                </div>
+
+
+                                                <div
+                                                    class="course-info">
+
+
+                                                    <div
+                                                        class="course-title-row">
+
+                                                        <div>
+
+                                                            <span
+                                                                class="course-code">
+
+                                                                ${escapeHTML(
+                                                                    course.code ||
+                                                                    ""
+                                                                )}
+
+                                                            </span>
+
+
+                                                            <h4>
+
+                                                                ${escapeHTML(
+                                                                    course.name ||
+                                                                    "Untitled Course"
+                                                                )}
+
+                                                            </h4>
+
+                                                        </div>
+
+
+                                                        <span
+                                                            class="course-percent">
+
+                                                            ${safePercentage}%
+
+                                                        </span>
+
+                                                    </div>
+
+
+                                                    <div
+                                                        class="progress-bar">
+
+                                                        <span
+                                                            style="width:${safePercentage}%;">
+
+                                                        </span>
+
+                                                    </div>
+
+
+                                                    <div
+                                                        class="course-meta">
+
+
+                                                        <span>
+
+                                                            <i
+                                                                class="fa-solid fa-user-tie">
+                                                            </i>
+
+                                                            ${escapeHTML(
+                                                                course.instructor ||
+                                                                "Course Instructor"
+                                                            )}
+
+                                                        </span>
+
+
+                                                        <span>
+
+                                                            <i
+                                                                class="fa-solid fa-star">
+                                                            </i>
+
+                                                            Grade:
+
+                                                            ${escapeHTML(
+                                                                course.grade ||
+                                                                "N/A"
+                                                            )}
+
+                                                        </span>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        `;
+
+                                    }
+                                )
+                                .join("");
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   COURSE CLICK
+                ================================================= */
+
+                if (coursesContainer) {
+
+                    coursesContainer.addEventListener(
+                        "click",
+                        function (event) {
+
+
+                            const courseItem =
+                                event.target.closest(
+                                    ".course-item"
+                                );
+
+
+                            if (!courseItem) {
+
+                                return;
+
+                            }
+
+
+                            const courseCode =
+                                courseItem.dataset.courseCode;
+
+
+                            if (courseCode) {
+
+                                localStorage.setItem(
+                                    "learnora_selected_course",
+                                    courseCode
+                                );
+
+
+                                window.location.href =
+                                    "course-detail.html";
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                /* =================================================
+                   ASSIGNMENTS
+                ================================================= */
+
+                const assignments =
+                    Array.isArray(user.assignments)
+                        ? user.assignments
+                        : [];
+
+
+                const assignmentsContainer =
+                    document.getElementById(
+                        "dashboardAssignments"
+                    );
+
+
+                if (assignmentsContainer) {
+
+                    if (assignments.length === 0) {
+
+                        assignmentsContainer.innerHTML = `
+
+                            <div class="empty-state">
+
+                                <i class="fa-solid fa-file-circle-check"></i>
+
+                                <p>
+                                    No assignments available.
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+
+                    else {
+
+                        const visibleAssignments =
+                            assignments.slice(0, 3);
+
+
+                        assignmentsContainer.innerHTML =
+                            visibleAssignments
+                                .map(
+                                    function (
+                                        assignment,
+                                        index
+                                    ) {
+
+
+                                        const iconList = [
+
+                                            "fa-file-code",
+                                            "fa-database",
+                                            "fa-chart-line"
+
+                                        ];
+
+
+                                        const colorList = [
+
+                                            "red",
+                                            "orange",
+                                            "blue"
+
+                                        ];
+
+
+                                        const icon =
+                                            iconList[
+                                                index %
+                                                iconList.length
+                                            ];
+
+
+                                        const color =
+                                            colorList[
+                                                index %
+                                                colorList.length
+                                            ];
+
+
+                                        const status =
+                                            String(
+                                                assignment.status ||
+                                                "pending"
+                                            )
+                                            .toLowerCase();
+
+
+                                        let badgeText =
+                                            "Pending";
+
+
+                                        let badgeClass =
+                                            "urgent";
+
+
+                                        if (
+                                            status ===
+                                            "submitted"
+                                        ) {
+
+                                            badgeText =
+                                                "Submitted";
+
+
+                                            badgeClass =
+                                                "success";
+
+                                        }
+
+
+                                        else if (
+                                            status ===
+                                            "completed"
+                                        ) {
+
+                                            badgeText =
+                                                "Completed";
+
+
+                                            badgeClass =
+                                                "success";
+
+                                        }
+
+
+                                        /* =================================
+                                           IMPORTANT:
+
+                                           login.js uses:
+
+                                           due: "Sep 30, 2026"
+
+                                           dueDate is supported as
+                                           fallback.
+                                        ================================= */
+
+                                        const dueDate =
+                                            assignment.due ||
+                                            assignment.dueDate ||
+                                            "No due date";
+
+
+                                        return `
+
+                                            <div
+                                                class="task-item">
+
+
+                                                <div
+                                                    class="task-icon ${color}">
+
+                                                    <i
+                                                        class="fa-solid ${icon}">
+                                                    </i>
+
+                                                </div>
+
+
+                                                <div
+                                                    class="task-info">
+
+                                                    <strong>
+
+                                                        ${escapeHTML(
+                                                            assignment.title ||
+                                                            "Untitled Assignment"
+                                                        )}
+
+                                                    </strong>
+
+
+                                                    <span>
+
+                                                        ${escapeHTML(
+                                                            assignment.course ||
+                                                            "Course"
+                                                        )}
+
+                                                        ·
+
+                                                        ${escapeHTML(
+                                                            dueDate
+                                                        )}
+
+                                                    </span>
+
+                                                </div>
+
+
+                                                <span
+                                                    class="due-badge ${badgeClass}">
+
+                                                    ${badgeText}
+
+                                                </span>
+
+                                            </div>
+
+                                        `;
+
+                                    }
+                                )
+                                .join("");
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   PENDING ASSIGNMENTS
+                ================================================= */
+
+                const pendingAssignments =
+                    assignments.filter(
+                        function (assignment) {
+
+                            const status =
+                                String(
+                                    assignment.status ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return (
+                                status !==
+                                "submitted" &&
+                                status !==
+                                "completed"
+                            );
+
+                        }
+                    );
+
+
+                const assignmentNavBadge =
+                    document.getElementById(
+                        "assignmentNavBadge"
+                    );
+
+
+                if (assignmentNavBadge) {
+
+                    assignmentNavBadge.textContent =
+                        pendingAssignments.length;
+
+                }
+
+
+                const quickAssignmentText =
+                    document.getElementById(
+                        "quickAssignmentText"
+                    );
+
+
+                if (quickAssignmentText) {
+
+                    if (
+                        pendingAssignments.length > 0
+                    ) {
+
+                        quickAssignmentText.textContent =
+                            pendingAssignments.length +
+                            " assignment" +
+                            (
+                                pendingAssignments.length === 1
+                                    ? ""
+                                    : "s"
+                            ) +
+                            " pending";
+
+                    }
+
+                    else {
+
+                        quickAssignmentText.textContent =
+                            "All assignments completed";
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   TODAY'S DATE
+                ================================================= */
+
+                const today =
+                    new Date();
+
+
+                const dateNumber =
+                    document.getElementById(
+                        "todayDateNumber"
+                    );
+
+
+                const dayElement =
+                    document.getElementById(
+                        "todayDay"
+                    );
+
+
+                const monthYearElement =
+                    document.getElementById(
+                        "todayMonthYear"
+                    );
+
+
+                if (dateNumber) {
+
+                    dateNumber.textContent =
+                        today.getDate();
+
+                }
+
+
+                if (dayElement) {
+
+                    dayElement.textContent =
+                        today.toLocaleDateString(
+                            "en-US",
+                            {
+                                weekday:
+                                    "long"
+                            }
+                        );
+
+                }
+
+
+                if (monthYearElement) {
+
+                    monthYearElement.textContent =
+                        today.toLocaleDateString(
+                            "en-US",
+                            {
+                                month:
+                                    "long",
+
+                                year:
+                                    "numeric"
+                            }
+                        );
+
+                }
+
+
+                /* =================================================
+                   DYNAMIC SCHEDULE
+                ================================================= */
+
+                const scheduleCourses =
+                    courses.slice(0, 3);
+
+
+                const scheduleElements = [
+
+                    {
+                        title:
+                            document.getElementById(
+                                "scheduleCourse1"
+                            ),
+
+                        code:
+                            document.getElementById(
+                                "scheduleCode1"
+                            )
+                    },
+
+
+                    {
+                        title:
+                            document.getElementById(
+                                "scheduleCourse2"
+                            ),
+
+                        code:
+                            document.getElementById(
+                                "scheduleCode2"
+                            )
+                    },
+
+
+                    {
+                        title:
+                            document.getElementById(
+                                "scheduleCourse3"
+                            ),
+
+                        code:
+                            document.getElementById(
+                                "scheduleCode3"
+                            )
+                    }
+
+                ];
+
+
+                scheduleElements.forEach(
+                    function (
+                        element,
+                        index
+                    ) {
+
+
+                        const course =
+                            scheduleCourses[
+                                index
+                            ];
+
+
+                        if (!course) {
+
+                            if (element.title) {
+
+                                element.title.textContent =
+                                    "No class";
+
+                            }
+
+
+                            if (element.code) {
+
+                                element.code.textContent =
+                                    "Free period";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        if (element.title) {
+
+                            element.title.textContent =
+                                course.name ||
+                                "Class";
+
+                        }
+
+
+                        if (element.code) {
+
+                            element.code.textContent =
+                                (
+                                    course.code ||
+                                    "Course"
+                                ) +
+                                " · " +
+                                (
+                                    index === 2
+                                        ? "Online"
+                                        : "Room " +
+                                          (204 + index)
+                                );
+
+                        }
+
+                    }
+                );
+
+
+                /* =================================================
+                   STORE USER ID
+                ================================================= */
+
+                if (user.id) {
+
+                    localStorage.setItem(
+                        "learnora_user_id",
+                        user.id
+                    );
+
+                }
+
+
+                /* =================================================
+                   DEBUG
+                ================================================= */
+
+                console.log(
+                    "===================================="
+                );
+
+                console.log(
+                    "LEARNORA CURRENT USER"
+                );
+
+                console.log(
+                    "===================================="
+                );
+
+                console.log(
+                    "ID:",
+                    user.id
+                );
+
+                console.log(
+                    "Name:",
+                    user.name
+                );
+
+                console.log(
+                    "Email:",
+                    user.email
+                );
+
+                console.log(
+                    "GPA:",
+                    user.gpa
+                );
+
+                console.log(
+                    "Attendance:",
+                    user.attendance
+                );
+
+                console.log(
+                    "Progress:",
+                    user.overallProgress
+                );
+
+                console.log(
+                    "Courses:",
+                    courses
+                );
+
+                console.log(
+                    "Assignments:",
+                    assignments
+                );
+
+                console.log(
+                    "===================================="
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           LOGOUT
+        ====================================================== */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+
+                const logoutButton =
+                    event.target.closest(
+                        "#logoutBtn"
+                    );
+
+
+                if (!logoutButton) {
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                localStorage.removeItem(
+                    "learnora_logged_in"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_user_role"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_user_email"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_current_user"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_user_id"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_student_name"
+                );
+
+
+                localStorage.removeItem(
+                    "learnora_selected_course"
+                );
+
+
+                window.location.href =
+                    "../login.html";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
